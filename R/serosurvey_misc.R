@@ -11,6 +11,7 @@
 #' @param digits_upp digits of upper interval to round
 #'
 #' @export unite_dotwhiskers
+#' @export serosvy_extract_posterior
 #'
 #' @examples
 #'
