@@ -1,0 +1,22 @@
+Package: serosurvey
+Title: Serological Survey Analysis For Prevalence Estimation Under Misclassification
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Andree",
+           family = "Valle Campos",
+           role = c("aut", "cre"),
+           email = "avallecam@gmail.com",
+           comment = c(ORCID = "0000-0002-7779-481X"))
+Description: We provide functions for prevalence estimation within a serological survey.
+    Here we gather open source functions from different project in one R package. 
+    This includes a template with an analysis workflow to efficiently use them 
+    harmoniously.
+URL: https://avallecam.github.io/serosurvey/
+BugReports: https://github.com/avallecam/serosurvey/issues
+License: GPL-3
+Suggests: 
+    testthat, tidyverse, skimr, furrr, tictoc
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1
