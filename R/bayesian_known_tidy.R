@@ -15,6 +15,8 @@
 #'
 #' @examples
 #'
+#' \dontrun{
+#'
 #' library(tidyverse)
 #' library(skimr)
 #'
@@ -25,7 +27,6 @@
 #'
 #' # reproducible example 01 -------------------------------------
 #'
-#' # NOT RUN {
 #'
 #' tidy_result <- serosvy_known_sample_posterior(
 #'   positive_number_test = positive_pop[1],
@@ -65,7 +66,6 @@
 #'             color="red") +
 #'  scale_x_continuous(breaks = scales::pretty_breaks())
 #'
-#' # }
 #'
 #' # reproducible example 02 -------------------------------------
 #'
@@ -73,7 +73,6 @@
 #' library(furrr)
 #' library(tictoc)
 #'
-#' # NOT RUN {
 #'
 #' # plan(sequential)
 #' plan(multisession, workers = availableCores())
@@ -106,7 +105,7 @@
 #'                               digits_upp = 3) %>%
 #'   glimpse()
 #'
-#' # }
+#' }
 #'
 #'
 

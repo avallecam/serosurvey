@@ -14,7 +14,8 @@
 #'
 #' @examples
 #'
-#' # NOT RUN {
+#' \dontrun{
+#'
 #' library(tidyverse)
 #'
 #' test <- rgamma(n = 1000,shape = 3,rate = 0.2) %>%
@@ -33,7 +34,7 @@
 #'                     digits_dot = 3,
 #'                     digits_low = 3,
 #'                     digits_upp = 3)
-#' # }
+#' }
 #'
 
 unite_dotwhiskers <- function(data,

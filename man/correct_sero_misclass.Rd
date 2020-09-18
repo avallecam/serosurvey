@@ -52,7 +52,7 @@ Funtions that implement the Rogen Gladen Estimator (1978)
 
 \examples{
 
-# NOT RUN {
+\dontrun{
 
 library(tidyverse)
 library(skimr)
@@ -83,7 +83,7 @@ tibble(
   mutate(adjust=pmap_dbl(.l = select(.,prev.obs=raw, Se=se, Sp=sp),
                          .f = rogan_gladen_estimator))
 
-# }
+}
 
 }
 \references{

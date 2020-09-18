@@ -40,7 +40,7 @@ Create tibble output with proportion (0-1 range) total estimates and coefficient
 
 \examples{
 
-# NOT RUN {
+\dontrun{
 
 # inspiracion
 
@@ -113,7 +113,8 @@ serosvy_proportion(design = dstrata,
                       numerator = awards,
                       denominator = stype)
 
-# }
+}
+
 }
 \references{
 Greg Freedman Ellis and Ben Schneider (2020). srvyr: 'dplyr'-Like Syntax for Summary

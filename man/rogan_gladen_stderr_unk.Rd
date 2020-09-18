@@ -31,7 +31,7 @@ Functions that implement the Rogen Gladen Estimator (1978)
 
 \examples{
 
-# NOT RUN {
+\dontrun{
 
 library(tidyverse)
 library(skimr)
@@ -65,7 +65,7 @@ tibble(positive=positive_pop,
   mutate(prev_tru_low=prev_tru-qnorm(0.975)*stde_tru,
          prev_tru_upp=prev_tru+qnorm(0.975)*stde_tru)
 
-# }
+}
 
 }
 \references{

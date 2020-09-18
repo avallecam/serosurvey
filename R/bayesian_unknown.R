@@ -22,6 +22,8 @@
 #'
 #' @examples
 #'
+#' \dontrun{
+#'
 #' library(tidyverse)
 #' library(skimr)
 #'
@@ -30,7 +32,6 @@
 #' positive_pop <- c(321, 123, 100, 10)
 #' negative_pop <- c(1234, 500, 375, 30)
 #'
-#' # NOT RUN {
 #' positive_pop[1]/negative_pop[1]
 #' posi <- c(2485713, 692)
 #' total <- c(11609844, 3212)
@@ -68,7 +69,7 @@
 #'   geom_histogram(aes(y=..density..),binwidth = 0.005) +
 #'   geom_density() +
 #'   facet_grid(~estimates,scales = "free_x")
-#' # }
+#' }
 #'
 
 sample_posterior_r_mcmc_testun <- function(samps,pos,n,tp,tn,fp,fn){

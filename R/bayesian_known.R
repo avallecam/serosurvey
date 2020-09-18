@@ -21,6 +21,8 @@
 #'
 #' @examples
 #'
+#' \dontrun{
+#'
 #' library(tidyverse)
 #' library(skimr)
 #'
@@ -35,7 +37,6 @@
 #' # https://github.com/LarremoreLab/covid_serological_sampling/
 #' # codebase/prevalence_onepopulation_workbook.ipynb
 #'
-#' # NOT RUN {
 #'
 #' # input for reproducible examples
 #'
@@ -60,12 +61,10 @@
 #'   as_tibble() %>%
 #'   ggplot(aes(x = r1)) +
 #'   geom_histogram(aes(y=..density..),binwidth = 0.005)
-#' # }
 #'
 #'
 #' # __ SUB-POPS --------------------------------------------------------------
 #'
-#' # NOT RUN {
 #'
 #' # reproduce this
 #' # https://github.com/LarremoreLab/covid_serological_sampling/
@@ -95,7 +94,7 @@
 #'   pivot_longer(cols = -rowname,names_to = "estimates",values_to = "values") %>%
 #'   ggplot(aes(x = values, color = estimates)) +
 #'   geom_density()
-#' # }
+#' }
 #'
 
 sample_posterior_r_mcmc_hyperR <- function(samps,posi,ni,se,sp,gam0){

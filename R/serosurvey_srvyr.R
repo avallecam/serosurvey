@@ -21,7 +21,7 @@
 #'
 #' @examples
 #'
-#' # NOT RUN {
+#' \dontrun{
 #'
 #' # inspiracion
 #'
@@ -94,7 +94,8 @@
 #'                       numerator = awards,
 #'                       denominator = stype)
 #'
-#' # }
+#' }
+#'
 
 
 srvyr_prop_step_01 <- function(design,numerator,denominator) {

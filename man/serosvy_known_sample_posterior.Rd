@@ -29,6 +29,8 @@ tibble of prevalence posterior distribution
 
 \examples{
 
+\dontrun{
+
 library(tidyverse)
 library(skimr)
 
@@ -39,7 +41,6 @@ negative_pop <- c(1234, 500, 375, 30)
 
 # reproducible example 01 -------------------------------------
 
-# NOT RUN {
 
 tidy_result <- serosvy_known_sample_posterior(
   positive_number_test = positive_pop[1],
@@ -79,7 +80,6 @@ tidy_result \%>\%
             color="red") +
  scale_x_continuous(breaks = scales::pretty_breaks())
 
-# }
 
 # reproducible example 02 -------------------------------------
 
@@ -87,7 +87,6 @@ library(purrr)
 library(furrr)
 library(tictoc)
 
-# NOT RUN {
 
 # plan(sequential)
 plan(multisession, workers = availableCores())
@@ -120,7 +119,7 @@ result \%>\%
                               digits_upp = 3) \%>\%
   glimpse()
 
-# }
+}
 
 
 }

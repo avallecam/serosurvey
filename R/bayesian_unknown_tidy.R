@@ -17,7 +17,7 @@
 #'
 #' @examples
 #'
-#' # NOT RUN {
+#' \dontrun{
 #'
 #' library(tidyverse)
 #' library(skimr)
@@ -51,7 +51,7 @@
 #' #  geom_density() +
 #' #  facet_grid(~estimates,scales = "free_x")
 #'
-#' # }
+#' }
 #'
 
 

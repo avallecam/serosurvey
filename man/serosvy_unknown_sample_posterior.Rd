@@ -33,7 +33,7 @@ tibble of prevalence posterior distribution
 
 \examples{
 
-# NOT RUN {
+\dontrun{
 
 library(tidyverse)
 library(skimr)
@@ -67,6 +67,6 @@ result_unk_x \%>\%
 #  geom_density() +
 #  facet_grid(~estimates,scales = "free_x")
 
-# }
+}
 
 }

@@ -21,7 +21,7 @@
 #'
 #' @examples
 #'
-#' # NOT RUN {
+#' \dontrun{
 #'
 #' library(tidyverse)
 #' library(skimr)
@@ -52,7 +52,7 @@
 #'   mutate(adjust=pmap_dbl(.l = select(.,prev.obs=raw, Se=se, Sp=sp),
 #'                          .f = rogan_gladen_estimator))
 #'
-#' # }
+#' }
 #'
 
 correct_sero_misclass <- function(num_pos,num_neg,sens=.806,spec=.83){

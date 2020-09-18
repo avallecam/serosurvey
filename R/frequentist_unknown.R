@@ -20,7 +20,7 @@
 #'
 #' @examples
 #'
-#' # NOT RUN {
+#' \dontrun{
 #'
 #' library(tidyverse)
 #' library(skimr)
@@ -54,7 +54,7 @@
 #'   mutate(prev_tru_low=prev_tru-qnorm(0.975)*stde_tru,
 #'          prev_tru_upp=prev_tru+qnorm(0.975)*stde_tru)
 #'
-#' # }
+#' }
 #'
 
 rogan_gladen_stderr_unk <- function(prev.obs,
