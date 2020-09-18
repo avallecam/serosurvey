@@ -56,16 +56,16 @@ result_unk_x \%>\%
 # result_unk_x \%>\%
 #   unnest(performance)
 
-result_unk_x \%>\%
-  unnest(posterior) \%>\%
-  as_tibble() \%>\%
-  rownames_to_column() \%>\%
-  select(-summary) \%>\%
-  pivot_longer(cols = -rowname,names_to = "estimates",values_to = "values") \%>\%
-  ggplot(aes(x = values)) +
-  geom_histogram(aes(y=..density..),binwidth = 0.005) +
-  geom_density() +
-  facet_grid(~estimates,scales = "free_x")
+#result_unk_x \%>\%
+#  unnest(posterior) \%>\%
+#  as_tibble() \%>\%
+#  rownames_to_column() \%>\%
+#  select(-summary) \%>\%
+#  pivot_longer(cols = -rowname,names_to = "estimates",values_to = "values") \%>\%
+#  ggplot(aes(x = values)) +
+#  geom_histogram(aes(y=..density..),binwidth = 0.005) +
+#  geom_density() +
+#  facet_grid(~estimates,scales = "free_x")
 
 # }
 

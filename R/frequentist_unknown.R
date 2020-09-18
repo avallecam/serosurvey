@@ -30,6 +30,11 @@
 #' positive_pop <- c(321, 123, 100, 10)
 #' negative_pop <- c(1234, 500, 375, 30)
 #'
+#' # prop.test(x = 321,n = 321+1234) %>% broom::glance()
+#' # binom.test(x = 321,n = 321+1234) %>% broom::glance()
+#' # https://stackoverflow.com/questions/17802320/r-proportion-confidence-interval-factor
+#' # https://stackoverflow.com/questions/21719578/confidence-interval-for-binomial-data-in-r
+#'
 #' tibble(positive=positive_pop,
 #'        negative=negative_pop) %>%
 #'   mutate(total=positive+negative,

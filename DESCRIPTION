@@ -1,6 +1,7 @@
 Package: serosurvey
 Title: Serological Survey Analysis For Prevalence Estimation Under Misclassification
 Version: 0.0.0.9000
+Date: 2020-09-17
 Authors@R: 
     person(given = "Andree",
            family = "Valle Campos",

@@ -11,6 +11,8 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+knitr::opts_chunk$set(fig.width=10, fig.height=4)
+options(tidyverse.quiet = TRUE)
 ```
 # serosurvey
 
@@ -19,14 +21,15 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/serosurvey)](https://cran.r-project.org/package=serosurvey)
 <!-- badges: end -->
 
-The goal of serosurvey is to ...
+The goal of serosurvey is to provide a centralized R package of Serological Survey Analysis For Prevalence Estimation Under Misclassification
 
 ## Installation
 
-You can install the released version of serosurvey from [CRAN](https://CRAN.R-project.org) with:
+<!-- You can install the released version of serosurvey from [CRAN](https://CRAN.R-project.org) with: -->
 
 ``` r
-install.packages("serosurvey")
+if(!require("devtools")) install.packages("devtools")
+devtools::install_github("avallecam/serosurvey")
 ```
 
 ## Example
@@ -38,18 +41,25 @@ library(serosurvey)
 ## basic example code
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+### Known test - Bayesian method
 
-```{r cars}
-summary(cars)
+```{r,eval=FALSE}
+example("serosvy_known_sample_posterior")
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
+### Unknown test - Bayesian method
 
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
+```{r,eval=FALSE}
+example("serosvy_unknown_sample_posterior")
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
+## Workflow
+
+## Contribute
+
+## Citation
+
+```{r}
+citation("serosurvey")
+```
+
