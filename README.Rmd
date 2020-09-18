@@ -41,13 +41,21 @@ library(serosurvey)
 ## basic example code
 ```
 
-### Known test - Bayesian method
+### Estimate prevalence from a survey design
+
+```{r,eval=FALSE}
+example("serosvy_proportion")
+```
+
+### Consider misclassification due to an imperfect diagnostic test
+
+#### Known test - Bayesian method
 
 ```{r,eval=FALSE}
 example("serosvy_known_sample_posterior")
 ```
 
-### Unknown test - Bayesian method
+#### Unknown test - Bayesian method
 
 ```{r,eval=FALSE}
 example("serosvy_unknown_sample_posterior")
@@ -55,7 +63,20 @@ example("serosvy_unknown_sample_posterior")
 
 ## Workflow
 
+> pending
+
 ## Contribute
+
+Feel free to contribute with your functions or workflows. 
+Here are two articles with interesting approaches using R.
+
+- Silveira et al (2020) in the strategy 3 analysed the survey accounting for sampling design and test validity using parametric bootstraping:
+
+> Silveira, M. F., Barros, A. J., Horta, B. L., Pellanda, L. C., Victora, G. D., Dellagostin, O. A., ... & Mesa, J. M. (2020). Population-based surveys of antibodies against SARS-CoV-2 in Southern Brazil. Nature Medicine, 26(8), 1196-1199. doi: https://doi.org/10.1038/s41591-020-0992-3
+
+- Flor et al. (2020) implemented a lot of frequentist and bayesian methods for test with known sensitivity and specificity 
+
+> Flor, M., Weiβ, M., Selhorst, T., Müller-Graf, C., & Greiner, M. (2020). Comparison of Bayesian and frequentist methods for prevalence estimation under misclassification. doi: https://doi.org/10.1186/s12889-020-09177-4
 
 ## Citation
 
