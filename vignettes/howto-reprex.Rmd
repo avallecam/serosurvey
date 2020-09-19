@@ -7,8 +7,13 @@ editor_options:
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE
 )
+knitr::opts_chunk$set(fig.width=10, fig.height=4)
+options(tidyverse.quiet = TRUE)
 ```
 
 ## call R package
@@ -23,6 +28,8 @@ library(survey)
 library(tictoc)
 library(furrr)
 library(purrr)
+# theme
+theme_set(theme_bw())
 ```
 
 ## import data
@@ -247,7 +254,9 @@ for (i in 1:nrow(outcome_01_adj_pre)) {
     # union all outputs
     union_all(out)
   
-  out %>% print() #%>% 
+  # activate to print the progress! (recommended)
+  # out %>% print() #%>% 
+  
   # # known test
     # mutate(adj_dot_kno=future_pmap(
     #   .l = select(.,
@@ -319,7 +328,21 @@ outcome_01_adj_tbl %>%
 
 ```
 
-```{r}
+### output figure
 
+```{r}
+outcome_01_adj_tbl %>% 
+  ggplot_prevalence(category = denominator_level,
+                    proportion = prop,
+                    outcome = numerator,
+                    proportion_upp = prop_upp,
+                    proportion_low = prop_low) +
+  theme(axis.text.x = element_text(angle = 0, vjust = 0, hjust=0)) +
+  coord_flip() +
+  facet_wrap(denominator~.,scales = "free_y") +
+  # facet_grid(denominator~.,scales = "free_y") +
+  colorspace::scale_color_discrete_qualitative() +
+  labs(title = "Prevalence by numerators across denominators",
+       y = "Prevalence",x = "")
 ```
 
