@@ -16,7 +16,14 @@ URL: https://avallecam.github.io/serosurvey/
 BugReports: https://github.com/avallecam/serosurvey/issues
 License: GPL-3
 Suggests: 
-    testthat, tidyverse, skimr, furrr, tictoc, srvyr, survey
+    testthat,
+    tidyverse,
+    skimr,
+    furrr,
+    tictoc,
+    srvyr,
+    survey,
+    rmarkdown
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

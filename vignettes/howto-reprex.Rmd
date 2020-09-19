@@ -1,0 +1,319 @@
+---
+title: "howto-reprex"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## call R package
+
+```{r setup}
+library(serosurvey)
+```
+
+## import data
+
+```{r}
+
+library(tidyverse)
+library(srvyr)
+library(survey)
+data(api)
+dstrata <- apistrat %>% as_survey_design(strata = stype, weights = pw)
+dstrata2 <- apistrat %>%
+  mutate(pw2=1) %>%
+  as_survey_design(strata = stype, weights = pw2)
+dstrata %>%
+  summarise(pct = survey_mean(awards=="Yes",proportion = TRUE))
+dstrata2 %>%
+  summarise(pct = survey_mean(awards=="Yes",proportion = TRUE))
+
+
+```
+
+## select covariates
+
+```{r}
+
+covariate_set01 <- uu_clean_data %>% 
+  select(survey_all,
+         sexo,
+         edad_etapas_de_vida_t,
+         edad_decenios,
+         diris,
+         hacinamiento,
+         nm_prov,
+         sintomas_cualquier_momento_cat,
+         sintomas_cualquier_momento_cat_fecha_14d_v1,
+         sintomas_cualquier_momento_cat_fecha_rangos,
+         contacto_covid,
+         contacto_covid_tipo,
+         prueba_previa,
+         prueba_previa_cat) %>% 
+  colnames()
+
+covariate_set02 <- uu_clean_data %>% 
+  select(sintomas_cualquier_momento_cat,
+         sintomas_cualquier_momento_cat_fecha_14d_v1,
+         sintomas_cualquier_momento_cat_fecha_rangos,
+         contacto_covid,
+         contacto_covid_tipo,
+         prueba_previa,
+         prueba_previa_cat) %>% 
+  colnames()
+
+```
+
+## seroprevalence
+
+```{r}
+# tratamiento de stratos con un solo conglomerado
+options(survey.lonely.psu = "certainty")
+
+# uu_clean_data %>% count(CONGLOMERADO,VIVIENDA)
+
+# diseño muestral de la encuesta ---------------------------------
+
+design <- uu_clean_data %>% 
+  
+  filter(!is.na(ig_clasificacion)) %>% #CRITICAL! ON OUTCOME
+  filter(!is.na(factorfinal)) %>% #NO DEBEN DE HABER CONGLOMERADOS SIN WEIGHT
+  
+  as_survey_design(c(CONGLOMERADO, VIVIENDA),
+                   #id = CONGLOMERADO, #clusters or psu (primary sampling unit) 
+                   #add vivienda como *SSU*
+                   strata = ESTRATO, #clusters need to be nested in the strata
+                   weights= PONDERACION # factores de expancion
+                   )
+
+```
+
+### estimation
+
+```{r}
+serosvy_proportion(design = design,
+                      denominator = sintomas_cualquier_momento_cat,
+                      numerator = ig_clasificacion) %>%
+  select(-ends_with("_low"),-ends_with("_upp"),-ends_with("_cv"),-ends_with("_deff"))
+
+serosvy_proportion(design = design,
+                      denominator = ig_clasificacion,
+                      numerator = sintomas_cualquier_momento_cat) %>%
+  select(-ends_with("_low"),-ends_with("_upp"),-ends_with("_cv"),-ends_with("_deff"))
+
+```
+
+### workflow
+
+#### 1. estimates: raw + weighted
+
+```{r}
+# _ 1. estimates: raw + weighted ---------------------------------------------------------------
+
+outcome_01_pre <- 
+  # crear matriz
+  # set 01 of denominator-numerator
+  expand_grid(
+    design=list(design),
+    denominator=covariate_set01,
+    numerator=c("ig_clasificacion","positividad_peru")
+  ) %>% 
+  # set 02 of denominator-numerator (e.g. within main outcome)
+  union_all(
+    expand_grid(
+      design=list(design),
+      denominator=c("ig_clasificacion","positividad_peru"),
+      numerator=covariate_set02
+    )
+  ) %>% 
+  # crear simbolos
+  mutate(
+    denominator=map(denominator,dplyr::sym),
+    numerator=map(numerator,dplyr::sym)
+  ) %>% 
+  # estimar prevalencia
+  
+  mutate(output=pmap(.l = select(.,design,denominator,numerator),
+                     .f = serosvy_proportion)) %>% 
+  
+  # mutate(output=map(.x = output,.f = tidy_srvyr_tibble)) %>% 
+  select(-design,-denominator,-numerator) %>% 
+  unnest(cols = c(output)) #%>% 
+
+# outcome_01_pre %>% avallecam::print_inf()
+
+```
+
+#### 2. test performance
+
+##### 2.1 filter + add values
+
+```{r}
+# _ 2. test performance ---------------------------------------------------
+
+# __ filter + add values --------------------------------------------------
+
+outcome_01_adj_pre <- outcome_01_pre %>% 
+  # only serological results
+  filter(numerator=="ig_clasificacion") %>% 
+  # only positives
+  filter(numerator_level=="positivo") %>% 
+  # remove some covariates
+  # filter(!magrittr::is_in(denominator,c("edad_decenios","nm_prov","hacinamiento","contacto_covid"))) %>% 
+  # round numbers are required
+  mutate_at(.vars = vars(total,total_den,
+                         total_low,total_den_low,
+                         total_upp,total_den_upp),
+            .funs = list("round"=round),digits = 0) %>%
+  # unknown test local validation results
+  # for sensitivity:
+  # 30 sars-cov-2 positives
+  # for specificity:
+  # 50 sars-cov-2 negatives
+  # 50 prepandemic with other pathogens
+  mutate(
+    true_positive = 30,
+    false_negative = 0,
+    false_positive = 0+2,
+    true_negative = 50+48
+  ) %>% 
+  rownames_to_column() %>%
+  mutate(rowname=as.numeric(rowname))
+
+```
+
+##### 2.2 apply + extract
+
+```{r}
+# __ apply + extract ----------------------------------------------------------------
+# 56-60sec por covariable 
+# 4GB RAM
+# paralelizando en 8 nucleos usando purrr y furrr
+
+plan(multisession, workers = availableCores())
+tic()
+
+out <- tibble()
+
+for (i in 1:nrow(outcome_01_adj_pre)) {
+  
+  out <- outcome_01_adj_pre %>% 
+    
+    slice(i) %>% 
+    
+    # dot
+    mutate(adj_dot_unk=future_pmap(
+      .l = select(.,
+                  positive_number_test=total_round,
+                  total_number_test=total_den_round),
+      .f = possibly(serosvy_unknown_sample_posterior,otherwise = NA_real_),
+      true_positive = true_positive,
+      false_negative = false_negative,
+      false_positive = false_positive,
+      true_negative = true_negative)) %>% 
+    serosvy_extract_posterior(variable = adj_dot_unk) %>% 
+    
+    # low
+    mutate(adj_low_unk=future_pmap(
+      .l = select(.,
+                  positive_number_test=total_low_round,
+                  total_number_test=total_den_low_round),
+      .f = possibly(serosvy_unknown_sample_posterior,otherwise = NA_real_),
+      true_positive = true_positive,
+      false_negative = false_negative,
+      false_positive = false_positive,
+      true_negative = true_negative)) %>%
+    serosvy_extract_posterior(variable = adj_low_unk) %>%
+    
+    # upp
+    mutate(adj_upp_unk=future_pmap(
+      .l = select(.,
+                  positive_number_test=total_upp_round,
+                  total_number_test=total_den_upp_round),
+      .f = possibly(serosvy_unknown_sample_posterior,otherwise = NA_real_),
+      true_positive = true_positive,
+      false_negative = false_negative,
+      false_positive = false_positive,
+      true_negative = true_negative)) %>%
+    serosvy_extract_posterior(variable = adj_upp_unk) %>% 
+    
+    # union all outputs
+    union_all(out)
+  
+  out %>% print() #%>% 
+  # # known test
+    # mutate(adj_dot_kno=future_pmap(
+    #   .l = select(.,
+    #               positive_number_test=total_round,
+    #               total_number_test=total_den_round),
+    #   .f = possibly(serosvy_known_sample_posterior,otherwise = NA_real_),
+    #   sensitivity=0.999,
+    #   specificity=0.960))
+  
+}
+
+toc()
+
+outcome_01_adj <- out  %>% 
+  mutate(rowname=as.numeric(rowname)) %>% 
+  arrange(rowname) %>% 
+  select(-rowname) 
+```
+
+#### 3. create output format
+
+```{r}
+
+# _ 3. create output format -----------------------------------------------
+
+
+
+outcome_01_adj_tbl <- 
+  # start from original dataset
+  outcome_01_pre %>% 
+  # only positives
+  filter(numerator_level=="positivo"|denominator_level=="positivo") %>% 
+  # left join with db with test performance update
+  left_join(outcome_01_adj) %>% 
+  # naniar::miss_var_summary() %>% 
+  # avallecam::print_inf() %>% 
+  
+  # apply format
+  unite_dotwhiskers(variable_dot = raw_prop, 
+                    variable_low = raw_prop_low,
+                    variable_upp = raw_prop_upp,
+                    digits_dot = 2,
+                    digits_low = 1,
+                    digits_upp = 2) %>% 
+  unite_dotwhiskers(variable_dot = prop, 
+                    variable_low = prop_low,
+                    variable_upp = prop_upp,
+                    digits_dot = 2,
+                    digits_low = 1,
+                    digits_upp = 2) %>% 
+  unite_dotwhiskers(variable_dot = adj_dot_unk_p50,
+                    variable_low = adj_low_unk_p50,
+                    variable_upp = adj_upp_unk_p50,
+                    digits_dot = 3,
+                    digits_low = 2,
+                    digits_upp = 3)
+```
+
+#### 4. evaluate output
+
+```{r}
+# _ 4. evaluate output ----------------------------------------------------
+
+
+outcome_01_adj_tbl %>% 
+  select(1:4,starts_with("unite1_")) %>% 
+  # view()
+  avallecam::print_inf()
+
+```
+
+
