@@ -1,5 +1,7 @@
 ---
 title: "howto-reprex"
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r, include = FALSE}
@@ -12,58 +14,60 @@ knitr::opts_chunk$set(
 ## call R package
 
 ```{r setup}
+# package
 library(serosurvey)
+# additional
+library(tidyverse)
+library(srvyr)
+library(survey)
+library(tictoc)
+library(furrr)
+library(purrr)
 ```
 
 ## import data
 
 ```{r}
-
-library(tidyverse)
-library(srvyr)
-library(survey)
 data(api)
-dstrata <- apistrat %>% as_survey_design(strata = stype, weights = pw)
-dstrata2 <- apistrat %>%
-  mutate(pw2=1) %>%
-  as_survey_design(strata = stype, weights = pw2)
+
+datasurvey <- apiclus2 %>% 
+  mutate(survey_all="survey_all") %>% 
+  # extra
+  mutate(outcome_two=cut(pct.resp,breaks = 2))
+
+datasurvey %>% glimpse()
+```
+
+```{r,eval=FALSE}
+dstrata <- datasurvey %>% as_survey_design(strata = stype, weights = pw)
+# dstrata2 <- apistrat %>%
+#   mutate(pw2=1) %>%
+  # as_survey_design(strata = stype, weights = pw2)
 dstrata %>%
   summarise(pct = survey_mean(awards=="Yes",proportion = TRUE))
-dstrata2 %>%
-  summarise(pct = survey_mean(awards=="Yes",proportion = TRUE))
-
-
+# dstrata2 %>%
+#   summarise(pct = survey_mean(awards=="Yes",proportion = TRUE))
 ```
+
 
 ## select covariates
 
 ```{r}
 
-covariate_set01 <- uu_clean_data %>% 
-  select(survey_all,
-         sexo,
-         edad_etapas_de_vida_t,
-         edad_decenios,
-         diris,
-         hacinamiento,
-         nm_prov,
-         sintomas_cualquier_momento_cat,
-         sintomas_cualquier_momento_cat_fecha_14d_v1,
-         sintomas_cualquier_momento_cat_fecha_rangos,
-         contacto_covid,
-         contacto_covid_tipo,
-         prueba_previa,
-         prueba_previa_cat) %>% 
+# denominadores
+covariate_set01 <- datasurvey %>% 
+  select(stype,
+         #sch.wide,
+         #comp.imp,
+         both) %>% 
   colnames()
 
-covariate_set02 <- uu_clean_data %>% 
-  select(sintomas_cualquier_momento_cat,
-         sintomas_cualquier_momento_cat_fecha_14d_v1,
-         sintomas_cualquier_momento_cat_fecha_rangos,
-         contacto_covid,
-         contacto_covid_tipo,
-         prueba_previa,
-         prueba_previa_cat) %>% 
+# numerators within outcome
+covariate_set02 <- datasurvey %>% 
+  select(#stype,
+         #sch.wide,
+         #comp.imp,
+         both) %>% 
   colnames()
 
 ```
@@ -78,36 +82,35 @@ options(survey.lonely.psu = "certainty")
 
 # diseño muestral de la encuesta ---------------------------------
 
-design <- uu_clean_data %>% 
+design <- datasurvey %>% 
   
-  filter(!is.na(ig_clasificacion)) %>% #CRITICAL! ON OUTCOME
-  filter(!is.na(factorfinal)) %>% #NO DEBEN DE HABER CONGLOMERADOS SIN WEIGHT
+  filter(!is.na(awards)) %>% #CRITICAL! ON OUTCOME
+  filter(!is.na(pw)) %>% #NO DEBEN DE HABER CONGLOMERADOS SIN WEIGHT
   
-  as_survey_design(c(CONGLOMERADO, VIVIENDA),
-                   #id = CONGLOMERADO, #clusters or psu (primary sampling unit) 
-                   #add vivienda como *SSU*
-                   strata = ESTRATO, #clusters need to be nested in the strata
-                   weights= PONDERACION # factores de expancion
-                   )
-
+  as_survey_design(
+    id=c(dnum, snum), #~dnum+snum, # primary secondary sampling unit
+    # strata = stype, #clusters need to be nested in the strata
+    weights = pw # factores de expancion
+  )
 ```
 
-### estimation
+### single estimation
 
 ```{r}
 serosvy_proportion(design = design,
-                      denominator = sintomas_cualquier_momento_cat,
-                      numerator = ig_clasificacion) %>%
-  select(-ends_with("_low"),-ends_with("_upp"),-ends_with("_cv"),-ends_with("_deff"))
+                      denominator = stype,
+                      numerator = awards) %>%
+  select(-ends_with("_low"),-ends_with("_upp"),
+         -ends_with("_cv"),-ends_with("_deff"))
 
 serosvy_proportion(design = design,
-                      denominator = ig_clasificacion,
-                      numerator = sintomas_cualquier_momento_cat) %>%
-  select(-ends_with("_low"),-ends_with("_upp"),-ends_with("_cv"),-ends_with("_deff"))
-
+                      denominator = awards,
+                      numerator = stype) %>%
+  select(-ends_with("_low"),-ends_with("_upp"),
+         -ends_with("_cv"),-ends_with("_deff"))
 ```
 
-### workflow
+### workflow: multiple estimation
 
 #### 1. estimates: raw + weighted
 
@@ -120,13 +123,13 @@ outcome_01_pre <-
   expand_grid(
     design=list(design),
     denominator=covariate_set01,
-    numerator=c("ig_clasificacion","positividad_peru")
+    numerator=c("awards","outcome_two")
   ) %>% 
   # set 02 of denominator-numerator (e.g. within main outcome)
   union_all(
     expand_grid(
       design=list(design),
-      denominator=c("ig_clasificacion","positividad_peru"),
+      denominator=c("awards","outcome_two"),
       numerator=covariate_set02
     )
   ) %>% 
@@ -144,7 +147,7 @@ outcome_01_pre <-
   select(-design,-denominator,-numerator) %>% 
   unnest(cols = c(output)) #%>% 
 
-# outcome_01_pre %>% avallecam::print_inf()
+outcome_01_pre
 
 ```
 
@@ -159,9 +162,9 @@ outcome_01_pre <-
 
 outcome_01_adj_pre <- outcome_01_pre %>% 
   # only serological results
-  filter(numerator=="ig_clasificacion") %>% 
+  filter(numerator=="awards") %>% 
   # only positives
-  filter(numerator_level=="positivo") %>% 
+  filter(numerator_level=="Yes") %>% 
   # remove some covariates
   # filter(!magrittr::is_in(denominator,c("edad_decenios","nm_prov","hacinamiento","contacto_covid"))) %>% 
   # round numbers are required
@@ -276,7 +279,7 @@ outcome_01_adj_tbl <-
   # start from original dataset
   outcome_01_pre %>% 
   # only positives
-  filter(numerator_level=="positivo"|denominator_level=="positivo") %>% 
+  filter(numerator_level=="Yes"|denominator_level=="Yes") %>% 
   # left join with db with test performance update
   left_join(outcome_01_adj) %>% 
   # naniar::miss_var_summary() %>% 
@@ -316,4 +319,7 @@ outcome_01_adj_tbl %>%
 
 ```
 
+```{r}
+
+```
 
