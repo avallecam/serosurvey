@@ -118,5 +118,5 @@ serosvy_proportion(design = dstrata,
 }
 \references{
 Greg Freedman Ellis and Ben Schneider (2020). srvyr: 'dplyr'-Like Syntax for Summary
-Statistics of Survey Data. http://gdfe.co/srvyr, https://github.com/gergness/srvyr.
+Statistics of Survey Data. \url{http://gdfe.co/srvyr}, \url{https://github.com/gergness/srvyr}.
 }

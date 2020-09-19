@@ -70,3 +70,6 @@ result_unk_x \%>\%
 }
 
 }
+\references{
+Larremore, D. B., Fosdick, B. K., Zhang, S., & Grad, Y. H. (2020). Jointly modeling prevalence, sensitivity and specificity for optimal sample allocation. bioRxiv. doi: \url{https://doi.org/10.1101/2020.05.23.112649}
+}

@@ -11,7 +11,14 @@
 #' @param false_positive false positive tests in the lab
 #' @param false_negative false negative tests in the lab
 #'
+#' @references
+#'
+#' Larremore, D. B., Fosdick, B. K., Zhang, S., & Grad, Y. H. (2020). Jointly modeling prevalence, sensitivity and specificity for optimal sample allocation. bioRxiv. doi: [https://doi.org/10.1101/2020.05.23.112649](https://doi.org/10.1101/2020.05.23.112649)
+#'
 #' @return tibble of prevalence posterior distribution
+#'
+#' @import skimr
+#' @import tidyverse
 #'
 #' @export serosvy_unknown_sample_posterior
 #'

@@ -14,7 +14,7 @@
 #'
 #' @references
 #'
-#' Kritsotakis, E. I. (2020). On the importance of population-based serological surveys of SARS-CoV-2 without overlooking their inherent uncertainties. Public Health in Practice, 100013. doi: https://doi.org/10.1016/j.puhip.2020.100013
+#' Kritsotakis, E. I. (2020). On the importance of population-based serological surveys of SARS-CoV-2 without overlooking their inherent uncertainties. Public Health in Practice, 100013. doi: [https://doi.org/10.1016/j.puhip.2020.100013](https://doi.org/10.1016/j.puhip.2020.100013)
 #'
 #' @export rogan_gladen_stderr_unk
 #'

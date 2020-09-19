@@ -9,7 +9,14 @@
 #' @param sensitivity known sensitivity of test
 #' @param specificity known specificity of test
 #'
+#' @references
+#'
+#' Larremore, D. B., Fosdick, B. K., Bubar, K. M., Zhang, S., Kissler, S. M., Metcalf, C. J. E., ... & Grad, Y. (2020). Estimating SARS-CoV-2 seroprevalence and epidemiological parameters with uncertainty from serological surveys. medRxiv. doi: [https://doi.org/10.1101/2020.04.15.20067066](https://doi.org/10.1101/2020.04.15.20067066)
+#'
 #' @return tibble of prevalence posterior distribution
+#'
+#' @import skimr
+#' @import tidyverse
 #'
 #' @export serosvy_known_sample_posterior
 #'

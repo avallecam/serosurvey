@@ -12,7 +12,10 @@
 #' @references
 #'
 #' Greg Freedman Ellis and Ben Schneider (2020). srvyr: 'dplyr'-Like Syntax for Summary
-#' Statistics of Survey Data. http://gdfe.co/srvyr, https://github.com/gergness/srvyr.
+#' Statistics of Survey Data. [http://gdfe.co/srvyr](http://gdfe.co/srvyr), [https://github.com/gergness/srvyr](https://github.com/gergness/srvyr).
+#'
+#' @import skimr
+#' @import tidyverse
 #'
 #' @export srvyr_prop_step_01
 #' @export srvyr_prop_step_02

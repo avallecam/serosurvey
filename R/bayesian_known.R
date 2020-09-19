@@ -6,7 +6,7 @@
 #'
 #' @references
 #'
-#' Larremore, D. B., Fosdick, B. K., Bubar, K. M., Zhang, S., Kissler, S. M., Metcalf, C. J. E., ... & Grad, Y. (2020). Estimating SARS-CoV-2 seroprevalence and epidemiological parameters with uncertainty from serological surveys. medRxiv. doi: https://doi.org/10.1101/2020.04.15.20067066
+#' Larremore, D. B., Fosdick, B. K., Bubar, K. M., Zhang, S., Kissler, S. M., Metcalf, C. J. E., ... & Grad, Y. (2020). Estimating SARS-CoV-2 seroprevalence and epidemiological parameters with uncertainty from serological surveys. medRxiv. doi: [https://doi.org/10.1101/2020.04.15.20067066](https://doi.org/10.1101/2020.04.15.20067066)
 #'
 #' @param samps number of MCMC samples desired
 #' @param posi number of positive tests population

@@ -87,7 +87,9 @@ tibble(
 
 }
 \references{
-Azman, A. S., Lauer, S., Bhuiyan, M. T. R., Luquero, F. J., Leung, D. T., Hegde, S., ... & Lessler, J. (2020). Vibrio cholerae O1 transmission in Bangladesh: insights from a nationally-representative serosurvey. medRxiv. doi: https://doi.org/10.1101/2020.03.13.20035352
+Rogan, W. J., & Gladen, B. (1978). Estimating prevalence from the results of a screening test. American journal of epidemiology, 107(1), 71-76. \url{https://doi.org/10.1093/oxfordjournals.aje.a112510}
 
-Takahashi, S., Greenhouse, B., & Rodríguez-Barraquer, I. (2020). Are SARS-CoV-2 seroprevalence estimates biased?. doi: https://doi.org/10.1093/infdis/jiaa523
+Azman, A. S., Lauer, S., Bhuiyan, M. T. R., Luquero, F. J., Leung, D. T., Hegde, S., ... & Lessler, J. (2020). Vibrio cholerae O1 transmission in Bangladesh: insights from a nationally-representative serosurvey. medRxiv. doi: \url{https://doi.org/10.1101/2020.03.13.20035352}
+
+Takahashi, S., Greenhouse, B., & Rodríguez-Barraquer, I. (2020). Are SARS-CoV-2 seroprevalence estimates biased?. doi: \url{https://doi.org/10.1093/infdis/jiaa523}
 }

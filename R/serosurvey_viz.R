@@ -12,6 +12,9 @@
 #' @param proportion_low lower interval
 #' @param breaks_n number of breaks in axis
 #'
+#' @import skimr
+#' @import tidyverse
+#'
 #' @export ggplot_prevalence
 #'
 #' @examples

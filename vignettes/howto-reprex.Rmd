@@ -1,5 +1,5 @@
 ---
-title: "howto-reprex"
+title: "Workflow: How to use the serosurvey R package?"
 editor_options: 
   chunk_output_type: console
 ---
@@ -16,7 +16,7 @@ knitr::opts_chunk$set(fig.width=10, fig.height=4)
 options(tidyverse.quiet = TRUE)
 ```
 
-## import packages
+## Import packages
 
 ```{r setup}
 # package
@@ -32,7 +32,7 @@ library(purrr)
 theme_set(theme_bw())
 ```
 
-## import data
+## Import data
 
 ```{r}
 data(api)
@@ -42,8 +42,10 @@ datasurvey <- apiclus2 %>%
   # extra
   mutate(outcome_two=cut(pct.resp,breaks = 2))
 
-datasurvey %>% glimpse()
+# datasurvey %>% glimpse()
 ```
+
+### `srvyr` workflow
 
 ```{r,eval=FALSE}
 dstrata <- datasurvey %>% as_survey_design(strata = stype, weights = pw)
@@ -57,11 +59,11 @@ dstrata %>%
 ```
 
 
-## select covariates
+## Select set of covariates
 
 ```{r}
 
-# denominadores
+# denominators
 covariate_set01 <- datasurvey %>% 
   select(stype,
          #sch.wide,
@@ -79,7 +81,7 @@ covariate_set02 <- datasurvey %>%
 
 ```
 
-## seroprevalence
+## Prevalence estimation
 
 ```{r}
 # tratamiento de stratos con un solo conglomerado
@@ -101,7 +103,7 @@ design <- datasurvey %>%
   )
 ```
 
-### single estimation
+## Example: Single estimation
 
 ```{r}
 serosvy_proportion(design = design,
@@ -117,9 +119,9 @@ serosvy_proportion(design = design,
          -ends_with("_cv"),-ends_with("_deff"))
 ```
 
-### workflow: multiple estimation
+## __Workflow:__ Multiple estimation
 
-#### 1. estimates: raw + weighted
+## 1. Estimates: raw + weighted
 
 ```{r}
 # _ 1. estimates: raw + weighted ---------------------------------------------------------------
@@ -158,9 +160,11 @@ outcome_01_pre
 
 ```
 
-#### 2. test performance
+## 2. Add uncertain test performance
 
-##### 2.1 filter + add values
+Lets assume that we have results from a local validation study
+
+### 2.1 Filter + add values
 
 ```{r}
 # _ 2. test performance ---------------------------------------------------
@@ -196,7 +200,7 @@ outcome_01_adj_pre <- outcome_01_pre %>%
 
 ```
 
-##### 2.2 apply + extract
+### 2.2 Apply + extract
 
 ```{r}
 # __ apply + extract ----------------------------------------------------------------
@@ -276,7 +280,7 @@ outcome_01_adj <- out  %>%
   select(-rowname) 
 ```
 
-#### 3. create output format
+## 3. Create output format
 
 ```{r}
 
@@ -315,7 +319,7 @@ outcome_01_adj_tbl <-
                     digits_upp = 3)
 ```
 
-#### 4. evaluate output
+## 4. Evaluate output
 
 ```{r}
 # _ 4. evaluate output ----------------------------------------------------
@@ -324,11 +328,13 @@ outcome_01_adj_tbl <-
 outcome_01_adj_tbl %>% 
   select(1:4,starts_with("unite1_")) %>% 
   # view()
-  avallecam::print_inf()
+  # avallecam::print_inf()
+  knitr::kable() %>% 
+  kableExtra::kable_styling(bootstrap_options = "striped", full_width = F)
 
 ```
 
-### output figure
+## Output figure
 
 ```{r}
 outcome_01_adj_tbl %>% 
