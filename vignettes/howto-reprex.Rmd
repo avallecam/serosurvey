@@ -16,7 +16,7 @@ knitr::opts_chunk$set(fig.width=10, fig.height=4)
 options(tidyverse.quiet = TRUE)
 ```
 
-## call R package
+## import packages
 
 ```{r setup}
 # package
