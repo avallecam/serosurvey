@@ -342,7 +342,7 @@ outcome_01_adj_tbl %>%
   facet_wrap(denominator~.,scales = "free_y") +
   # facet_grid(denominator~.,scales = "free_y") +
   colorspace::scale_color_discrete_qualitative() +
-  labs(title = "Prevalence by numerators across denominators",
+  labs(title = "Prevalence of numerators across denominators",
        y = "Prevalence",x = "")
 ```
 
