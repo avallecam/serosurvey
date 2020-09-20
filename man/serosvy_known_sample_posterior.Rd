@@ -20,7 +20,7 @@ serosvy_known_sample_posterior(positive_number_test, total_number_test,
 tibble of prevalence posterior distribution
 }
 \description{
-\strong{one or sub} population - \strong{known} test performance - posterior distribution of prevalence.
+\strong{one or sub} population - \strong{known} test performance - posterior distribution of prevalence. source \href{https://github.com/LarremoreLab/covid_serological_sampling/blob/master/codebase/seroprevalence.R}{here}
 }
 \section{Functions}{
 \itemize{

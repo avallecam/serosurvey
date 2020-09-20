@@ -1,6 +1,6 @@
 #' @title Bayesian serological sampling functions for one population and unknown test performance
 #'
-#' @description __one__ population - __unknown__ test performance - posterior distribution of prevalence.
+#' @description __one__ population - __unknown__ test performance - posterior distribution of prevalence. source [here](https://github.com/LarremoreLab/bayesian-joint-prev-se-sp/blob/master/singleSERO_uncertainTEST.R)
 #'
 #' @describeIn sample_posterior_r_mcmc_testun one population - unknown test performance - posterior distribution of prevalence. source [here](https://github.com/LarremoreLab/bayesian-joint-prev-se-sp/blob/master/singleSERO_uncertainTEST.R)
 #'

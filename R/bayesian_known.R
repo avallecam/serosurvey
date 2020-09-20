@@ -1,6 +1,6 @@
 #' @title Bayesian serological sampling functions for one or more sub-population and known test performance
 #'
-#' @description __one or sub__ population - __known__ test performance - posterior distribution of prevalence.
+#' @description __one or sub__ population - __known__ test performance - posterior distribution of prevalence. source [here](https://github.com/LarremoreLab/covid_serological_sampling/blob/master/codebase/seroprevalence.R)
 #'
 #' @describeIn sample_posterior_r_mcmc_hyperR sub population - known test performance - posterior distribution of prevalence. source [here](https://github.com/LarremoreLab/covid_serological_sampling/blob/master/codebase/seroprevalence.R)
 #'

@@ -2,10 +2,15 @@
 % Please edit documentation in R/bayesian_unknown_tidy.R
 \name{serosvy_unknown_sample_posterior}
 \alias{serosvy_unknown_sample_posterior}
+\alias{serosvy_unknown_sample_posterior_ii}
 \title{Tidy output for Bayesian serological sampling functions for one population and unknown test performance}
 \usage{
 serosvy_unknown_sample_posterior(positive_number_test, total_number_test,
   true_positive, true_negative, false_positive, false_negative)
+
+serosvy_unknown_sample_posterior_ii(positive_number_test,
+  total_number_test, true_positive, true_negative, false_positive,
+  false_negative)
 }
 \arguments{
 \item{positive_number_test}{number of positive tests population}
@@ -24,11 +29,13 @@ serosvy_unknown_sample_posterior(positive_number_test, total_number_test,
 tibble of prevalence posterior distribution
 }
 \description{
-\strong{one} population - \strong{unknown} test performance - posterior distribution of prevalence.
+\strong{one} population - \strong{unknown} test performance - posterior distribution of prevalence. source \href{https://github.com/LarremoreLab/bayesian-joint-prev-se-sp/blob/master/singleSERO_uncertainTEST.R}{here}
 }
 \section{Functions}{
 \itemize{
 \item \code{serosvy_unknown_sample_posterior}: one population - unknown test performance - posterior distribution of prevalence. source \href{https://github.com/LarremoreLab/bayesian-joint-prev-se-sp/blob/master/singleSERO_uncertainTEST.R}{here}
+
+\item \code{serosvy_unknown_sample_posterior_ii}: takes known sensitivity and specificity of test and returns proportion of sample that 'true' positive
 }}
 
 \examples{
@@ -66,6 +73,32 @@ result_unk_x \%>\%
 #  geom_histogram(aes(y=..density..),binwidth = 0.005) +
 #  geom_density() +
 #  facet_grid(~estimates,scales = "free_x")
+
+
+# ------------------------------------------------------
+
+result_unk_x <- serosvy_unknown_sample_posterior_ii(
+  positive_number_test = positive_pop[1],
+  total_number_test = positive_pop[1]+negative_pop[1],
+  true_positive = 670,
+  true_negative = 640,
+  false_positive = 202,
+  false_negative = 74)
+
+result_unk_x \%>\%
+  unnest(summary)
+result_unk_x \%>\%
+  unnest(performance)
+
+result_unk_x \%>\%
+  select(posterior) \%>\%
+  unnest(posterior) \%>\%
+  rownames_to_column() \%>\%
+  pivot_longer(cols = -rowname,names_to = "estimates",values_to = "values") \%>\%
+  ggplot(aes(x = values)) +
+  geom_histogram(aes(y=..density..),binwidth = 0.005) +
+  geom_density() +
+  facet_grid(~estimates,scales = "free_x")
 
 }
 

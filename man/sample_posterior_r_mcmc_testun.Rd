@@ -25,7 +25,7 @@ sample_posterior_r_mcmc_testun(samps, pos, n, tp, tn, fp, fn)
 Prevalence posterior distribution
 }
 \description{
-\strong{one} population - \strong{unknown} test performance - posterior distribution of prevalence.
+\strong{one} population - \strong{unknown} test performance - posterior distribution of prevalence. source \href{https://github.com/LarremoreLab/bayesian-joint-prev-se-sp/blob/master/singleSERO_uncertainTEST.R}{here}
 }
 \section{Functions}{
 \itemize{

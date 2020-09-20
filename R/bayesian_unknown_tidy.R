@@ -1,6 +1,6 @@
 #' @title Tidy output for Bayesian serological sampling functions for one population and unknown test performance
 #'
-#' @description __one__ population - __unknown__ test performance - posterior distribution of prevalence.
+#' @description __one__ population - __unknown__ test performance - posterior distribution of prevalence. source [here](https://github.com/LarremoreLab/bayesian-joint-prev-se-sp/blob/master/singleSERO_uncertainTEST.R)
 #'
 #' @describeIn serosvy_unknown_sample_posterior one population - unknown test performance - posterior distribution of prevalence. source [here](https://github.com/LarremoreLab/bayesian-joint-prev-se-sp/blob/master/singleSERO_uncertainTEST.R)
 #'
@@ -21,6 +21,7 @@
 #' @import tidyverse
 #'
 #' @export serosvy_unknown_sample_posterior
+#' @export serosvy_unknown_sample_posterior_ii
 #'
 #' @examples
 #'
@@ -57,6 +58,32 @@
 #' #  geom_histogram(aes(y=..density..),binwidth = 0.005) +
 #' #  geom_density() +
 #' #  facet_grid(~estimates,scales = "free_x")
+#'
+#'
+#' # ------------------------------------------------------
+#'
+#' result_unk_x <- serosvy_unknown_sample_posterior_ii(
+#'   positive_number_test = positive_pop[1],
+#'   total_number_test = positive_pop[1]+negative_pop[1],
+#'   true_positive = 670,
+#'   true_negative = 640,
+#'   false_positive = 202,
+#'   false_negative = 74)
+#'
+#' result_unk_x %>%
+#'   unnest(summary)
+#' result_unk_x %>%
+#'   unnest(performance)
+#'
+#' result_unk_x %>%
+#'   select(posterior) %>%
+#'   unnest(posterior) %>%
+#'   rownames_to_column() %>%
+#'   pivot_longer(cols = -rowname,names_to = "estimates",values_to = "values") %>%
+#'   ggplot(aes(x = values)) +
+#'   geom_histogram(aes(y=..density..),binwidth = 0.005) +
+#'   geom_density() +
+#'   facet_grid(~estimates,scales = "free_x")
 #'
 #' }
 #'
@@ -132,5 +159,88 @@ serosvy_unknown_sample_posterior <- function(positive_number_test,
     # posterior=list(result),
     summary=list(result_sum),
     # performance=list(performance_sum)
+  )
+}
+
+#' @describeIn serosvy_unknown_sample_posterior takes known sensitivity and specificity of test and returns proportion of sample that 'true' positive
+#' @inheritParams serosvy_unknown_sample_posterior
+
+serosvy_unknown_sample_posterior_ii <- function(positive_number_test,
+                                             total_number_test,
+                                             true_positive,
+                                             true_negative,
+                                             false_positive,
+                                             false_negative) {
+
+  # negative_number_test <- total_number_test - positive_number_test
+
+  pos <- positive_number_test
+  # neg <- negative_number_test
+  tot <- total_number_test
+  tp <- true_positive
+  tn <- true_negative
+  fp <- false_positive
+  fn <- false_negative
+
+  result <-
+  # result_sum <-
+    sample_posterior_r_mcmc_testun(samps = 10000,
+                                   #in population
+                                   pos = pos, #positive
+                                   # n = neg, #negatives
+                                   n = tot, #total
+                                   # in lab
+                                   tp = tp,tn = tn,
+                                   fp = fp,fn = fn
+    ) #%>%
+
+    # # as_tibble()
+    # # first matrix element is r (posterior distribution)
+    # .[,1] %>%
+    #
+    # # as_tibble() %>%
+    # enframe(value = "r",name = NULL) %>%
+    # # 90% credibility interval
+    # summarise(numeric.p05 = quantile(r, probs = .05),
+    #           numeric.mean = mean(r),
+    #           numeric.p50 = quantile(r, probs = .50),
+    #           numeric.p95 = quantile(r, probs = .95))
+
+  my_skim <- skim_with(
+    numeric = sfl(p05 = ~ quantile(., probs = .05), # 90% credibility interval
+                  mean = mean,
+                  p50 = ~ quantile(., probs = .50),
+                  p95 = ~ quantile(., probs = .95)),
+    append = FALSE)
+
+  all_in_one <- result %>%
+    my_skim() %>%
+    as_tibble() %>%
+    select(skim_variable,numeric.p05:numeric.p95)
+
+  result_sum <- result %>%
+    # # first matrix element is r (posterior distribution)
+    .[,1] %>%
+    enframe(value = "r",name = NULL) %>%
+    # summarise(numeric.p05 = quantile(r, probs = .05),
+    #           numeric.mean = mean(r),
+    #           numeric.p50 = quantile(r, probs = .50),
+    #           numeric.p95 = quantile(r, probs = .95)) %>%
+  my_skim() %>%
+  as_tibble() %>%
+  filter(skim_variable=="r") %>%
+  select(skim_variable,numeric.p05:numeric.p95)
+
+  performance_sum <- result %>%
+    my_skim() %>%
+    as_tibble() %>%
+    filter(!(skim_variable=="r")) %>%
+    select(skim_variable,numeric.p05:numeric.p95)
+
+  output <- tibble(
+    posterior=list(result %>% as_tibble()),
+    summary=list(result_sum),
+    performance=list(performance_sum),
+    tidy=list(all_in_one)
   )
 }

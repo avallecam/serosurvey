@@ -23,7 +23,7 @@ sample_posterior_r_mcmc_hyperR(samps, posi, ni, se, sp, gam0)
 Prevalence posterior distribution
 }
 \description{
-\strong{one or sub} population - \strong{known} test performance - posterior distribution of prevalence.
+\strong{one or sub} population - \strong{known} test performance - posterior distribution of prevalence. source \href{https://github.com/LarremoreLab/covid_serological_sampling/blob/master/codebase/seroprevalence.R}{here}
 }
 \section{Functions}{
 \itemize{

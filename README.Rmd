@@ -2,6 +2,10 @@
 output: github_document
 editor_options: 
   chunk_output_type: console
+bibliography: references.bib
+link-citations: yes
+linkcolor: Blue
+urlcolor: Blue
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -26,7 +30,7 @@ options(tidyverse.quiet = TRUE)
 [![CRAN status](https://www.r-pkg.org/badges/version/serosurvey)](https://cran.r-project.org/package=serosurvey)
 <!-- badges: end -->
 
-The goal of `serosurvey` is to provide a centralized R package of Serological Survey Analysis For Prevalence Estimation Under Misclassification
+The goal of `serosurvey` is to gather _functions_ and _workflow templates_ for __Serological Survey Analysis For Prevalence Estimation Under Misclassification__.
 
 ## Installation
 
@@ -62,8 +66,11 @@ data(api)
 
 datasurvey <- apiclus2 %>% 
   mutate(survey_all="survey_all") %>% 
-  # extra
-  mutate(outcome_two=cut(pct.resp,breaks = 2))
+  # create variables
+  mutate(outcome_one = awards,
+         outcome_two = cut(pct.resp,breaks = 2),
+         covariate_01 = stype,
+         covariate_02 = both)
 ```
 
 ```{r,echo=FALSE}
@@ -76,12 +83,12 @@ options(survey.lonely.psu = "certainty")
 
 design <- datasurvey %>% 
   
-  filter(!is.na(awards)) %>% #CRITICAL! ON OUTCOME
+  filter(!is.na(outcome_one)) %>% #CRITICAL! ON OUTCOME
   filter(!is.na(pw)) %>% #NO DEBEN DE HABER CONGLOMERADOS SIN WEIGHT
   
   as_survey_design(
     id=c(dnum, snum), #~dnum+snum, # primary secondary sampling unit
-    # strata = stype, #clusters need to be nested in the strata
+    # strata = strata, #clusters need to be nested in the strata
     weights = pw # factores de expancion
   )
 ```
@@ -89,10 +96,10 @@ design <- datasurvey %>%
 ```{r,echo=FALSE}
 # denominadores
 covariate_set01 <- datasurvey %>% 
-  select(stype,
+  select(covariate_01,
          #sch.wide,
          #comp.imp,
-         both) %>% 
+         covariate_02) %>% 
   colnames()
 
 # numerators within outcome
@@ -100,23 +107,29 @@ covariate_set02 <- datasurvey %>%
   select(#stype,
          #sch.wide,
          #comp.imp,
-         both) %>% 
+         covariate_02) %>% 
   colnames()
 ```
 
 ### `survey`: Estimate single prevalences
 
-- __`serosvy_proportion`__ estimates __prevalence, total population, raw proportions, cv%, deff__ from a `srvyr` survey design object in one single function:
+- From a __`srvyr` survey design object__, __`serosvy_proportion`__ estimates:
+
+  + weighted prevalence (`prop`), 
+  + total population (`total`),
+  + raw proportion (`raw_prop`), 
+  + coefficient of variability (`cv`), 
+  + design effect (`deff`)
 
 ```{r}
 serosvy_proportion(design = design,
-                      denominator = stype,
-                      numerator = awards)
+                   denominator = covariate_01,
+                   numerator = outcome_one)
 
 
 serosvy_proportion(design = design,
-                      denominator = awards,
-                      numerator = stype)
+                   denominator = outcome_one,
+                   numerator = covariate_01)
 ```
 
 ```{r,eval=FALSE}
@@ -125,35 +138,48 @@ example("serosvy_proportion")
 
 ### `survey`: Estimate multiple prevalences
 
-- In [articles](https://avallecam.github.io/serosurvey/articles/howto-reprex.html) we provide a workflow to __estimate multiple prevalences__ in one single pipe operation:
+- In 
+the [Article tab](https://avallecam.github.io/serosurvey/articles/howto-reprex.html) 
+we provide a workflow to __estimate multiple prevalences__: 
+
+  + using _different set of covariates_ and outcomes as numerators or denominators,
+  + in _one single pipe_ operation
 
 ```{r}
 # crear matriz
+  #
   # set 01 of denominator-numerator
-  expand_grid(
-    design=list(design),
-    denominator=covariate_set01,
-    numerator=c("awards","outcome_two")
+  #
+expand_grid(
+  design=list(design),
+  denominator=c("covariate_01","covariate_02"), # covariates
+  numerator=c("outcome_one","outcome_two") # outcomes
   ) %>% 
+  #
   # set 02 of denominator-numerator (e.g. within main outcome)
+  #
   union_all(
     expand_grid(
       design=list(design),
-      denominator=c("awards","outcome_two"),
-      numerator=covariate_set02
+      denominator=c("outcome_one","outcome_two"), # outcomes
+      numerator=c("covariate_02") # covariates
     )
   ) %>% 
-  # crear simbolos
+  #
+  # create symbols (to be readed as arguments)
+  #
   mutate(
     denominator=map(denominator,dplyr::sym),
     numerator=map(numerator,dplyr::sym)
   ) %>% 
-  # estimar prevalencia
-  
+  #
+  # estimate prevalence
+  #
   mutate(output=pmap(.l = select(.,design,denominator,numerator),
                      .f = serosvy_proportion)) %>% 
-  
-  # mutate(output=map(.x = output,.f = tidy_srvyr_tibble)) %>% 
+  #
+  # show the outcome
+  #
   select(-design,-denominator,-numerator) %>% 
   unnest(cols = c(output)) %>% 
   print(n=Inf)
@@ -161,12 +187,22 @@ example("serosvy_proportion")
 
 ### `serology`: Estimate prevalence Under misclassification
 
-- We provide a __tidy outputs__ for open source funtions to consider __misclassification due to an imperfect diagnostic test__:
+- We gather __classical frequentist approaches__ to deal with 
+misclassification due to an imperfect diagnostic test.
+Check the [functions documentation tab](https://avallecam.github.io/serosurvey/reference/index.html).
+
+- We provide __tidy outputs for bayesian approaches__ developed in @Larremore2020unk [here](https://github.com/LarremoreLab/bayesian-joint-prev-se-sp/blob/master/singleSERO_uncertainTEST.R) and @Larremore2020kno [here](https://github.com/LarremoreLab/covid_serological_sampling/blob/master/codebase/seroprevalence.R):
+
+- You can use them with __`purrr`__ and __`furrr`__ to efficiently iterate and parallelize this step for __multiple prevalences in one single pipe__.
+Check the workflow 
+in [Article tab](https://avallecam.github.io/serosurvey/articles/howto-reprex.html).
+
 
 #### __Known test performance - Bayesian method__
 
 ```{r}
 tidy_result <- serosvy_known_sample_posterior(
+  #in population
   positive_number_test = 321,
   total_number_test = 321+1234,
   # known performance
@@ -185,7 +221,7 @@ tidy_result %>%
  select(posterior) %>%
  unnest(cols = c(posterior)) %>%
  ggplot(aes(x = r1)) +
- geom_histogram(aes(y=..density..),binwidth = 0.005) +
+ geom_histogram(aes(y=..density..),binwidth = 0.0005) +
  geom_density() +
  geom_vline(aes(xintercept=tidy_result_out %>%
                   pull(numeric.mean)),
@@ -205,22 +241,42 @@ example("serosvy_known_sample_posterior")
 
 #### __Unknown test preformance - Bayesian method__
 
+- The test performance is defined as _unknown_ or _uncertain_ "when the test 
+characteristics are not well defined and a limited number of test are 
+available, such as during an outbreak of a novel pathogen." [@Larremore2020unk; @Diggle2011]
+
+```{r,eval=FALSE,echo=FALSE}
+# result_unk <- sample_posterior_r_mcmc_testun(
+#   samps = 10000,
+#   #in population
+#   pos = 692, #positive
+#   n = 3212, #total
+#   # in lab (local validation study)
+#   tp = 670,tn = 640,fp = 202,fn = 74)
+```
+
 ```{r}
-result_unk <- sample_posterior_r_mcmc_testun(samps = 10000,
-                                             #in population
-                                             pos = 692, #positive
-                                             n = 3212, #total
-                                             # in lab (local validation study)
-                                             tp = 670,tn = 640,fp = 202,fn = 74)
+result_unk <- serosvy_unknown_sample_posterior_ii(
+  #in population
+  positive_number_test = 321,
+  total_number_test = 321+1234,
+  # in lab (local validation study)
+  true_positive = 670,
+  true_negative = 640,
+  false_positive = 202,
+  false_negative = 74)
 ```
 
 ```{r,echo=FALSE}
 result_unk %>%
-  as_tibble() %>%
+  select(posterior) %>% 
+  unnest(posterior) %>%
   rownames_to_column() %>%
-  pivot_longer(cols = -rowname,names_to = "estimates",values_to = "values") %>%
+  pivot_longer(cols = -rowname,
+               names_to = "estimates",
+               values_to = "values") %>%
   ggplot(aes(x = values)) +
-  geom_histogram(aes(y=..density..),binwidth = 0.005) +
+  geom_histogram(aes(y=..density..),binwidth = 0.0005) +
   geom_density() +
   facet_grid(~estimates,scales = "free_x")
 ```
@@ -229,56 +285,22 @@ result_unk %>%
 example("serosvy_unknown_sample_posterior")
 ```
 
-### `purrr`: Iterate and parallelize the calculations
-
-- __Use `purrr` and `furrr`__ to efficiently update prevalence posterior distributions for multiple prevalences in one pipe: 
-
-```{r}
-library(purrr)
-library(furrr)
-# library(tictoc)
-
-plan(multisession, workers = availableCores())
-# tic()
-result <- tibble(
-  g=1:2,
-  p=seq(10L,20L,10L),
-  n=seq(200L,100L,-100L),
-  se=seq(0.9,0.8,-0.1),
-  sp=seq(0.8,0.9,0.1)
-) %>%
-  # mutate(fix=pmap(.l = select(.,
-  mutate(fix=future_pmap(
-    .l = select(.,
-                positive_number_test=p,
-                total_number_test=n,
-                sensitivity=se,
-                specificity=sp),
-    .f = possibly(serosvy_known_sample_posterior,
-                  otherwise = NA_real_)))
-# toc()
-
-result %>%
-  unnest(fix) %>%
-  unnest(summary)
-```
-
-
 ## Contribute
 
 Feel free to fill an issue or contribute with your functions or workflows. 
 
 Here are two articles with interesting approaches using R:
 
-- Silveira et al (2020) in the strategy 3 analysed the survey accounting for sampling design and test validity using parametric bootstraping:
+- @Silveira2020 in the strategy 3 analysed the survey accounting for sampling design and test validity using parametric bootstraping.
 
-> Silveira, M. F., Barros, A. J., Horta, B. L., Pellanda, L. C., Victora, G. D., Dellagostin, O. A., ... & Mesa, J. M. (2020). Population-based surveys of antibodies against SARS-CoV-2 in Southern Brazil. Nature Medicine, 26(8), 1196-1199. doi: https://doi.org/10.1038/s41591-020-0992-3
+- @Flor2020 implemented a lot of frequentist and bayesian methods for test with known sensitivity and specificity. Code is available [here](https://github.com/BfRstats/bayespem-validation-code)
 
-- Flor et al. (2020) implemented a lot of frequentist and bayesian methods for test with known sensitivity and specificity 
 
-> Flor, M., Weiβ, M., Selhorst, T., Müller-Graf, C., & Greiner, M. (2020). Comparison of Bayesian and frequentist methods for prevalence estimation under misclassification. doi: https://doi.org/10.1186/s12889-020-09177-4
+## References
 
-## Citation
+<div id="refs"></div>
+
+## How to cite this R package
 
 ```{r}
 citation("serosurvey")
