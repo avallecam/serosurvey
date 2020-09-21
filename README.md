@@ -34,8 +34,8 @@ library(serosurvey)
 
 ### `survey`: Estimate single prevalences
 
-  - From a **`srvyr` survey design object**, **`serosvy_proportion`**
-    estimates:
+  - From a **[`srvyr`](http://gdfe.co/srvyr/) survey design object**,
+    **`serosvy_proportion`** estimates:
     
       - weighted prevalence (`prop`),
       - total population (`total`),
@@ -175,9 +175,12 @@ expand_grid(
 
 ### `serology`: Estimate prevalence Under misclassification
 
-  - We gather **classical frequentist approaches** to deal with
-    misclassification due to an imperfect diagnostic test. Check the
-    [functions documentation
+  - We gather **one frequentist approach** (Rogan and Gladen
+    [1978](#ref-ROGAN1978)), available in different Github repos, that
+    deal with misclassification due to an imperfect diagnostic test
+    (Azman et al. [2020](#ref-Azman2020); Takahashi, Greenhouse, and
+    Rodrı́guez-Barraquer [2020](#ref-Takahashi2020)). Check the
+    [Reference
     tab](https://avallecam.github.io/serosurvey/reference/index.html).
 
   - We provide **tidy outputs for bayesian approaches** developed in
@@ -186,15 +189,16 @@ expand_grid(
     and Daniel B Larremore et al. ([2020](#ref-Larremore2020kno))
     [here](https://github.com/LarremoreLab/covid_serological_sampling/blob/master/codebase/seroprevalence.R):
 
-  - You can use them with **`purrr`** and **`furrr`** to efficiently
-    iterate and parallelize this step for **multiple prevalences in one
-    single pipe**. Check the workflow in [Article
+  - You can use them with **[`purrr`](https://purrr.tidyverse.org/)**
+    and **[`furrr`](https://davisvaughan.github.io/furrr/)** to
+    efficiently iterate and parallelize this step for **multiple
+    prevalences in one single pipe**. Check the workflow in [Article
     tab](https://avallecam.github.io/serosurvey/articles/howto-reprex.html).
 
 #### **Known test performance - Bayesian method**
 
 ``` r
-tidy_result <- serosvy_known_sample_posterior(
+serosvy_known_sample_posterior(
   #in population
   positive_number_test = 321,
   total_number_test = 321+1234,
@@ -210,18 +214,19 @@ tidy_result <- serosvy_known_sample_posterior(
 example("serosvy_known_sample_posterior")
 ```
 
-#### **Unknown test preformance - Bayesian method**
+#### **Unknown test performance - Bayesian method**
 
-  - The test performance is defined as *unknown* or *uncertain* “when
-    the test characteristics are not well defined and a limited number
-    of test are available, such as during an outbreak of a novel
-    pathogen.” (Daniel B. Larremore et al.
-    [2020](#ref-Larremore2020unk); Diggle [2011](#ref-Diggle2011))
+  - The test performance is called *unknown* when test sensitivity and
+    specificity are not known with certainty. (Kritsotakis
+    [2020](#ref-Kritsotakis2020); Diggle [2011](#ref-Diggle2011))
+  - This could arise during an outbreak of a novel pathogen, when lab
+    validation data is available with a limited set of samples. (Daniel
+    B. Larremore et al. [2020](#ref-Larremore2020unk))
 
 <!-- end list -->
 
 ``` r
-result_unk <- serosvy_unknown_sample_posterior_ii(
+serosvy_unknown_sample_posterior_ii(
   #in population
   positive_number_test = 321,
   total_number_test = 321+1234,
@@ -241,9 +246,9 @@ example("serosvy_unknown_sample_posterior")
 ## Contribute
 
 Feel free to fill an issue or contribute with your functions or
-workflows.
+workflows in a pull request.
 
-Here are two articles with interesting approaches using R:
+Here are two publications with interesting approaches using R:
 
   - Silveira et al. ([2020](#ref-Silveira2020)) in the strategy 3
     analysed the survey accounting for sampling design and test validity
@@ -257,6 +262,16 @@ Here are two articles with interesting approaches using R:
 ## References
 
 <div id="refs">
+
+<div id="ref-Azman2020">
+
+Azman, Andrew S, Stephen Lauer, M. Taufiqur Rahman Bhuiyan, Francisco J
+Luquero, Daniel T Leung, Sonia Hegde, Jason B Harris, et al. 2020.
+“Vibrio Cholerae O1 Transmission in Bangladesh: Insights from a
+Nationally- Representative Serosurvey,” March.
+<https://doi.org/10.1101/2020.03.13.20035352>.
+
+</div>
 
 <div id="ref-Diggle2011">
 
@@ -272,6 +287,15 @@ Flor, Matthias, Michael Weiß, Thomas Selhorst, Christine Müller-Graf,
 and Matthias Greiner. 2020. “Comparison of Bayesian and Frequentist
 Methods for Prevalence Estimation Under Misclassification.” *BMC Public
 Health* 20 (1). <https://doi.org/10.1186/s12889-020-09177-4>.
+
+</div>
+
+<div id="ref-Kritsotakis2020">
+
+Kritsotakis, Evangelos I. 2020. “On the Importance of Population-Based
+Serological Surveys of SARS-CoV-2 Without Overlooking Their Inherent
+Uncertainties.” *Public Health in Practice* 1 (November): 100013.
+<https://doi.org/10.1016/j.puhip.2020.100013>.
 
 </div>
 
@@ -294,6 +318,14 @@ Optimal Sample Allocation,” May.
 
 </div>
 
+<div id="ref-ROGAN1978">
+
+Rogan, Walter J., and Beth Gladen. 1978. “Estimating Prevalence from the
+Results of A Screening Test.” *American Journal of Epidemiology* 107
+(1): 71–76. <https://doi.org/10.1093/oxfordjournals.aje.a112510>.
+
+</div>
+
 <div id="ref-Silveira2020">
 
 Silveira, Mariângela F., Aluı́sio J. D. Barros, Bernardo L. Horta, Lúcia
@@ -301,6 +333,14 @@ C. Pellanda, Gabriel D. Victora, Odir A. Dellagostin, Claudio J.
 Struchiner, et al. 2020. “Population-Based Surveys of Antibodies Against
 SARS-CoV-2 in Southern Brazil.” *Nature Medicine* 26 (8): 1196–9.
 <https://doi.org/10.1038/s41591-020-0992-3>.
+
+</div>
+
+<div id="ref-Takahashi2020">
+
+Takahashi, Saki, Bryan Greenhouse, and Isabel Rodrı́guez-Barraquer.
+2020. “Are SARS-CoV-2 Seroprevalence Estimates Biased?” *The Journal of
+Infectious Diseases*, August. <https://doi.org/10.1093/infdis/jiaa523>.
 
 </div>
 

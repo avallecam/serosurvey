@@ -113,7 +113,7 @@ covariate_set02 <- datasurvey %>%
 
 ### `survey`: Estimate single prevalences
 
-- From a __`srvyr` survey design object__, __`serosvy_proportion`__ estimates:
+- From a __[`srvyr`](http://gdfe.co/srvyr/) survey design object__, __`serosvy_proportion`__ estimates:
 
   + weighted prevalence (`prop`), 
   + total population (`total`),
@@ -187,21 +187,26 @@ expand_grid(
 
 ### `serology`: Estimate prevalence Under misclassification
 
-- We gather __classical frequentist approaches__ to deal with 
-misclassification due to an imperfect diagnostic test.
-Check the [functions documentation tab](https://avallecam.github.io/serosurvey/reference/index.html).
+- We gather __one frequentist approach__ [@ROGAN1978], 
+available in different Github repos, that deal with 
+misclassification due to an imperfect diagnostic 
+test [@Azman2020; @Takahashi2020].
+Check the [Reference tab](https://avallecam.github.io/serosurvey/reference/index.html).
 
-- We provide __tidy outputs for bayesian approaches__ developed in @Larremore2020unk [here](https://github.com/LarremoreLab/bayesian-joint-prev-se-sp/blob/master/singleSERO_uncertainTEST.R) and @Larremore2020kno [here](https://github.com/LarremoreLab/covid_serological_sampling/blob/master/codebase/seroprevalence.R):
+- We provide __tidy outputs for bayesian approaches__ developed 
+in @Larremore2020unk [here](https://github.com/LarremoreLab/bayesian-joint-prev-se-sp/blob/master/singleSERO_uncertainTEST.R) 
+and @Larremore2020kno [here](https://github.com/LarremoreLab/covid_serological_sampling/blob/master/codebase/seroprevalence.R):
 
-- You can use them with __`purrr`__ and __`furrr`__ to efficiently iterate and parallelize this step for __multiple prevalences in one single pipe__.
+- You can use them with __[`purrr`](https://purrr.tidyverse.org/)__ and __[`furrr`](https://davisvaughan.github.io/furrr/)__ to efficiently iterate 
+and parallelize this step for __multiple prevalences in one single pipe__.
 Check the workflow 
 in [Article tab](https://avallecam.github.io/serosurvey/articles/howto-reprex.html).
 
 
 #### __Known test performance - Bayesian method__
 
-```{r}
-tidy_result <- serosvy_known_sample_posterior(
+```{r,eval=FALSE}
+serosvy_known_sample_posterior(
   #in population
   positive_number_test = 321,
   total_number_test = 321+1234,
@@ -212,6 +217,15 @@ tidy_result <- serosvy_known_sample_posterior(
 ```
 
 ```{r,echo=FALSE}
+tidy_result <- serosvy_known_sample_posterior(
+  #in population
+  positive_number_test = 321,
+  total_number_test = 321+1234,
+  # known performance
+  sensitivity = 0.93,
+  specificity = 0.975
+)
+
 tidy_result_out <-
   tidy_result %>%
   select(summary) %>%
@@ -239,11 +253,14 @@ tidy_result %>%
 example("serosvy_known_sample_posterior")
 ```
 
-#### __Unknown test preformance - Bayesian method__
+#### __Unknown test performance - Bayesian method__
 
-- The test performance is defined as _unknown_ or _uncertain_ "when the test 
-characteristics are not well defined and a limited number of test are 
-available, such as during an outbreak of a novel pathogen." [@Larremore2020unk; @Diggle2011]
+- The test performance is called _unknown_ when test 
+sensitivity and specificity are not known with 
+certainty. [@Kritsotakis2020; @Diggle2011] 
+- This could arise during an outbreak of a novel pathogen,
+when lab validation data is available with a limited set of samples.
+[@Larremore2020unk]
 
 ```{r,eval=FALSE,echo=FALSE}
 # result_unk <- sample_posterior_r_mcmc_testun(
@@ -255,8 +272,8 @@ available, such as during an outbreak of a novel pathogen." [@Larremore2020unk; 
 #   tp = 670,tn = 640,fp = 202,fn = 74)
 ```
 
-```{r}
-result_unk <- serosvy_unknown_sample_posterior_ii(
+```{r,eval=FALSE}
+serosvy_unknown_sample_posterior_ii(
   #in population
   positive_number_test = 321,
   total_number_test = 321+1234,
@@ -268,6 +285,16 @@ result_unk <- serosvy_unknown_sample_posterior_ii(
 ```
 
 ```{r,echo=FALSE}
+result_unk <- serosvy_unknown_sample_posterior_ii(
+  #in population
+  positive_number_test = 321,
+  total_number_test = 321+1234,
+  # in lab (local validation study)
+  true_positive = 670,
+  true_negative = 640,
+  false_positive = 202,
+  false_negative = 74)
+
 result_unk %>%
   select(posterior) %>% 
   unnest(posterior) %>%
@@ -287,9 +314,9 @@ example("serosvy_unknown_sample_posterior")
 
 ## Contribute
 
-Feel free to fill an issue or contribute with your functions or workflows. 
+Feel free to fill an issue or contribute with your functions or workflows in a pull request. 
 
-Here are two articles with interesting approaches using R:
+Here are two publications with interesting approaches using R:
 
 - @Silveira2020 in the strategy 3 analysed the survey accounting for sampling design and test validity using parametric bootstraping.
 
