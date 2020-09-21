@@ -179,7 +179,7 @@ expand_grid(
     [1978](#ref-ROGAN1978)), available in different Github repos, that
     deal with misclassification due to an imperfect diagnostic test
     (Azman et al. [2020](#ref-Azman2020); Takahashi, Greenhouse, and
-    Rodrı́guez-Barraquer [2020](#ref-Takahashi2020)). Check the
+    Rodríguez-Barraquer [2020](#ref-Takahashi2020)). Check the
     [Reference
     tab](https://avallecam.github.io/serosurvey/reference/index.html).
 
@@ -284,6 +284,51 @@ citation("serosurvey")
 
 ## References
 
+Azman, Andrew S, Stephen Lauer, M. Taufiqur Rahman Bhuiyan, Francisco J
+Luquero, Daniel T Leung, Sonia Hegde, Jason B Harris, et al. 2020.
+“Vibrio Cholerae O1 Transmission in Bangladesh: Insights from a
+Nationally- Representative Serosurvey,” March.
+<https://doi.org/10.1101/2020.03.13.20035352>.
+
+Diggle, Peter J. 2011. “Estimating Prevalence Using an Imperfect Test.”
+Epidemiology Research International 2011: 1–5.
+<https://doi.org/10.1155/2011/608719>.
+
+Flor, Matthias, Michael Weiß, Thomas Selhorst, Christine Müller-Graf,
+and Matthias Greiner. 2020. “Comparison of Bayesian and Frequentist
+Methods for Prevalence Estimation Under Misclassification.” BMC Public
+Health 20 (1). <https://doi.org/10.1186/s12889-020-09177-4>.
+
+Kritsotakis, Evangelos I. 2020. “On the Importance of Population-Based
+Serological Surveys of SARS-CoV-2 Without Overlooking Their Inherent
+Uncertainties.” Public Health in Practice 1 (November): 100013.
+<https://doi.org/10.1016/j.puhip.2020.100013>.
+
+Larremore, Daniel B., Bailey K Fosdick, Kate M Bubar, Sam Zhang, Stephen
+M Kissler, C. Jessica E. Metcalf, Caroline Buckee, and Yonatan
+Grad.2020.“Estimating SARS-CoV-2 Seroprevalence and Epidemiological
+Parameters with Uncertainty from Serological Surveys.” medRxiv, April.
+<https://doi.org/10.1101/2020.04.15.20067066>.
+
+Larremore, Daniel B., Bailey K. Fosdick, Sam Zhang, and Yonatan
+Grad.2020.“Jointly Modeling Prevalence, Sensitivity and Specificity for
+Optimal Sample Allocation.” bioRxiv, May.
+<https://doi.org/10.1101/2020.05.23.112649>.
+
+Rogan, Walter J., and Beth Gladen. 1978. “Estimating Prevalence from the
+Results of A Screening Test.” American Journal of Epidemiology 107 (1):
+71–76. <https://doi.org/10.1093/oxfordjournals.aje.a112510>.
+
+Silveira, Mariângela F., Aluı́sio J. D. Barros, Bernardo L. Horta, Lúcia
+C. Pellanda, Gabriel D. Victora, Odir A. Dellagostin, Claudio J.
+Struchiner, et al. 2020. “Population-Based Surveys of Antibodies Against
+SARS-CoV-2 in Southern Brazil.” Nature Medicine 26 (8): 1196–9.
+<https://doi.org/10.1038/s41591-020-0992-3>.
+
+Takahashi, Saki, Bryan Greenhouse, and Isabel Rodríguez-Barraquer. 2020.
+“Are SARS-CoV-2 seroprevalence estimates biased?” The Journal of
+Infectious Diseases, August. <https://doi.org/10.1093/infdis/jiaa523>.
+
 <div id="refs" class="references">
 
 <div id="ref-Azman2020">
@@ -327,7 +372,7 @@ Uncertainties.” *Public Health in Practice* 1 (November): 100013.
 Larremore, Daniel B, Bailey K Fosdick, Kate M Bubar, Sam Zhang, Stephen
 M Kissler, C. Jessica E. Metcalf, Caroline Buckee, and Yonatan Grad.
 2020. “Estimating SARS-CoV-2 Seroprevalence and Epidemiological
-Parameters with Uncertainty from Serological Surveys,” April.
+Parameters with Uncertainty from Serological Surveys.” *medRxiv*, April.
 <https://doi.org/10.1101/2020.04.15.20067066>.
 
 </div>
@@ -336,7 +381,7 @@ Parameters with Uncertainty from Serological Surveys,” April.
 
 Larremore, Daniel B., Bailey K. Fosdick, Sam Zhang, and Yonatan H. Grad.
 2020. “Jointly Modeling Prevalence, Sensitivity and Specificity for
-Optimal Sample Allocation,” May.
+Optimal Sample Allocation.” *bioRxiv*, May.
 <https://doi.org/10.1101/2020.05.23.112649>.
 
 </div>
@@ -361,8 +406,8 @@ SARS-CoV-2 in Southern Brazil.” *Nature Medicine* 26 (8): 1196–9.
 
 <div id="ref-Takahashi2020">
 
-Takahashi, Saki, Bryan Greenhouse, and Isabel Rodrı́guez-Barraquer.
-2020. “Are SARS-CoV-2 Seroprevalence Estimates Biased?” *The Journal of
+Takahashi, Saki, Bryan Greenhouse, and Isabel Rodríguez-Barraquer. 2020.
+“Are SARS-CoV-2 seroprevalence estimates biased?” *The Journal of
 Infectious Diseases*, August. <https://doi.org/10.1093/infdis/jiaa523>.
 
 </div>
