@@ -192,7 +192,7 @@ expand_grid(
   - You can use them with **[`purrr`](https://purrr.tidyverse.org/)**
     and **[`furrr`](https://davisvaughan.github.io/furrr/)** to
     efficiently iterate and parallelize this step for **multiple
-    prevalences in one single pipe**. Check the workflow in [Article
+    prevalences**. Check the workflow in [Article
     tab](https://avallecam.github.io/serosurvey/articles/howto-reprex.html).
 
 #### **Known test performance - Bayesian method**
@@ -259,9 +259,32 @@ Here are two publications with interesting approaches using R:
     specificity. Code is available
     [here](https://github.com/BfRstats/bayespem-validation-code)
 
+## How to cite this R package
+
+``` r
+citation("serosurvey")
+#> 
+#> To cite package 'serosurvey' in publications use:
+#> 
+#>   Andree Valle Campos (2020). serosurvey: Serological Survey
+#>   Analysis For Prevalence Estimation Under Misclassification. R
+#>   package version 0.0.0.9000.
+#>   https://avallecam.github.io/serosurvey/
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Manual{,
+#>     title = {serosurvey: Serological Survey Analysis For Prevalence Estimation Under Misclassification},
+#>     author = {Andree {Valle Campos}},
+#>     year = {2020},
+#>     note = {R package version 0.0.0.9000},
+#>     url = {https://avallecam.github.io/serosurvey/},
+#>   }
+```
+
 ## References
 
-<div id="refs">
+<div id="refs" class="references">
 
 <div id="ref-Azman2020">
 
@@ -345,26 +368,3 @@ Infectious Diseases*, August. <https://doi.org/10.1093/infdis/jiaa523>.
 </div>
 
 </div>
-
-## How to cite this R package
-
-``` r
-citation("serosurvey")
-#> 
-#> To cite package 'serosurvey' in publications use:
-#> 
-#>   Andree Valle Campos (2020). serosurvey: Serological Survey
-#>   Analysis For Prevalence Estimation Under Misclassification. R
-#>   package version 0.0.0.9000.
-#>   https://avallecam.github.io/serosurvey/
-#> 
-#> A BibTeX entry for LaTeX users is
-#> 
-#>   @Manual{,
-#>     title = {serosurvey: Serological Survey Analysis For Prevalence Estimation Under Misclassification},
-#>     author = {Andree {Valle Campos}},
-#>     year = {2020},
-#>     note = {R package version 0.0.0.9000},
-#>     url = {https://avallecam.github.io/serosurvey/},
-#>   }
-```

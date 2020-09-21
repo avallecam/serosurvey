@@ -198,7 +198,7 @@ in @Larremore2020unk [here](https://github.com/LarremoreLab/bayesian-joint-prev-
 and @Larremore2020kno [here](https://github.com/LarremoreLab/covid_serological_sampling/blob/master/codebase/seroprevalence.R):
 
 - You can use them with __[`purrr`](https://purrr.tidyverse.org/)__ and __[`furrr`](https://davisvaughan.github.io/furrr/)__ to efficiently iterate 
-and parallelize this step for __multiple prevalences in one single pipe__.
+and parallelize this step for __multiple prevalences__.
 Check the workflow 
 in [Article tab](https://avallecam.github.io/serosurvey/articles/howto-reprex.html).
 
@@ -322,14 +322,10 @@ Here are two publications with interesting approaches using R:
 
 - @Flor2020 implemented a lot of frequentist and bayesian methods for test with known sensitivity and specificity. Code is available [here](https://github.com/BfRstats/bayespem-validation-code)
 
-
-## References
-
-<div id="refs"></div>
-
 ## How to cite this R package
 
 ```{r}
 citation("serosurvey")
 ```
 
+## References

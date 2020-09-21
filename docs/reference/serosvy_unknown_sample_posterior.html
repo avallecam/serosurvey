@@ -34,7 +34,7 @@
 
 <meta property="og:title" content="Tidy output for Bayesian serological sampling functions for one population and unknown test performance — serosvy_unknown_sample_posterior" />
 
-<meta property="og:description" content="one population - unknown test performance - posterior distribution of prevalence." />
+<meta property="og:description" content="one population - unknown test performance - posterior distribution of prevalence. source here" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -117,12 +117,16 @@
 
     <div class="ref-description">
     
-    <p><strong>one</strong> population - <strong>unknown</strong> test performance - posterior distribution of prevalence.</p>
+    <p><strong>one</strong> population - <strong>unknown</strong> test performance - posterior distribution of prevalence. source <a href='https://github.com/LarremoreLab/bayesian-joint-prev-se-sp/blob/master/singleSERO_uncertainTEST.R'>here</a></p>
     
     </div>
 
     <pre class="usage"><span class='fu'>serosvy_unknown_sample_posterior</span>(<span class='no'>positive_number_test</span>, <span class='no'>total_number_test</span>,
-  <span class='no'>true_positive</span>, <span class='no'>true_negative</span>, <span class='no'>false_positive</span>, <span class='no'>false_negative</span>)</pre>
+  <span class='no'>true_positive</span>, <span class='no'>true_negative</span>, <span class='no'>false_positive</span>, <span class='no'>false_negative</span>)
+
+<span class='fu'>serosvy_unknown_sample_posterior_ii</span>(<span class='no'>positive_number_test</span>,
+  <span class='no'>total_number_test</span>, <span class='no'>true_positive</span>, <span class='no'>true_negative</span>, <span class='no'>false_positive</span>,
+  <span class='no'>false_negative</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,6 +166,7 @@
     
 <ul>
 <li><p><code>serosvy_unknown_sample_posterior</code>: one population - unknown test performance - posterior distribution of prevalence. source <a href='https://github.com/LarremoreLab/bayesian-joint-prev-se-sp/blob/master/singleSERO_uncertainTEST.R'>here</a></p></li>
+<li><p><code>serosvy_unknown_sample_posterior_ii</code>: takes known sensitivity and specificity of test and returns proportion of sample that 'true' positive</p></li>
 </ul>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
@@ -204,6 +209,32 @@
 <span class='co'>#  geom_histogram(aes(y=..density..),binwidth = 0.005) +</span>
 <span class='co'>#  geom_density() +</span>
 <span class='co'>#  facet_grid(~estimates,scales = "free_x")</span>
+
+
+<span class='co'># ------------------------------------------------------</span>
+
+<span class='no'>result_unk_x</span> <span class='kw'>&lt;-</span> <span class='fu'>serosvy_unknown_sample_posterior_ii</span>(
+  <span class='kw'>positive_number_test</span> <span class='kw'>=</span> <span class='no'>positive_pop</span>[<span class='fl'>1</span>],
+  <span class='kw'>total_number_test</span> <span class='kw'>=</span> <span class='no'>positive_pop</span>[<span class='fl'>1</span>]+<span class='no'>negative_pop</span>[<span class='fl'>1</span>],
+  <span class='kw'>true_positive</span> <span class='kw'>=</span> <span class='fl'>670</span>,
+  <span class='kw'>true_negative</span> <span class='kw'>=</span> <span class='fl'>640</span>,
+  <span class='kw'>false_positive</span> <span class='kw'>=</span> <span class='fl'>202</span>,
+  <span class='kw'>false_negative</span> <span class='kw'>=</span> <span class='fl'>74</span>)
+
+<span class='no'>result_unk_x</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>unnest</span>(<span class='no'>summary</span>)
+<span class='no'>result_unk_x</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>unnest</span>(<span class='no'>performance</span>)
+
+<span class='no'>result_unk_x</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>select</span>(<span class='no'>posterior</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>unnest</span>(<span class='no'>posterior</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>rownames_to_column</span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>pivot_longer</span>(<span class='kw'>cols</span> <span class='kw'>=</span> -<span class='no'>rowname</span>,<span class='kw'>names_to</span> <span class='kw'>=</span> <span class='st'>"estimates"</span>,<span class='kw'>values_to</span> <span class='kw'>=</span> <span class='st'>"values"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>ggplot</span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>values</span>)) +
+  <span class='fu'>geom_histogram</span>(<span class='fu'>aes</span>(<span class='kw'>y</span><span class='kw'>=</span><span class='no'>..density..</span>),<span class='kw'>binwidth</span> <span class='kw'>=</span> <span class='fl'>0.005</span>) +
+  <span class='fu'>geom_density</span>() +
+  <span class='fu'>facet_grid</span>(~<span class='no'>estimates</span>,<span class='kw'>scales</span> <span class='kw'>=</span> <span class='st'>"free_x"</span>)
 
 }</div></pre>
   </div>

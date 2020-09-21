@@ -2,6 +2,10 @@
 title: "Workflow: How to use the serosurvey R package?"
 editor_options: 
   chunk_output_type: console
+bibliography: ../references.bib
+link-citations: yes
+linkcolor: Blue
+urlcolor: Blue
 ---
 
 ```{r, include = FALSE}
@@ -20,7 +24,7 @@ options(tidyverse.quiet = TRUE)
 
 __Problem__
 
-- If we used an imperfect test, we need to incorporate the test uncertainty into the sampling design uncertainty. 
+- If we used an imperfect test to measure an outcome within a multi-stage sampling design survey, we need to incorporate the test uncertainty into the sampling design uncertainty. 
 
 __Method details__
 
@@ -42,7 +46,7 @@ __Procedure details__
 
 - Test correction functions require positive integers.
 
-- We use `purrr` and `furrr` to efficiently update prevalence posterior distributions for multiple prevalences in one pipe
+- We use `purrr` and `furrr` to efficiently update prevalence posterior distributions for multiple prevalences within a `for-loop`
 
 
 __Limitations__
@@ -70,25 +74,34 @@ library(purrr)
 theme_set(theme_bw())
 ```
 
-## Import data
+## __I. Workflow:__ Create a survey design object
+
+## 1. Import data
+
+- `datasurvey` is the input dataframe
+- outcomes: `outcome_one` and `outcome_two`
+- covariates: `covariate_01` and `covariate_02`
 
 ```{r}
 data(api)
 
 datasurvey <- apiclus2 %>% 
   mutate(survey_all="survey_all") %>% 
-  # create variables
-  mutate(outcome_one = awards,
+  # conviniently create variables
+  # to identify outcomes and covariates throughout the script 
+  mutate(outcome_one = awards, # this have the serology results
          outcome_two = cut(pct.resp,breaks = 2),
          covariate_01 = stype,
-         covariate_02 = both)
-
-# datasurvey %>% glimpse()
+         covariate_02 = both,
+         # two stage cluster samples
+         primary_sampling_unit = dnum,
+         secondary_sampling_unit = snum,
+         # strata = census_tracts, (activate if available)
+         sampling_weights = pw)
 ```
 
+```{r,eval=FALSE,echo=FALSE}
 ### `srvyr` workflow
-
-```{r,eval=FALSE}
 dstrata <- datasurvey %>% as_survey_design(strata = covariate_01, weights = pw)
 # dstrata2 <- apistrat %>%
 #   mutate(pw2=1) %>%
@@ -100,9 +113,16 @@ dstrata %>%
 ```
 
 
-## Select set of covariates
+## 2. Identify sets numerators and denominators
+
+- Using `select` and `colnames` we create strings of covariates
 
 ```{r}
+# outcome
+outcome_set00 <- datasurvey %>% 
+  select(outcome_one,
+         outcome_two) %>% 
+  colnames()
 
 # denominators
 covariate_set01 <- datasurvey %>% 
@@ -122,60 +142,67 @@ covariate_set02 <- datasurvey %>%
 
 ```
 
-## Prevalence estimation
+## 3. Create a `srvyr` survey design object
 
 ```{r}
-# tratamiento de stratos con un solo conglomerado
+# define how to treat strata with only one census tract
 options(survey.lonely.psu = "certainty")
 
-# uu_clean_data %>% count(CONGLOMERADO,VIVIENDA)
+# uu_clean_data %>% count(dnum, snum)
 
-# diseño muestral de la encuesta ---------------------------------
+# create survey sampling design ---------------------------------
 
 design <- datasurvey %>% 
   
-  filter(!is.na(outcome_one)) %>% #CRITICAL! ON OUTCOME
-  filter(!is.na(pw)) %>% #NO DEBEN DE HABER CONGLOMERADOS SIN WEIGHT
+  # the outcome must have complete observations
+  filter(!is.na(outcome_one)) %>% 
+  # all census tracts must contain sampling weights
+  filter(!is.na(sampling_weights)) %>% 
   
   as_survey_design(
-    id=c(dnum, snum), #~dnum+snum, # primary secondary sampling unit
+    # 1 - primary and secondary sampling unit
+    id=c(primary_sampling_unit, secondary_sampling_unit), 
+    # 2 - activate if available
     # strata = strata, #clusters need to be nested in the strata
-    weights = pw # factores de expancion
+    # 3- weights or expansion factors
+    weights = sampling_weights 
   )
 ```
 
 ## Example: Single estimation
 
+- How to use `serosvy_proportion` for a single estimation
+
+- Here we exchage the numerator and denominator
+
 ```{r}
 serosvy_proportion(design = design,
-                      denominator = covariate_01,
-                      numerator = outcome_one) %>%
+                   denominator = covariate_01,
+                   numerator = outcome_one) %>%
   select(-ends_with("_low"),-ends_with("_upp"),
          -ends_with("_cv"),-ends_with("_deff"))
 
 serosvy_proportion(design = design,
-                      denominator = outcome_one,
-                      numerator = covariate_01) %>%
+                   denominator = outcome_one,
+                   numerator = covariate_01) %>%
   select(-ends_with("_low"),-ends_with("_upp"),
          -ends_with("_cv"),-ends_with("_deff"))
 ```
 
-## __Workflow:__ Multiple estimation
+## __II. Workflow:__ Multiple estimation
 
 ## 1. Estimates: raw + weighted
 
 ```{r}
-# _ 1. estimates: raw + weighted ---------------------------------------------------------------
-
 outcome_01_pre <- 
-  # crear matriz
+  # create a expanded grid of numerators and denominators
   #
   # set 01 of denominator-numerator
   #
-expand_grid(
-  design=list(design),
-  denominator=c("covariate_01","covariate_02"), # covariates
-  numerator=c("outcome_one","outcome_two") # outcomes
+  expand_grid(
+    design=list(design),
+    denominator=covariate_set01, # covariates
+    numerator=outcome_set00 # outcomes
   ) %>% 
   #
   # set 02 of denominator-numerator (e.g. within main outcome)
@@ -183,8 +210,8 @@ expand_grid(
   union_all(
     expand_grid(
       design=list(design),
-      denominator=c("outcome_one","outcome_two"), # outcomes
-      numerator=c("covariate_02") # covariates
+      denominator=outcome_set00, # outcomes
+      numerator=covariate_set02 # covariates
     )
   ) %>% 
   #
@@ -206,21 +233,25 @@ expand_grid(
   unnest(cols = c(output)) #%>% 
 
 outcome_01_pre
-
 ```
 
 ## 2. Add uncertain test performance
 
-Lets assume that we have results from a local validation study
+### 2.1 Filter serology results and add validation study results
 
-### 2.1 Filter + add validation study results
+- Here we use:
+
+  + Filter the rows with the results of the serology test: `outcome_one` 
+
+  + Add the results from the available validation study as columns
 
 ```{r}
 # _ 2. test performance ---------------------------------------------------
 
 # __ filter + add values --------------------------------------------------
 
-outcome_01_adj_pre <- outcome_01_pre %>% 
+outcome_01_adj_pre <- 
+  outcome_01_pre %>% 
   # only serological results
   filter(numerator=="outcome_one") %>% 
   # only positives
@@ -247,13 +278,16 @@ outcome_01_adj_pre <- outcome_01_pre %>%
 
 ```
 
-### 2.2 Apply + extract
+### 2.2 Apply to all rows and extract the results
+
+- Here we use `purrr` and `furrr` to efficiently update prevalence posterior distributions for multiple prevalences within a `for-loop`
+
+- We apply the procedure to each point estimate and confidence interval
 
 ```{r}
-# __ apply + extract ----------------------------------------------------------------
 # 56-60sec por covariable 
 # 4GB RAM
-# paralelizando en 8 nucleos usando purrr y furrr
+# parallelized in 8 cores using purrr y furrr
 
 plan(multisession, workers = availableCores())
 tic()
@@ -329,11 +363,11 @@ outcome_01_adj <- out  %>%
 
 ## 3. Create output format
 
+- Here we join all the results to the original dataset
+
+- We also create `unite*_` columns summarizing the results
+
 ```{r}
-
-# _ 3. create output format -----------------------------------------------
-
-
 
 outcome_01_adj_tbl <- 
   # start from original dataset
@@ -368,9 +402,9 @@ outcome_01_adj_tbl <-
 
 ## 4. Evaluate output
 
-```{r}
-# _ 4. evaluate output ----------------------------------------------------
+- Take a quick look to the output
 
+```{r}
 
 outcome_01_adj_tbl %>% 
   select(1:4,starts_with("unite1_")) %>% 
@@ -382,6 +416,8 @@ outcome_01_adj_tbl %>%
 ```
 
 ## Output figure
+
+- Make a quick plot using a custom create function
 
 ```{r}
 outcome_01_adj_tbl %>% 
