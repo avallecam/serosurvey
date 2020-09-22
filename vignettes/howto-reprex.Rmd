@@ -28,6 +28,12 @@ __Problem__
 
 __Method details__
 
+_survey:_
+
+- Sampling weights were included in a two-stage cluster sample without stratas. We estimated prevalence 95% confidence intervals using the “logit” method.
+
+_serology:_
+
 - Here we applied a Bayesian method to estimate the posterior probability of seroprevalence for a test with unknown performance [@Larremore2020unk].
 
 - As inputs we used the expanded point estimate number of positive tests and total population that resulted from the sampling weights adjusted seroprevalence estimation. 
@@ -44,10 +50,14 @@ example available in the `epiR` package: `?epiR::epi.tests`
 
 __Procedure details__
 
-- Test correction functions require positive integers.
+- The survey design does not include any explicit strata. 
+Include it if available in I.3.
 
-- We use `purrr` and `furrr` to efficiently update prevalence posterior distributions for multiple prevalences within a `for-loop`
+- The family of functions `serosvy_*_sample_posterior` to correct 
+prevalence due to test performance require positive integers. 
+This is adressed in II.2.1.
 
+- We use `purrr` and `furrr` within a `for-loop` in II.2.2 to efficiently update prevalence posterior distributions for multiple prevalences.
 
 __Limitations__
 
@@ -242,6 +252,8 @@ outcome_01_pre
 - Here we use:
 
   + Filter the rows with the results of the serology test: `outcome_one` 
+  
+  + 
 
   + Add the results from the available validation study as columns
 
@@ -280,7 +292,7 @@ outcome_01_adj_pre <-
 
 ### 2.2 Apply to all rows and extract the results
 
-- Here we use `purrr` and `furrr` to efficiently update prevalence posterior distributions for multiple prevalences within a `for-loop`
+- Here we use `purrr` and `furrr` within a `for-loop` to efficiently update prevalence posterior distributions for multiple prevalences.
 
 - We apply the procedure to each point estimate and confidence interval
 
