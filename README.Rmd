@@ -30,20 +30,20 @@ options(tidyverse.quiet = TRUE)
 [![CRAN status](https://www.r-pkg.org/badges/version/serosurvey)](https://cran.r-project.org/package=serosurvey)
 <!-- badges: end -->
 
-The goal of `serosurvey` is to gather _functions_ and _workflow templates_ for __Serological Survey Analysis For Prevalence Estimation Under Misclassification__.
+The goal of `serosurvey` is to gather __Serological Survey Analysis__ functions and workflow templates for __Prevalence Estimation Under Misclassification__.
 
 ## Installation
 
 <!-- You can install the released version of serosurvey from [CRAN](https://CRAN.R-project.org) with: -->
 
 ``` r
-if(!require("devtools")) install.packages("devtools")
-devtools::install_github("avallecam/serosurvey")
+if(!require("remotes")) install.packages("remotes")
+remotes::install_github("avallecam/serosurvey")
 ```
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+Three basic examples which shows you how to solve common problems:
 
 ```{r example}
 library(serosurvey)
@@ -111,7 +111,7 @@ covariate_set02 <- datasurvey %>%
   colnames()
 ```
 
-### `survey`: Estimate single prevalences
+### 1. `survey`: Estimate single prevalences
 
 - From a __[`srvyr`](http://gdfe.co/srvyr/) survey design object__, __`serosvy_proportion`__ estimates:
 
@@ -136,7 +136,7 @@ serosvy_proportion(design = design,
 example("serosvy_proportion")
 ```
 
-### `survey`: Estimate multiple prevalences
+### 2. `survey`: Estimate multiple prevalences
 
 - In 
 the [Article tab](https://avallecam.github.io/serosurvey/articles/howto-reprex.html) 
@@ -185,7 +185,7 @@ expand_grid(
   print(n=Inf)
 ```
 
-### `serology`: Estimate prevalence Under misclassification
+### 3. `serology`: Estimate prevalence Under misclassification
 
 - We gather __one frequentist approach__ [@ROGAN1978], 
 available in different Github repos, that deal with 

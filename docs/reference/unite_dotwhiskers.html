@@ -181,7 +181,7 @@
 <span class='no'>test</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/GammaDist.html'>rgamma</a></span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>,<span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>3</span>,<span class='kw'>rate</span> <span class='kw'>=</span> <span class='fl'>0.2</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>enframe</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>mutate</span>(<span class='kw'>value</span><span class='kw'>=</span><span class='no'>value</span>/<span class='fl'>100</span>) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>skimr</span><span class='kw ns'>::</span><span class='fu'><a href='https://docs.ropensci.org/skimr/reference/skim.html'>skim</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>skimr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/skimr/man/skim.html'>skim</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>as_tibble</span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>select</span>(<span class='fu'>contains</span>(<span class='st'>"mean"</span>),<span class='fu'>contains</span>(<span class='st'>"p25"</span>),<span class='fu'>contains</span>(<span class='st'>"p50"</span>))
 

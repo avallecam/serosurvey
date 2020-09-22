@@ -48,9 +48,9 @@ example available in the `epiR` package: `?epiR::epi.tests`
   + for sensitivity: Of 744 patients that were disease positive, 670 were test positive.
   + for specificity: Of 842 patients that were disease negative, 640 were test negative.
 
-__Procedure details__
+__Workflow details__
 
-- The survey design does not include any explicit strata. 
+- In this reprex the survey design does not include any explicit strata. 
 Include it if available in I.3.
 
 - The family of functions `serosvy_*_sample_posterior` to correct 
