@@ -125,11 +125,6 @@ covariate_set02 <- datasurvey %>%
 serosvy_proportion(design = design,
                    denominator = covariate_01,
                    numerator = outcome_one)
-
-
-serosvy_proportion(design = design,
-                   denominator = outcome_one,
-                   numerator = covariate_01)
 ```
 
 ```{r,eval=FALSE}
@@ -335,7 +330,7 @@ citation("serosurvey")
 ## Contact
 
 Andree Valle Campos | 
-[`avallecam`](https://twitter.com/avallecam) |
+[`@avallecam`](https://twitter.com/avallecam) |
 avallecam@gmail.com
 
 Project Link: https://github.com/avallecam/serosurvey

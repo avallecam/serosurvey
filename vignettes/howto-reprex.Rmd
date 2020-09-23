@@ -1,5 +1,10 @@
 ---
 title: "Workflow: How to use the serosurvey R package?"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Workflow: How to use the serosurvey R package?}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 editor_options: 
   chunk_output_type: console
 bibliography: ../references.bib
@@ -86,7 +91,7 @@ theme_set(theme_bw())
 
 ## __I. Workflow:__ Create a survey design object
 
-## 1. Import data
+## I.1. Import data
 
 - `datasurvey` is the input dataframe
 - outcomes: `outcome_one` and `outcome_two`
@@ -123,7 +128,7 @@ dstrata %>%
 ```
 
 
-## 2. Identify sets numerators and denominators
+## I.2. Identify sets numerators and denominators
 
 - Using `select` and `colnames` we create strings of covariates
 
@@ -152,7 +157,7 @@ covariate_set02 <- datasurvey %>%
 
 ```
 
-## 3. Create a `srvyr` survey design object
+## I.3. Create a `srvyr` survey design object
 
 ```{r}
 # define how to treat strata with only one census tract
@@ -179,7 +184,7 @@ design <- datasurvey %>%
   )
 ```
 
-## Example: Single estimation
+## I.4 Example: Single estimation
 
 - How to use `serosvy_proportion` for a single estimation
 
@@ -201,7 +206,7 @@ serosvy_proportion(design = design,
 
 ## __II. Workflow:__ Multiple estimation
 
-## 1. Estimates: raw + weighted
+## II.1. Estimates: raw + weighted
 
 ```{r}
 outcome_01_pre <- 
@@ -245,15 +250,15 @@ outcome_01_pre <-
 outcome_01_pre
 ```
 
-## 2. Add uncertain test performance
+## II.2. Add uncertain test performance
 
-### 2.1 Filter serology results and add validation study results
+### II.2.1 Filter serology results and add validation study results
 
 - Here we use:
 
   + Filter the rows with the results of the serology test: `outcome_one` 
   
-  + 
+  + Round population estimates to use positive integers in the next step
 
   + Add the results from the available validation study as columns
 
@@ -290,7 +295,7 @@ outcome_01_adj_pre <-
 
 ```
 
-### 2.2 Apply to all rows and extract the results
+### II.2.2 Apply to all rows and extract the results
 
 - Here we use `purrr` and `furrr` within a `for-loop` to efficiently update prevalence posterior distributions for multiple prevalences.
 
@@ -373,7 +378,7 @@ outcome_01_adj <- out  %>%
   select(-rowname) 
 ```
 
-## 3. Create output format
+## II.3. Create output format
 
 - Here we join all the results to the original dataset
 
@@ -412,7 +417,7 @@ outcome_01_adj_tbl <-
                     digits_upp = 3)
 ```
 
-## 4. Evaluate output
+## II.4. Evaluate output
 
 - Take a quick look to the output
 
@@ -427,7 +432,7 @@ outcome_01_adj_tbl %>%
 
 ```
 
-## 5. Output figure
+## II.5. Output figure
 
 - Make a quick plot using a custom created function
 

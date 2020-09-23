@@ -140,9 +140,9 @@
 <h2 class="hasAnchor">
 <a href="#i--workflow-create-a-survey-design-object" class="anchor"></a><strong>I. Workflow:</strong> Create a survey design object</h2>
 </div>
-<div id="import-data" class="section level2">
+<div id="i-1--import-data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#import-data" class="anchor"></a>1. Import data</h2>
+<a href="#i-1--import-data" class="anchor"></a>I.1. Import data</h2>
 <ul>
 <li>
 <code>datasurvey</code> is the input dataframe</li>
@@ -167,9 +167,9 @@
 <a class="sourceLine" id="cb2-14" title="14">         <span class="co"># strata = census_tracts, (activate if available)</span></a>
 <a class="sourceLine" id="cb2-15" title="15">         <span class="dt">sampling_weights =</span> pw)</a></code></pre></div>
 </div>
-<div id="identify-sets-numerators-and-denominators" class="section level2">
+<div id="i-2--identify-sets-numerators-and-denominators" class="section level2">
 <h2 class="hasAnchor">
-<a href="#identify-sets-numerators-and-denominators" class="anchor"></a>2. Identify sets numerators and denominators</h2>
+<a href="#i-2--identify-sets-numerators-and-denominators" class="anchor"></a>I.2. Identify sets numerators and denominators</h2>
 <ul>
 <li>Using <code>select</code> and <code>colnames</code> we create strings of covariates</li>
 </ul>
@@ -195,9 +195,9 @@
 <a class="sourceLine" id="cb3-20" title="20">         covariate_<span class="dv">02</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb3-21" title="21"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>()</a></code></pre></div>
 </div>
-<div id="create-a-srvyr-survey-design-object" class="section level2">
+<div id="i-3--create-a-srvyr-survey-design-object" class="section level2">
 <h2 class="hasAnchor">
-<a href="#create-a-srvyr-survey-design-object" class="anchor"></a>3. Create a <code>srvyr</code> survey design object</h2>
+<a href="#i-3--create-a-srvyr-survey-design-object" class="anchor"></a>I.3. Create a <code>srvyr</code> survey design object</h2>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># define how to treat strata with only one census tract</span></a>
 <a class="sourceLine" id="cb4-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="dt">survey.lonely.psu =</span> <span class="st">"certainty"</span>)</a>
 <a class="sourceLine" id="cb4-3" title="3"></a>
@@ -221,9 +221,9 @@
 <a class="sourceLine" id="cb4-21" title="21">    <span class="dt">weights =</span> sampling_weights </a>
 <a class="sourceLine" id="cb4-22" title="22">  )</a></code></pre></div>
 </div>
-<div id="example-single-estimation" class="section level2">
+<div id="i-4-example-single-estimation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#example-single-estimation" class="anchor"></a>Example: Single estimation</h2>
+<a href="#i-4-example-single-estimation" class="anchor"></a>I.4 Example: Single estimation</h2>
 <ul>
 <li><p>How to use <code>serosvy_proportion</code> for a single estimation</p></li>
 <li><p>Here we exchage the numerator and denominator</p></li>
@@ -266,9 +266,9 @@
 <h2 class="hasAnchor">
 <a href="#ii--workflow-multiple-estimation" class="anchor"></a><strong>II. Workflow:</strong> Multiple estimation</h2>
 </div>
-<div id="estimates-raw-weighted" class="section level2">
+<div id="ii-1--estimates-raw-weighted" class="section level2">
 <h2 class="hasAnchor">
-<a href="#estimates-raw-weighted" class="anchor"></a>1. Estimates: raw + weighted</h2>
+<a href="#ii-1--estimates-raw-weighted" class="anchor"></a>II.1. Estimates: raw + weighted</h2>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">outcome_<span class="dv">01</span>_pre &lt;-<span class="st"> </span></a>
 <a class="sourceLine" id="cb6-2" title="2"><span class="st">  </span><span class="co"># create a expanded grid of numerators and denominators</span></a>
 <a class="sourceLine" id="cb6-3" title="3"><span class="st">  </span><span class="co">#</span></a>
@@ -328,18 +328,18 @@
 <a class="sourceLine" id="cb6-57" title="57"><span class="co">#&gt; #   raw_num &lt;int&gt;, raw_den &lt;int&gt;, raw_prop &lt;dbl&gt;, raw_prop_low &lt;dbl&gt;,</span></a>
 <a class="sourceLine" id="cb6-58" title="58"><span class="co">#&gt; #   raw_prop_upp &lt;dbl&gt;</span></a></code></pre></div>
 </div>
-<div id="add-uncertain-test-performance" class="section level2">
+<div id="ii-2--add-uncertain-test-performance" class="section level2">
 <h2 class="hasAnchor">
-<a href="#add-uncertain-test-performance" class="anchor"></a>2. Add uncertain test performance</h2>
-<div id="filter-serology-results-and-add-validation-study-results" class="section level3">
+<a href="#ii-2--add-uncertain-test-performance" class="anchor"></a>II.2. Add uncertain test performance</h2>
+<div id="ii-2-1-filter-serology-results-and-add-validation-study-results" class="section level3">
 <h3 class="hasAnchor">
-<a href="#filter-serology-results-and-add-validation-study-results" class="anchor"></a>2.1 Filter serology results and add validation study results</h3>
+<a href="#ii-2-1-filter-serology-results-and-add-validation-study-results" class="anchor"></a>II.2.1 Filter serology results and add validation study results</h3>
 <ul>
 <li>
 <p>Here we use:</p>
 <ul>
 <li><p>Filter the rows with the results of the serology test: <code>outcome_one</code></p></li>
-<li>
+<li><p>Round population estimates to use positive integers in the next step</p></li>
 <li><p>Add the results from the available validation study as columns</p></li>
 </ul>
 </li>
@@ -374,9 +374,9 @@
 <a class="sourceLine" id="cb7-28" title="28"><span class="st">  </span><span class="kw">rownames_to_column</span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb7-29" title="29"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rowname=</span><span class="kw"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(rowname))</a></code></pre></div>
 </div>
-<div id="apply-to-all-rows-and-extract-the-results" class="section level3">
+<div id="ii-2-2-apply-to-all-rows-and-extract-the-results" class="section level3">
 <h3 class="hasAnchor">
-<a href="#apply-to-all-rows-and-extract-the-results" class="anchor"></a>2.2 Apply to all rows and extract the results</h3>
+<a href="#ii-2-2-apply-to-all-rows-and-extract-the-results" class="anchor"></a>II.2.2 Apply to all rows and extract the results</h3>
 <ul>
 <li><p>Here we use <code>purrr</code> and <code>furrr</code> within a <code>for-loop</code> to efficiently update prevalence posterior distributions for multiple prevalences.</p></li>
 <li><p>We apply the procedure to each point estimate and confidence interval</p></li>
@@ -450,7 +450,7 @@
 <a class="sourceLine" id="cb8-67" title="67">}</a>
 <a class="sourceLine" id="cb8-68" title="68"></a>
 <a class="sourceLine" id="cb8-69" title="69"><span class="kw">toc</span>()</a>
-<a class="sourceLine" id="cb8-70" title="70"><span class="co">#&gt; 506.17 sec elapsed</span></a>
+<a class="sourceLine" id="cb8-70" title="70"><span class="co">#&gt; 261.16 sec elapsed</span></a>
 <a class="sourceLine" id="cb8-71" title="71"></a>
 <a class="sourceLine" id="cb8-72" title="72">outcome_<span class="dv">01</span>_adj &lt;-<span class="st"> </span>out  <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb8-73" title="73"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rowname=</span><span class="kw"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(rowname)) <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -458,9 +458,9 @@
 <a class="sourceLine" id="cb8-75" title="75"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>rowname) </a></code></pre></div>
 </div>
 </div>
-<div id="create-output-format" class="section level2">
+<div id="ii-3--create-output-format" class="section level2">
 <h2 class="hasAnchor">
-<a href="#create-output-format" class="anchor"></a>3. Create output format</h2>
+<a href="#ii-3--create-output-format" class="anchor"></a>II.3. Create output format</h2>
 <ul>
 <li><p>Here we join all the results to the original dataset</p></li>
 <li><p>We also create <code>unite*_</code> columns summarizing the results</p></li>
@@ -496,9 +496,9 @@
 <a class="sourceLine" id="cb9-29" title="29">                    <span class="dt">digits_low =</span> <span class="dv">2</span>,</a>
 <a class="sourceLine" id="cb9-30" title="30">                    <span class="dt">digits_upp =</span> <span class="dv">3</span>)</a></code></pre></div>
 </div>
-<div id="evaluate-output" class="section level2">
+<div id="ii-4--evaluate-output" class="section level2">
 <h2 class="hasAnchor">
-<a href="#evaluate-output" class="anchor"></a>4. Evaluate output</h2>
+<a href="#ii-4--evaluate-output" class="anchor"></a>II.4. Evaluate output</h2>
 <ul>
 <li>Take a quick look to the output</li>
 </ul>
@@ -527,7 +527,7 @@
 <td align="left">Yes</td>
 <td align="left">75.9% (65.3 - 84.6)</td>
 <td align="left">78.9% ( 67.5 - 87)</td>
-<td align="left">83.110% (65.82 - 95.6)</td>
+<td align="left">83.089% (65.83 - 95.5)</td>
 </tr>
 <tr class="even">
 <td align="left">covariate_01</td>
@@ -536,7 +536,7 @@
 <td align="left">Yes</td>
 <td align="left">25.0% ( 8.7 - 49.1)</td>
 <td align="left">14.8% ( 3.8 - 44)</td>
-<td align="left">0.422% ( 0.28 - 29.8)</td>
+<td align="left">0.421% ( 0.28 - 29.7)</td>
 </tr>
 <tr class="odd">
 <td align="left">covariate_01</td>
@@ -545,7 +545,7 @@
 <td align="left">Yes</td>
 <td align="left">65.2% (42.7 - 83.6)</td>
 <td align="left">44.8% ( 16.0 - 78)</td>
-<td align="left">31.470% ( 0.41 - 81.1)</td>
+<td align="left">31.534% ( 0.41 - 81.1)</td>
 </tr>
 <tr class="even">
 <td align="left">covariate_02</td>
@@ -563,7 +563,7 @@
 <td align="left">Yes</td>
 <td align="left">93.3% (85.9 - 97.5)</td>
 <td align="left">96.7% ( 88.2 - 99)</td>
-<td align="left">99.902% (96.97 - 100.0)</td>
+<td align="left">99.902% (97.00 - 100.0)</td>
 </tr>
 <tr class="even">
 <td align="left">covariate_02</td>
@@ -622,9 +622,9 @@
 </tbody>
 </table>
 </div>
-<div id="output-figure" class="section level2">
+<div id="ii-5--output-figure" class="section level2">
 <h2 class="hasAnchor">
-<a href="#output-figure" class="anchor"></a>5. Output figure</h2>
+<a href="#ii-5--output-figure" class="anchor"></a>II.5. Output figure</h2>
 <ul>
 <li>Make a quick plot using a custom created function</li>
 </ul>
@@ -666,16 +666,16 @@
 <li><a href="#context">Context</a></li>
       <li><a href="#import-packages">Import packages</a></li>
       <li><a href="#i--workflow-create-a-survey-design-object"><strong>I. Workflow:</strong> Create a survey design object</a></li>
-      <li><a href="#import-data">1. Import data</a></li>
-      <li><a href="#identify-sets-numerators-and-denominators">2. Identify sets numerators and denominators</a></li>
-      <li><a href="#create-a-srvyr-survey-design-object">3. Create a <code>srvyr</code> survey design object</a></li>
-      <li><a href="#example-single-estimation">Example: Single estimation</a></li>
+      <li><a href="#i-1--import-data">I.1. Import data</a></li>
+      <li><a href="#i-2--identify-sets-numerators-and-denominators">I.2. Identify sets numerators and denominators</a></li>
+      <li><a href="#i-3--create-a-srvyr-survey-design-object">I.3. Create a <code>srvyr</code> survey design object</a></li>
+      <li><a href="#i-4-example-single-estimation">I.4 Example: Single estimation</a></li>
       <li><a href="#ii--workflow-multiple-estimation"><strong>II. Workflow:</strong> Multiple estimation</a></li>
-      <li><a href="#estimates-raw-weighted">1. Estimates: raw + weighted</a></li>
-      <li><a href="#add-uncertain-test-performance">2. Add uncertain test performance</a></li>
-      <li><a href="#create-output-format">3. Create output format</a></li>
-      <li><a href="#evaluate-output">4. Evaluate output</a></li>
-      <li><a href="#output-figure">5. Output figure</a></li>
+      <li><a href="#ii-1--estimates-raw-weighted">II.1. Estimates: raw + weighted</a></li>
+      <li><a href="#ii-2--add-uncertain-test-performance">II.2. Add uncertain test performance</a></li>
+      <li><a href="#ii-3--create-output-format">II.3. Create output format</a></li>
+      <li><a href="#ii-4--evaluate-output">II.4. Evaluate output</a></li>
+      <li><a href="#ii-5--output-figure">II.5. Output figure</a></li>
       <li><a href="#reference">Reference</a></li>
       </ul>
 </div>

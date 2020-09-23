@@ -63,25 +63,6 @@ serosvy_proportion(design = design,
 #> #   total_cv <dbl>, total_se <dbl>, total_deff <dbl>, total_den <dbl>,
 #> #   total_den_low <dbl>, total_den_upp <dbl>, raw_num <int>,
 #> #   raw_den <int>, raw_prop <dbl>, raw_prop_low <dbl>, raw_prop_upp <dbl>
-
-
-serosvy_proportion(design = design,
-                   denominator = outcome_one,
-                   numerator = covariate_01)
-#> # A tibble: 6 x 23
-#>   denominator denominator_lev~ numerator numerator_level   prop prop_low
-#>   <chr>       <fct>            <chr>     <fct>            <dbl>    <dbl>
-#> 1 outcome_one No               covariat~ E               0.400    0.216 
-#> 2 outcome_one No               covariat~ H               0.318    0.117 
-#> 3 outcome_one No               covariat~ M               0.283    0.150 
-#> 4 outcome_one Yes              covariat~ E               0.840    0.712 
-#> 5 outcome_one Yes              covariat~ H               0.0311   0.0105
-#> 6 outcome_one Yes              covariat~ M               0.129    0.0633
-#> # ... with 17 more variables: prop_upp <dbl>, prop_cv <dbl>,
-#> #   prop_se <dbl>, total <dbl>, total_low <dbl>, total_upp <dbl>,
-#> #   total_cv <dbl>, total_se <dbl>, total_deff <dbl>, total_den <dbl>,
-#> #   total_den_low <dbl>, total_den_upp <dbl>, raw_num <int>,
-#> #   raw_den <int>, raw_prop <dbl>, raw_prop_low <dbl>, raw_prop_upp <dbl>
 ```
 
 ``` r
@@ -290,7 +271,7 @@ citation("serosurvey")
 
 ## Contact
 
-Andree Valle Campos | [`avallecam`](https://twitter.com/avallecam) |
+Andree Valle Campos | [`@avallecam`](https://twitter.com/avallecam) |
 <avallecam@gmail.com>
 
 Project Link: <https://github.com/avallecam/serosurvey>
