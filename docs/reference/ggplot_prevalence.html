@@ -122,7 +122,10 @@
     </div>
 
     <pre class="usage"><span class='fu'>ggplot_prevalence</span>(<span class='no'>data</span>, <span class='no'>category</span>, <span class='no'>outcome</span>, <span class='no'>proportion</span>, <span class='no'>proportion_upp</span>,
-  <span class='no'>proportion_low</span>, <span class='kw'>breaks_n</span> <span class='kw'>=</span> <span class='fl'>5</span>)</pre>
+  <span class='no'>proportion_low</span>, <span class='kw'>breaks_n</span> <span class='kw'>=</span> <span class='fl'>5</span>)
+
+<span class='fu'>ggplot_prevalence_ii</span>(<span class='no'>data</span>, <span class='no'>denominator_level</span>, <span class='no'>numerator</span>, <span class='no'>proportion</span>,
+  <span class='no'>proportion_upp</span>, <span class='no'>proportion_low</span>, <span class='kw'>breaks_n</span> <span class='kw'>=</span> <span class='fl'>5</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -155,6 +158,18 @@
       <th>breaks_n</th>
       <td><p>number of breaks in axis</p></td>
     </tr>
+    <tr>
+      <th>denominator_level</th>
+      <td><ul>
+<li><p>denominator values column</p></li>
+</ul></td>
+    </tr>
+    <tr>
+      <th>numerator</th>
+      <td><ul>
+<li><p>numerator variable name column</p></li>
+</ul></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
@@ -162,12 +177,15 @@
     
 <ul>
 <li><p><code>ggplot_prevalence</code>: ggplot2 visualization of proportions</p></li>
+<li><p><code>ggplot_prevalence_ii</code>: ggplot_prevalence with new arguments</p></li>
 </ul>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 # not yet
+# go to workflow:
+# https://avallecam.github.io/serosurvey/articles/howto-reprex.html
 
 </div></pre>
   </div>

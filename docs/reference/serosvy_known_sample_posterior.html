@@ -194,7 +194,7 @@
                               <span class='kw'>digits_dot</span> <span class='kw'>=</span> <span class='fl'>4</span>,
                               <span class='kw'>digits_low</span> <span class='kw'>=</span> <span class='fl'>3</span>,
                               <span class='kw'>digits_upp</span> <span class='kw'>=</span> <span class='fl'>3</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/skimr/man/print.html'>print</a></span>()
+  <span class='fu'><a href='https://docs.ropensci.org/skimr/reference/print.html'>print</a></span>()
 
 <span class='co'>#posterior distribution</span>
 <span class='no'>tidy_result</span> <span class='kw'>%&gt;%</span>
@@ -238,7 +238,7 @@
                               <span class='kw'>total_number_test</span><span class='kw'>=</span><span class='no'>n</span>,
                               <span class='kw'>sensitivity</span><span class='kw'>=</span><span class='no'>se</span>,
                               <span class='kw'>specificity</span><span class='kw'>=</span><span class='no'>sp</span>),
-                  <span class='kw'>.f</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/purrr/man/safely.html'>possibly</a></span>(<span class='no'>serosvy_known_sample_posterior</span>,<span class='kw'>otherwise</span> <span class='kw'>=</span> <span class='fl'>NA_real_</span>)))
+                  <span class='kw'>.f</span> <span class='kw'>=</span> <span class='fu'><a href='https://purrr.tidyverse.org/reference/safely.html'>possibly</a></span>(<span class='no'>serosvy_known_sample_posterior</span>,<span class='kw'>otherwise</span> <span class='kw'>=</span> <span class='fl'>NA_real_</span>)))
 <span class='fu'><a href='https://rdrr.io/pkg/tictoc/man/tic.html'>toc</a></span>()
 
 <span class='no'>result</span> <span class='kw'>%&gt;%</span>

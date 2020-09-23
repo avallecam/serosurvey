@@ -2,10 +2,14 @@
 % Please edit documentation in R/serosurvey_viz.R
 \name{ggplot_prevalence}
 \alias{ggplot_prevalence}
+\alias{ggplot_prevalence_ii}
 \title{Visualization of proportions}
 \usage{
 ggplot_prevalence(data, category, outcome, proportion, proportion_upp,
   proportion_low, breaks_n = 5)
+
+ggplot_prevalence_ii(data, denominator_level, numerator, proportion,
+  proportion_upp, proportion_low, breaks_n = 5)
 }
 \arguments{
 \item{data}{input tibble}
@@ -21,6 +25,14 @@ ggplot_prevalence(data, category, outcome, proportion, proportion_upp,
 \item{proportion_low}{lower interval}
 
 \item{breaks_n}{number of breaks in axis}
+
+\item{denominator_level}{\itemize{
+\item denominator values column
+}}
+
+\item{numerator}{\itemize{
+\item numerator variable name column
+}}
 }
 \description{
 visualization of proportions
@@ -28,10 +40,14 @@ visualization of proportions
 \section{Functions}{
 \itemize{
 \item \code{ggplot_prevalence}: ggplot2 visualization of proportions
+
+\item \code{ggplot_prevalence_ii}: ggplot_prevalence with new arguments
 }}
 
 \examples{
 
 # not yet
+# go to workflow:
+# https://avallecam.github.io/serosurvey/articles/howto-reprex.html
 
 }

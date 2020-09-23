@@ -16,10 +16,13 @@
 #' @import tidyverse
 #'
 #' @export ggplot_prevalence
+#' @export ggplot_prevalence_ii
 #'
 #' @examples
 #'
 #' # not yet
+#' # go to workflow:
+#' # https://avallecam.github.io/serosurvey/articles/howto-reprex.html
 #'
 
 ggplot_prevalence <- function(data,category,outcome,
@@ -30,6 +33,31 @@ ggplot_prevalence <- function(data,category,outcome,
                y = {{proportion}},
                color={{outcome}},
                group={{outcome}})) +
+    # geom_point(aes(size=proportion_cv),position = position_dodge(width = 0.5)) +
+    geom_point(position = position_dodge(width = 0.5)) +
+    geom_errorbar(aes(max={{proportion_upp}},min={{proportion_low}}),
+                  position = position_dodge(width = 0.5)) +
+    scale_y_continuous(labels = scales::percent_format(accuracy = 1),
+                       breaks = scales::pretty_breaks(n = {{breaks_n}})) +
+    # scale_size_continuous(labels = scales::percent_format()) +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+}
+
+#' @describeIn ggplot_prevalence ggplot_prevalence with new arguments
+#' @inheritParams ggplot_prevalence
+#' @param denominator_level - denominator values column
+#' @param numerator - numerator variable name column
+
+ggplot_prevalence_ii <- function(data,
+                                 denominator_level,
+                                 numerator,
+                                 proportion,proportion_upp,proportion_low,
+                              breaks_n=5) {
+  data %>%
+    ggplot(aes(x = {{denominator_level}},
+               y = {{proportion}},
+               color={{numerator}},
+               group={{numerator}})) +
     # geom_point(aes(size=proportion_cv),position = position_dodge(width = 0.5)) +
     geom_point(position = position_dodge(width = 0.5)) +
     geom_errorbar(aes(max={{proportion_upp}},min={{proportion_low}}),

@@ -97,7 +97,7 @@
 <a href="#1-survey-estimate-single-prevalences" class="anchor"></a>1. <code>survey</code>: Estimate single prevalences</h3>
 <ul>
 <li>
-<p>From a <strong><a href="http://gdfe.co/srvyr/"><code>srvyr</code></a> survey design object</strong>, <strong><code>serosvy_proportion</code></strong> estimates:</p>
+<p>From a <a href="http://gdfe.co/srvyr/"><code>srvyr</code></a> <strong>survey design object</strong>, <strong><code>serosvy_proportion</code></strong> estimates:</p>
 <ul>
 <li>weighted prevalence (<code>prop</code>),</li>
 <li>total population (<code>total</code>),</li>
@@ -152,8 +152,8 @@
 <li>
 <p>In the <a href="https://avallecam.github.io/serosurvey/articles/howto-reprex.html">Article tab</a> we provide a workflow to <strong>estimate multiple prevalences</strong>:</p>
 <ul>
-<li>using <em>different set of covariates</em> and outcomes as numerators or denominators,</li>
-<li>in <em>one single pipe</em> operation</li>
+<li>using different set of covariates and outcomes as numerators or denominators,</li>
+<li>in one single pipe operation</li>
 </ul>
 </li>
 </ul>
@@ -234,7 +234,7 @@
 <ul>
 <li><p>We gather <strong>one frequentist approach</strong> (Rogan and Gladen <a href="#ref-ROGAN1978">1978</a>), available in different Github repos, that deal with misclassification due to an imperfect diagnostic test (Azman et al. <a href="#ref-Azman2020">2020</a>; Takahashi, Greenhouse, and Rodríguez-Barraquer <a href="#ref-Takahashi2020">2020</a>). Check the <a href="https://avallecam.github.io/serosurvey/reference/index.html">Reference tab</a>.</p></li>
 <li><p>We provide <strong>tidy outputs for bayesian approaches</strong> developed in Daniel B. Larremore et al. (<a href="#ref-Larremore2020unk">2020</a>) <a href="https://github.com/LarremoreLab/bayesian-joint-prev-se-sp/blob/master/singleSERO_uncertainTEST.R">here</a> and Daniel B Larremore et al. (<a href="#ref-Larremore2020kno">2020</a>) <a href="https://github.com/LarremoreLab/covid_serological_sampling/blob/master/codebase/seroprevalence.R">here</a>:</p></li>
-<li><p>You can use them with <strong><a href="https://purrr.tidyverse.org/"><code>purrr</code></a></strong> and <strong><a href="https://davisvaughan.github.io/furrr/"><code>furrr</code></a></strong> to efficiently iterate and parallelize this step for <strong>multiple prevalences</strong>. Check the workflow in <a href="https://avallecam.github.io/serosurvey/articles/howto-reprex.html">Article tab</a>.</p></li>
+<li><p>You can use them with <a href="https://purrr.tidyverse.org/"><code>purrr</code></a> and <a href="https://davisvaughan.github.io/furrr/"><code>furrr</code></a> to efficiently iterate and parallelize this step for <strong>multiple prevalences</strong>. Check the workflow in <a href="https://avallecam.github.io/serosurvey/articles/howto-reprex.html">Article tab</a>.</p></li>
 </ul>
 <div id="known-test-performance---bayesian-method" class="section level4">
 <h4 class="hasAnchor">
@@ -256,8 +256,7 @@
 <a href="#unknown-test-performance---bayesian-method" class="anchor"></a><strong>Unknown test performance - Bayesian method</strong>
 </h4>
 <ul>
-<li>The test performance is called <em>unknown</em> when test sensitivity and specificity are not known with certainty. (Kritsotakis <a href="#ref-Kritsotakis2020">2020</a>; Diggle <a href="#ref-Diggle2011">2011</a>)</li>
-<li>This could arise during an outbreak of a novel pathogen, when lab validation data is available with a limited set of samples. (Daniel B. Larremore et al. <a href="#ref-Larremore2020unk">2020</a>)</li>
+<li>The test performance is called <em>“unknown”</em> or <em>“uncertain”</em> when test sensitivity and specificity are not known with certainty (Kritsotakis <a href="#ref-Kritsotakis2020">2020</a>; Diggle <a href="#ref-Diggle2011">2011</a>; Gelman and Carpenter <a href="#ref-Gelman2020">2020</a>) and lab validation data is available with a limited set of samples, tipically during a novel pathogen outbreak.</li>
 </ul>
 <!-- end list --><div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="reference/serosvy_unknown_sample_posterior.html">serosvy_unknown_sample_posterior_ii</a></span>(</a>
 <a class="sourceLine" id="cb8-2" title="2">  <span class="co">#in population</span></a>
@@ -273,14 +272,15 @@
 </div>
 </div>
 </div>
-<div id="contribute" class="section level2">
+<div id="contributing" class="section level2">
 <h2 class="hasAnchor">
-<a href="#contribute" class="anchor"></a>Contribute</h2>
+<a href="#contributing" class="anchor"></a>Contributing</h2>
 <p>Feel free to fill an issue or contribute with your functions or workflows in a pull request.</p>
-<p>Here are two publications with interesting approaches using R:</p>
+<p>Here are a list of publications with interesting approaches using R:</p>
 <ul>
 <li><p>Silveira et al. (<a href="#ref-Silveira2020">2020</a>) in the strategy 3 analysed the survey accounting for sampling design and test validity using parametric bootstraping.</p></li>
-<li><p>Flor et al. (<a href="#ref-Flor2020">2020</a>) implemented a lot of frequentist and bayesian methods for test with known sensitivity and specificity. Code is available <a href="https://github.com/BfRstats/bayespem-validation-code">here</a></p></li>
+<li><p>Flor et al. (<a href="#ref-Flor2020">2020</a>) implemented a lot of frequentist and bayesian methods for test with known sensitivity and specificity. Code is available <a href="https://github.com/BfRstats/bayespem-validation-code">here</a>.</p></li>
+<li><p>Gelman and Carpenter (<a href="#ref-Gelman2020">2020</a>) also applied Bayesian inference with hierarchical regression and post-stratification to account for test uncertainty with unknown specificity and sensitivity. Here a <a href="https://github.com/bob-carpenter/diagnostic-testing/blob/master/src/case-study/seroprevalence-meta-analysis.Rmd">case-study</a>.</p></li>
 </ul>
 </div>
 <div id="how-to-cite-this-r-package" class="section level2">
@@ -305,12 +305,24 @@
 <a class="sourceLine" id="cb10-17" title="17"><span class="co">#&gt;     url = {https://avallecam.github.io/serosurvey/},</span></a>
 <a class="sourceLine" id="cb10-18" title="18"><span class="co">#&gt;   }</span></a></code></pre></div>
 </div>
+<div id="contact" class="section level2">
+<h2 class="hasAnchor">
+<a href="#contact" class="anchor"></a>Contact</h2>
+<p>Andree Valle Campos | <a href="https://twitter.com/avallecam"><code>avallecam</code></a> | <a href="mailto:avallecam@gmail.com" class="email">avallecam@gmail.com</a></p>
+<p>Project Link: <a href="https://github.com/avallecam/serosurvey" class="uri">https://github.com/avallecam/serosurvey</a></p>
+</div>
+<div id="acknowledgements" class="section level2">
+<h2 class="hasAnchor">
+<a href="#acknowledgements" class="anchor"></a>Acknowledgements</h2>
+<p>Many thanks to the Centro Nacional de Epidemiología, Prevención y Control de Enfermedades <a href="https://www.dge.gob.pe/portalnuevo/">(CDC Perú)</a> for the opportunity to work on this project.</p>
+</div>
 <div id="references" class="section level2">
 <h2 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h2>
 <p>Azman, Andrew S, Stephen Lauer, M. Taufiqur Rahman Bhuiyan, Francisco J Luquero, Daniel T Leung, Sonia Hegde, Jason B Harris, et al. 2020. “Vibrio Cholerae O1 Transmission in Bangladesh: Insights from a Nationally- Representative Serosurvey,” March. <a href="https://doi.org/10.1101/2020.03.13.20035352" class="uri">https://doi.org/10.1101/2020.03.13.20035352</a>.</p>
 <p>Diggle, Peter J. 2011. “Estimating Prevalence Using an Imperfect Test.” Epidemiology Research International 2011: 1–5. <a href="https://doi.org/10.1155/2011/608719" class="uri">https://doi.org/10.1155/2011/608719</a>.</p>
 <p>Flor, Matthias, Michael Weiß, Thomas Selhorst, Christine Müller-Graf, and Matthias Greiner. 2020. “Comparison of Bayesian and Frequentist Methods for Prevalence Estimation Under Misclassification.” BMC Public Health 20 (1). <a href="https://doi.org/10.1186/s12889-020-09177-4" class="uri">https://doi.org/10.1186/s12889-020-09177-4</a>.</p>
+<p>Gelman, Andrew, and Bob Carpenter. 2020. “Bayesian Analysis of Tests with Unknown Specificity and Sensitivity.” Journal of the Royal Statistical Society: Series C (Applied Statistics), August. <a href="https://doi.org/10.1111/rssc.12435" class="uri">https://doi.org/10.1111/rssc.12435</a>.</p>
 <p>Kritsotakis, Evangelos I. 2020. “On the Importance of Population-Based Serological Surveys of SARS-CoV-2 Without Overlooking Their Inherent Uncertainties.” Public Health in Practice 1 (November): 100013. <a href="https://doi.org/10.1016/j.puhip.2020.100013" class="uri">https://doi.org/10.1016/j.puhip.2020.100013</a>.</p>
 <p>Larremore, Daniel B., Bailey K Fosdick, Kate M Bubar, Sam Zhang, Stephen M Kissler, C. Jessica E. Metcalf, Caroline Buckee, and Yonatan Grad.2020.“Estimating SARS-CoV-2 Seroprevalence and Epidemiological Parameters with Uncertainty from Serological Surveys.” medRxiv, April. <a href="https://doi.org/10.1101/2020.04.15.20067066" class="uri">https://doi.org/10.1101/2020.04.15.20067066</a>.</p>
 <p>Larremore, Daniel B., Bailey K. Fosdick, Sam Zhang, and Yonatan Grad.2020.“Jointly Modeling Prevalence, Sensitivity and Specificity for Optimal Sample Allocation.” bioRxiv, May. <a href="https://doi.org/10.1101/2020.05.23.112649" class="uri">https://doi.org/10.1101/2020.05.23.112649</a>.</p>
@@ -345,6 +357,16 @@ Flor, Matthias, Michael Weiß, Thomas Selhorst, Christine Müller-Graf,
 and Matthias Greiner. 2020. “Comparison of Bayesian and Frequentist
 Methods for Prevalence Estimation Under Misclassification.” *BMC Public
 Health* 20 (1). <https:>.
+
+</https:>
+</div>
+
+<div id="ref-Gelman2020">
+
+Gelman, Andrew, and Bob Carpenter. 2020. “Bayesian Analysis of Tests
+with Unknown Specificity and Sensitivity.” *Journal of the Royal
+Statistical Society: Series C (Applied Statistics)*, August.
+<https:>.
 
 </https:>
 </div>

@@ -34,7 +34,7 @@ library(serosurvey)
 
 ### 1\. `survey`: Estimate single prevalences
 
-  - From a **[`srvyr`](http://gdfe.co/srvyr/) survey design object**,
+  - From a [`srvyr`](http://gdfe.co/srvyr/) **survey design object**,
     **`serosvy_proportion`** estimates:
     
       - weighted prevalence (`prop`),
@@ -94,9 +94,9 @@ example("serosvy_proportion")
     tab](https://avallecam.github.io/serosurvey/articles/howto-reprex.html)
     we provide a workflow to **estimate multiple prevalences**:
     
-      - using *different set of covariates* and outcomes as numerators
-        or denominators,
-      - in *one single pipe* operation
+      - using different set of covariates and outcomes as numerators or
+        denominators,
+      - in one single pipe operation
 
 <!-- end list -->
 
@@ -189,10 +189,10 @@ expand_grid(
     and Daniel B Larremore et al. ([2020](#ref-Larremore2020kno))
     [here](https://github.com/LarremoreLab/covid_serological_sampling/blob/master/codebase/seroprevalence.R):
 
-  - You can use them with **[`purrr`](https://purrr.tidyverse.org/)**
-    and **[`furrr`](https://davisvaughan.github.io/furrr/)** to
-    efficiently iterate and parallelize this step for **multiple
-    prevalences**. Check the workflow in [Article
+  - You can use them with [`purrr`](https://purrr.tidyverse.org/) and
+    [`furrr`](https://davisvaughan.github.io/furrr/) to efficiently
+    iterate and parallelize this step for **multiple prevalences**.
+    Check the workflow in [Article
     tab](https://avallecam.github.io/serosurvey/articles/howto-reprex.html).
 
 #### **Known test performance - Bayesian method**
@@ -216,12 +216,12 @@ example("serosvy_known_sample_posterior")
 
 #### **Unknown test performance - Bayesian method**
 
-  - The test performance is called *unknown* when test sensitivity and
-    specificity are not known with certainty. (Kritsotakis
-    [2020](#ref-Kritsotakis2020); Diggle [2011](#ref-Diggle2011))
-  - This could arise during an outbreak of a novel pathogen, when lab
-    validation data is available with a limited set of samples. (Daniel
-    B. Larremore et al. [2020](#ref-Larremore2020unk))
+  - The test performance is called *“unknown”* or *“uncertain”* when
+    test sensitivity and specificity are not known with certainty
+    (Kritsotakis [2020](#ref-Kritsotakis2020); Diggle
+    [2011](#ref-Diggle2011); Gelman and Carpenter
+    [2020](#ref-Gelman2020)) and lab validation data is available with a
+    limited set of samples, tipically during a novel pathogen outbreak.
 
 <!-- end list -->
 
@@ -243,12 +243,12 @@ serosvy_unknown_sample_posterior_ii(
 example("serosvy_unknown_sample_posterior")
 ```
 
-## Contribute
+## Contributing
 
 Feel free to fill an issue or contribute with your functions or
 workflows in a pull request.
 
-Here are two publications with interesting approaches using R:
+Here are a list of publications with interesting approaches using R:
 
   - Silveira et al. ([2020](#ref-Silveira2020)) in the strategy 3
     analysed the survey accounting for sampling design and test validity
@@ -257,7 +257,13 @@ Here are two publications with interesting approaches using R:
   - Flor et al. ([2020](#ref-Flor2020)) implemented a lot of frequentist
     and bayesian methods for test with known sensitivity and
     specificity. Code is available
-    [here](https://github.com/BfRstats/bayespem-validation-code)
+    [here](https://github.com/BfRstats/bayespem-validation-code).
+
+  - Gelman and Carpenter ([2020](#ref-Gelman2020)) also applied Bayesian
+    inference with hierarchical regression and post-stratification to
+    account for test uncertainty with unknown specificity and
+    sensitivity. Here a
+    [case-study](https://github.com/bob-carpenter/diagnostic-testing/blob/master/src/case-study/seroprevalence-meta-analysis.Rmd).
 
 ## How to cite this R package
 
@@ -282,6 +288,20 @@ citation("serosurvey")
 #>   }
 ```
 
+## Contact
+
+Andree Valle Campos | [`avallecam`](https://twitter.com/avallecam) |
+<avallecam@gmail.com>
+
+Project Link: <https://github.com/avallecam/serosurvey>
+
+## Acknowledgements
+
+Many thanks to the Centro Nacional de Epidemiología, Prevención y
+Control de Enfermedades [(CDC
+Perú)](https://www.dge.gob.pe/portalnuevo/) for the opportunity to work
+on this project.
+
 ## References
 
 Azman, Andrew S, Stephen Lauer, M. Taufiqur Rahman Bhuiyan, Francisco J
@@ -298,6 +318,11 @@ Flor, Matthias, Michael Weiß, Thomas Selhorst, Christine Müller-Graf,
 and Matthias Greiner. 2020. “Comparison of Bayesian and Frequentist
 Methods for Prevalence Estimation Under Misclassification.” BMC Public
 Health 20 (1). <https://doi.org/10.1186/s12889-020-09177-4>.
+
+Gelman, Andrew, and Bob Carpenter. 2020. “Bayesian Analysis of Tests
+with Unknown Specificity and Sensitivity.” Journal of the Royal
+Statistical Society: Series C (Applied Statistics), August.
+<https://doi.org/10.1111/rssc.12435>.
 
 Kritsotakis, Evangelos I. 2020. “On the Importance of Population-Based
 Serological Surveys of SARS-CoV-2 Without Overlooking Their Inherent
@@ -355,6 +380,15 @@ Flor, Matthias, Michael Weiß, Thomas Selhorst, Christine Müller-Graf,
 and Matthias Greiner. 2020. “Comparison of Bayesian and Frequentist
 Methods for Prevalence Estimation Under Misclassification.” *BMC Public
 Health* 20 (1). <https://doi.org/10.1186/s12889-020-09177-4>.
+
+</div>
+
+<div id="ref-Gelman2020">
+
+Gelman, Andrew, and Bob Carpenter. 2020. “Bayesian Analysis of Tests
+with Unknown Specificity and Sensitivity.” *Journal of the Royal
+Statistical Society: Series C (Applied Statistics)*, August.
+<https://doi.org/10.1111/rssc.12435>.
 
 </div>
 

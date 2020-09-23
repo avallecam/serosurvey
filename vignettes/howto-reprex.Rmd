@@ -427,15 +427,15 @@ outcome_01_adj_tbl %>%
 
 ```
 
-## Output figure
+## 5. Output figure
 
-- Make a quick plot using a custom create function
+- Make a quick plot using a custom created function
 
 ```{r}
-outcome_01_adj_tbl %>% 
-  ggplot_prevalence(
-    category = denominator_level,
-    outcome = numerator,
+outcome_01_adj_tbl %>%
+  ggplot_prevalence_ii(
+    denominator_level = denominator_level,
+    numerator = numerator,
     proportion = prop,
     proportion_upp = prop_upp,
     proportion_low = prop_low) +
