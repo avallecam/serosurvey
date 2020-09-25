@@ -112,7 +112,12 @@ datasurvey <- apiclus2 %>%
          primary_sampling_unit = dnum,
          secondary_sampling_unit = snum,
          # strata = census_tracts, (activate if available)
-         sampling_weights = pw)
+         sampling_weights = pw) %>% 
+  # recode factor leves to replicate serology results
+  mutate(outcome_one=fct_recode(outcome_one,
+                                "negative"="No","positive"="Yes")) %>% 
+  mutate(outcome_two=fct_recode(outcome_two,
+                                "negative"="(50,100]","positive"="(-0.1,50]"))
 ```
 
 ```{r,eval=FALSE,echo=FALSE}
@@ -122,9 +127,9 @@ dstrata <- datasurvey %>% as_survey_design(strata = covariate_01, weights = pw)
 #   mutate(pw2=1) %>%
   # as_survey_design(strata = covariate_01, weights = pw2)
 dstrata %>%
-  summarise(pct = survey_mean(outcome_one=="Yes",proportion = TRUE))
+  summarise(pct = survey_mean(outcome_one=="positive",proportion = TRUE))
 # dstrata2 %>%
-#   summarise(pct = survey_mean(outcome_one=="Yes",proportion = TRUE))
+#   summarise(pct = survey_mean(outcome_one=="positive",proportion = TRUE))
 ```
 
 
@@ -272,7 +277,7 @@ outcome_01_adj_pre <-
   # only serological results
   filter(numerator=="outcome_one") %>% 
   # only positives
-  filter(numerator_level=="Yes") %>% 
+  filter(numerator_level=="positive") %>% 
   # round numbers are required
   mutate_at(.vars = vars(total,total_den,
                          total_low,total_den_low,
@@ -390,7 +395,7 @@ outcome_01_adj_tbl <-
   # start from original dataset
   outcome_01_pre %>% 
   # only positives
-  filter(numerator_level=="Yes"|denominator_level=="Yes") %>% 
+  filter(numerator_level=="positive"|denominator_level=="positive") %>% 
   # left join with db with test performance update
   left_join(outcome_01_adj) %>% 
   # naniar::miss_var_summary() %>% 
