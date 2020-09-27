@@ -6,7 +6,8 @@
 \title{Miscellaneous function}
 \usage{
 unite_dotwhiskers(data, variable_dot, variable_low, variable_upp,
-  digits_dot = 3, digits_low = 2, digits_upp = 3)
+  digits_dot = 3, digits_low = 2, digits_upp = 3,
+  decimal_to_percent = TRUE)
 
 serosvy_extract_posterior(data, variable)
 }
@@ -24,6 +25,8 @@ serosvy_extract_posterior(data, variable)
 \item{digits_low}{digits of lower interval to round}
 
 \item{digits_upp}{digits of upper interval to round}
+
+\item{decimal_to_percent}{logical to multiply values by 100. TRUE by default.}
 
 \item{variable}{variable to extract from posterior distributions}
 }
