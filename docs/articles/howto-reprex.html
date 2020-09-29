@@ -455,7 +455,7 @@
 <a class="sourceLine" id="cb8-67" title="67">}</a>
 <a class="sourceLine" id="cb8-68" title="68"></a>
 <a class="sourceLine" id="cb8-69" title="69"><span class="kw">toc</span>()</a>
-<a class="sourceLine" id="cb8-70" title="70"><span class="co">#&gt; 367.84 sec elapsed</span></a>
+<a class="sourceLine" id="cb8-70" title="70"><span class="co">#&gt; 241 sec elapsed</span></a>
 <a class="sourceLine" id="cb8-71" title="71"></a>
 <a class="sourceLine" id="cb8-72" title="72">outcome_<span class="dv">01</span>_adj &lt;-<span class="st"> </span>out  <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb8-73" title="73"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rowname=</span><span class="kw"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(rowname)) <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -530,35 +530,35 @@
 <td align="left">E</td>
 <td align="left">outcome_one</td>
 <td align="left">positive</td>
-<td align="left">75.9% (65.3 - 84.6)</td>
-<td align="left">78.9% ( 67.5 - 87)</td>
-<td align="left">83.157% (65.90 - 95.5)</td>
+<td align="left">75.9 (65.3 - 84.6)</td>
+<td align="left">78.9 ( 67.5 - 87)</td>
+<td align="left">83.140 (65.87 - 95.5)</td>
 </tr>
 <tr class="even">
 <td align="left">covariate_01</td>
 <td align="left">H</td>
 <td align="left">outcome_one</td>
 <td align="left">positive</td>
-<td align="left">25.0% ( 8.7 - 49.1)</td>
-<td align="left">14.8% ( 3.8 - 44)</td>
-<td align="left">0.421% ( 0.28 - 29.9)</td>
+<td align="left">25.0 ( 8.7 - 49.1)</td>
+<td align="left">14.8 ( 3.8 - 44)</td>
+<td align="left">0.423 ( 0.27 - 29.8)</td>
 </tr>
 <tr class="odd">
 <td align="left">covariate_01</td>
 <td align="left">M</td>
 <td align="left">outcome_one</td>
 <td align="left">positive</td>
-<td align="left">65.2% (42.7 - 83.6)</td>
-<td align="left">44.8% ( 16.0 - 78)</td>
-<td align="left">31.544% ( 0.40 - 81.1)</td>
+<td align="left">65.2 (42.7 - 83.6)</td>
+<td align="left">44.8 ( 16.0 - 78)</td>
+<td align="left">31.450 ( 0.41 - 81.1)</td>
 </tr>
 <tr class="even">
 <td align="left">covariate_01</td>
 <td align="left">E</td>
 <td align="left">outcome_two</td>
 <td align="left">positive</td>
-<td align="left">6.0% ( 2.0 - 13.5)</td>
-<td align="left">18.2% ( 5.0 - 49)</td>
+<td align="left">6.0 ( 2.0 - 13.5)</td>
+<td align="left">18.2 ( 5.0 - 49)</td>
 <td align="left">NA</td>
 </tr>
 <tr class="odd">
@@ -566,8 +566,8 @@
 <td align="left">H</td>
 <td align="left">outcome_two</td>
 <td align="left">positive</td>
-<td align="left">5.0% ( 0.1 - 24.9)</td>
-<td align="left">7.7% ( 0.9 - 44)</td>
+<td align="left">5.0 ( 0.1 - 24.9)</td>
+<td align="left">7.7 ( 0.9 - 44)</td>
 <td align="left">NA</td>
 </tr>
 <tr class="even">
@@ -575,17 +575,17 @@
 <td align="left">Yes</td>
 <td align="left">outcome_one</td>
 <td align="left">positive</td>
-<td align="left">93.3% (85.9 - 97.5)</td>
-<td align="left">96.7% ( 88.2 - 99)</td>
-<td align="left">99.900% (97.02 - 100.0)</td>
+<td align="left">93.3 (85.9 - 97.5)</td>
+<td align="left">96.7 ( 88.2 - 99)</td>
+<td align="left">99.903 (97.00 - 100.0)</td>
 </tr>
 <tr class="odd">
 <td align="left">covariate_02</td>
 <td align="left">No</td>
 <td align="left">outcome_two</td>
 <td align="left">positive</td>
-<td align="left">8.1% ( 1.7 - 21.9)</td>
-<td align="left">21.8% ( 6.7 - 52)</td>
+<td align="left">8.1 ( 1.7 - 21.9)</td>
+<td align="left">21.8 ( 6.7 - 52)</td>
 <td align="left">NA</td>
 </tr>
 <tr class="even">
@@ -593,8 +593,8 @@
 <td align="left">Yes</td>
 <td align="left">outcome_two</td>
 <td align="left">positive</td>
-<td align="left">3.4% ( 0.7 - 9.5)</td>
-<td align="left">9.1% ( 2.1 - 32)</td>
+<td align="left">3.4 ( 0.7 - 9.5)</td>
+<td align="left">9.1 ( 2.1 - 32)</td>
 <td align="left">NA</td>
 </tr>
 <tr class="odd">
@@ -602,8 +602,8 @@
 <td align="left">positive</td>
 <td align="left">covariate_02</td>
 <td align="left">Yes</td>
-<td align="left">100.0% (95.7 - 100.0)</td>
-<td align="left">100.0% (100.0 - 100)</td>
+<td align="left">100.0 (95.7 - 100.0)</td>
+<td align="left">100.0 (100.0 - 100)</td>
 <td align="left">NA</td>
 </tr>
 <tr class="even">
@@ -611,8 +611,8 @@
 <td align="left">positive</td>
 <td align="left">covariate_02</td>
 <td align="left">No</td>
-<td align="left">50.0% (11.8 - 88.2)</td>
-<td align="left">54.9% ( 29.4 - 78)</td>
+<td align="left">50.0 (11.8 - 88.2)</td>
+<td align="left">54.9 ( 29.4 - 78)</td>
 <td align="left">NA</td>
 </tr>
 <tr class="odd">
@@ -620,8 +620,8 @@
 <td align="left">positive</td>
 <td align="left">covariate_02</td>
 <td align="left">Yes</td>
-<td align="left">50.0% (11.8 - 88.2)</td>
-<td align="left">45.1% ( 21.9 - 71)</td>
+<td align="left">50.0 (11.8 - 88.2)</td>
+<td align="left">45.1 ( 21.9 - 71)</td>
 <td align="left">NA</td>
 </tr>
 </tbody>

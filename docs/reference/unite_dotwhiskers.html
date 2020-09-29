@@ -122,7 +122,8 @@
     </div>
 
     <pre class="usage"><span class='fu'>unite_dotwhiskers</span>(<span class='no'>data</span>, <span class='no'>variable_dot</span>, <span class='no'>variable_low</span>, <span class='no'>variable_upp</span>,
-  <span class='kw'>digits_dot</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>digits_low</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>digits_upp</span> <span class='kw'>=</span> <span class='fl'>3</span>)
+  <span class='kw'>digits_dot</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>digits_low</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>digits_upp</span> <span class='kw'>=</span> <span class='fl'>3</span>,
+  <span class='kw'>decimal_to_percent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='fu'>serosvy_extract_posterior</span>(<span class='no'>data</span>, <span class='no'>variable</span>)</pre>
     
@@ -156,6 +157,10 @@
     <tr>
       <th>digits_upp</th>
       <td><p>digits of upper interval to round</p></td>
+    </tr>
+    <tr>
+      <th>decimal_to_percent</th>
+      <td><p>logical to multiply values by 100. TRUE by default.</p></td>
     </tr>
     <tr>
       <th>variable</th>

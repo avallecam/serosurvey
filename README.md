@@ -231,9 +231,10 @@ workflows in a pull request.
 
 Here are a list of publications with interesting approaches using R:
 
-  - Silveira et al. ([2020](#ref-Silveira2020)) in the strategy 3
-    analysed the survey accounting for sampling design and test validity
-    using parametric bootstraping.
+  - Silveira et al. ([2020](#ref-Silveira2020)) and Hallal et al.
+    ([2020](#ref-Hallal2020)) analysed a serological survey accounting
+    for sampling design and test validity using parametric bootstraping,
+    following Lewis and Torgerson ([2012](#ref-Lewis2012)).
 
   - Flor et al. ([2020](#ref-Flor2020)) implemented a lot of frequentist
     and bayesian methods for test with known sensitivity and
@@ -305,6 +306,12 @@ with Unknown Specificity and Sensitivity.” Journal of the Royal
 Statistical Society: Series C (Applied Statistics), August.
 <https://doi.org/10.1111/rssc.12435>.
 
+Hallal, Pedro C, Fernando P Hartwig, Bernardo L Horta, Mariângela F
+Silveira, Claudio J Struchiner, Luı́s P Vidaletti, Nelson A Neumann, et
+al. 2020. “SARS-CoV-2 Antibody Prevalence in Brazil: Results from Two
+Successive Nationwide Serological Household Surveys.” The Lancet Global
+Health, September. <https://doi.org/10.1016/s2214-109x(20)30387-9>.
+
 Kritsotakis, Evangelos I. 2020. “On the Importance of Population-Based
 Serological Surveys of SARS-CoV-2 Without Overlooking Their Inherent
 Uncertainties.” Public Health in Practice 1 (November): 100013.
@@ -320,6 +327,11 @@ Larremore, Daniel B., Bailey K. Fosdick, Sam Zhang, and Yonatan
 Grad.2020.“Jointly Modeling Prevalence, Sensitivity and Specificity for
 Optimal Sample Allocation.” bioRxiv, May.
 <https://doi.org/10.1101/2020.05.23.112649>.
+
+Lewis, Fraser I, and Paul R Torgerson. 2012. “A Tutorial in Estimating
+the Prevalence of Disease in Humans and Animals in the Absence of a Gold
+Standard Diagnostic.” Emerging Themes in Epidemiology 9 (1).
+<https://doi.org/10.1186/1742-7622-9-9>.
 
 Rogan, Walter J., and Beth Gladen. 1978. “Estimating Prevalence from the
 Results of A Screening Test.” American Journal of Epidemiology 107 (1):
@@ -373,6 +385,16 @@ Statistical Society: Series C (Applied Statistics)*, August.
 
 </div>
 
+<div id="ref-Hallal2020">
+
+Hallal, Pedro C, Fernando P Hartwig, Bernardo L Horta, Mariângela F
+Silveira, Claudio J Struchiner, Luı́s P Vidaletti, Nelson A Neumann, et
+al. 2020. “SARS-CoV-2 Antibody Prevalence in Brazil: Results from Two
+Successive Nationwide Serological Household Surveys.” *The Lancet Global
+Health*, September. <https://doi.org/10.1016/s2214-109x(20)30387-9>.
+
+</div>
+
 <div id="ref-Kritsotakis2020">
 
 Kritsotakis, Evangelos I. 2020. “On the Importance of Population-Based
@@ -398,6 +420,15 @@ Larremore, Daniel B., Bailey K. Fosdick, Sam Zhang, and Yonatan H. Grad.
 2020. “Jointly Modeling Prevalence, Sensitivity and Specificity for
 Optimal Sample Allocation.” *bioRxiv*, May.
 <https://doi.org/10.1101/2020.05.23.112649>.
+
+</div>
+
+<div id="ref-Lewis2012">
+
+Lewis, Fraser I, and Paul R Torgerson. 2012. “A Tutorial in Estimating
+the Prevalence of Disease in Humans and Animals in the Absence of a Gold
+Standard Diagnostic.” *Emerging Themes in Epidemiology* 9 (1).
+<https://doi.org/10.1186/1742-7622-9-9>.
 
 </div>
 
