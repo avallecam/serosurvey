@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Serological Survey Analysis For Prevalence Estimation Under Misclassification • serosurvey</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">serosurvey</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0</span>
       </span>
     </div>
 
@@ -62,7 +62,14 @@
   </ul>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a>
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -269,22 +276,26 @@
 <a href="#how-to-cite-this-r-package" class="anchor"></a>How to cite this R package</h2>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span>(<span class="st">"serosurvey"</span>)</a>
 <a class="sourceLine" id="cb10-2" title="2"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb10-3" title="3"><span class="co">#&gt; To cite package 'serosurvey' in publications use:</span></a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="co">#&gt; To cite package ‘serosurvey’ in publications use:</span></a>
 <a class="sourceLine" id="cb10-4" title="4"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb10-5" title="5"><span class="co">#&gt;   Andree Valle Campos (2020). serosurvey: Serological Survey</span></a>
-<a class="sourceLine" id="cb10-6" title="6"><span class="co">#&gt;   Analysis For Prevalence Estimation Under Misclassification. R</span></a>
-<a class="sourceLine" id="cb10-7" title="7"><span class="co">#&gt;   package version 0.0.0.9000.</span></a>
-<a class="sourceLine" id="cb10-8" title="8"><span class="co">#&gt;   https://avallecam.github.io/serosurvey/</span></a>
-<a class="sourceLine" id="cb10-9" title="9"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb10-10" title="10"><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></a>
-<a class="sourceLine" id="cb10-11" title="11"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb10-12" title="12"><span class="co">#&gt;   @Manual{,</span></a>
-<a class="sourceLine" id="cb10-13" title="13"><span class="co">#&gt;     title = {serosurvey: Serological Survey Analysis For Prevalence Estimation Under Misclassification},</span></a>
+<a class="sourceLine" id="cb10-5" title="5"><span class="co">#&gt; Valle Campos A (2020). "serosurvey: Serological Survey Analysis</span></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="co">#&gt; For Prevalence Estimation Under Misclassification." _Zenodo_. doi:</span></a>
+<a class="sourceLine" id="cb10-7" title="7"><span class="co">#&gt; 10.5281/zenodo.4065080 (URL:</span></a>
+<a class="sourceLine" id="cb10-8" title="8"><span class="co">#&gt; https://doi.org/10.5281/zenodo.4065080), R package version 1.0,</span></a>
+<a class="sourceLine" id="cb10-9" title="9"><span class="co">#&gt; &lt;URL: https://avallecam.github.io/serosurvey/&gt;.</span></a>
+<a class="sourceLine" id="cb10-10" title="10"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb10-11" title="11"><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></a>
+<a class="sourceLine" id="cb10-12" title="12"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb10-13" title="13"><span class="co">#&gt;   @Article{,</span></a>
 <a class="sourceLine" id="cb10-14" title="14"><span class="co">#&gt;     author = {Andree {Valle Campos}},</span></a>
-<a class="sourceLine" id="cb10-15" title="15"><span class="co">#&gt;     year = {2020},</span></a>
-<a class="sourceLine" id="cb10-16" title="16"><span class="co">#&gt;     note = {R package version 0.0.0.9000},</span></a>
-<a class="sourceLine" id="cb10-17" title="17"><span class="co">#&gt;     url = {https://avallecam.github.io/serosurvey/},</span></a>
-<a class="sourceLine" id="cb10-18" title="18"><span class="co">#&gt;   }</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-15" title="15"><span class="co">#&gt;     title = {serosurvey: Serological Survey Analysis For Prevalence Estimation Under Misclassification},</span></a>
+<a class="sourceLine" id="cb10-16" title="16"><span class="co">#&gt;     journal = {Zenodo},</span></a>
+<a class="sourceLine" id="cb10-17" title="17"><span class="co">#&gt;     month = {oct},</span></a>
+<a class="sourceLine" id="cb10-18" title="18"><span class="co">#&gt;     year = {2020},</span></a>
+<a class="sourceLine" id="cb10-19" title="19"><span class="co">#&gt;     doi = {10.5281/zenodo.4065080},</span></a>
+<a class="sourceLine" id="cb10-20" title="20"><span class="co">#&gt;     note = {R package version 1.0},</span></a>
+<a class="sourceLine" id="cb10-21" title="21"><span class="co">#&gt;     url = {https://avallecam.github.io/serosurvey/},</span></a>
+<a class="sourceLine" id="cb10-22" title="22"><span class="co">#&gt;   }</span></a></code></pre></div>
 </div>
 <div id="contact" class="section level2">
 <h2 class="hasAnchor">
@@ -462,6 +473,12 @@ Infectious Diseases*, August. <https:>.
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
+<div class="citation">
+<h2>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html">Citing serosurvey</a></li>
+</ul>
+</div>
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
@@ -472,6 +489,7 @@ Infectious Diseases*, August. <https:>.
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
+<li><a href="https://zenodo.org/badge/latestdoi/296497540"><img src="https://zenodo.org/badge/296497540.svg" alt="DOI"></a></li>
 <li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
 <li><a href="https://cran.r-project.org/package=serosurvey"><img src="https://www.r-pkg.org/badges/version/serosurvey" alt="CRAN status"></a></li>
 </ul>

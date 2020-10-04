@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Workflow: How to use the serosurvey R package? • serosurvey</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">serosurvey</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0</span>
       </span>
     </div>
 
@@ -59,7 +59,14 @@
   </ul>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a>
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -455,7 +462,7 @@
 <a class="sourceLine" id="cb8-67" title="67">}</a>
 <a class="sourceLine" id="cb8-68" title="68"></a>
 <a class="sourceLine" id="cb8-69" title="69"><span class="kw">toc</span>()</a>
-<a class="sourceLine" id="cb8-70" title="70"><span class="co">#&gt; 262.36 sec elapsed</span></a>
+<a class="sourceLine" id="cb8-70" title="70"><span class="co">#&gt; 260.17 sec elapsed</span></a>
 <a class="sourceLine" id="cb8-71" title="71"></a>
 <a class="sourceLine" id="cb8-72" title="72">outcome_<span class="dv">01</span>_adj &lt;-<span class="st"> </span>out  <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb8-73" title="73"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rowname=</span><span class="kw"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(rowname)) <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -505,24 +512,42 @@
 <h2 class="hasAnchor">
 <a href="#ii-4--evaluate-output" class="anchor"></a>II.4. Evaluate output</h2>
 <ul>
-<li>Take a quick look to the output</li>
+<li>
+<p>Take a quick look to the output:</p>
+<ul>
+<li>
+<code>raw_or_unadjusted_prev</code> crude or raw prevalence</li>
+<li>
+<code>sampling_weighted_prev</code> sampling weights adjusted prevalence</li>
+<li>
+<code>sampling_and_test_prev</code> <strong>sampling weights</strong> and <strong>test performance</strong> adjusted prevalence</li>
+</ul>
+</li>
 </ul>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"></a>
 <a class="sourceLine" id="cb10-2" title="2">outcome_<span class="dv">01</span>_adj_tbl <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb10-3" title="3"><span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,<span class="kw">starts_with</span>(<span class="st">"unite1_"</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb10-4" title="4"><span class="st">  </span><span class="co"># view()</span></a>
-<a class="sourceLine" id="cb10-5" title="5"><span class="st">  </span><span class="co"># avallecam::print_inf()</span></a>
-<a class="sourceLine" id="cb10-6" title="6"><span class="st">  </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb10-7" title="7"><span class="st">  </span>kableExtra<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span>(<span class="dt">bootstrap_options =</span> <span class="st">"striped"</span>, <span class="dt">full_width =</span> F)</a></code></pre></div>
+<a class="sourceLine" id="cb10-3" title="3"><span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,raw_num,raw_den,</a>
+<a class="sourceLine" id="cb10-4" title="4">         <span class="kw">starts_with</span>(<span class="st">"unite1_"</span>),</a>
+<a class="sourceLine" id="cb10-5" title="5">         prop_cv) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="st">  </span><span class="kw">rename</span>(<span class="st">"raw_or_unadjusted_prev"</span>=unite1_raw_prop,</a>
+<a class="sourceLine" id="cb10-7" title="7">         <span class="st">"sampling_weighted_prev"</span>=unite1_prop,</a>
+<a class="sourceLine" id="cb10-8" title="8">         <span class="st">"sampling_and_test_prev"</span>=unite1_adj_dot_unk_p50) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-9" title="9"><span class="st">  </span><span class="kw">mutate_if</span>(<span class="dt">.predicate =</span> is.numeric,<span class="dt">.funs =</span> <span class="op">~</span><span class="kw"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(.x,<span class="dv">2</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb10-10" title="10"><span class="st">  </span><span class="co">#   DT::datatable()</span></a>
+<a class="sourceLine" id="cb10-11" title="11"><span class="st">  </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb10-12" title="12"><span class="st">  </span>kableExtra<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span>(<span class="dt">bootstrap_options =</span> <span class="st">"striped"</span>, <span class="dt">full_width =</span> F)</a></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">denominator</th>
 <th align="left">denominator_level</th>
 <th align="left">numerator</th>
 <th align="left">numerator_level</th>
-<th align="left">unite1_raw_prop</th>
-<th align="left">unite1_prop</th>
-<th align="left">unite1_adj_dot_unk_p50</th>
+<th align="right">raw_num</th>
+<th align="right">raw_den</th>
+<th align="left">raw_or_unadjusted_prev</th>
+<th align="left">sampling_weighted_prev</th>
+<th align="left">sampling_and_test_prev</th>
+<th align="right">prop_cv</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -530,99 +555,132 @@
 <td align="left">E</td>
 <td align="left">outcome_one</td>
 <td align="left">positive</td>
+<td align="right">63</td>
+<td align="right">83</td>
 <td align="left">75.9 (65.3 - 84.6)</td>
 <td align="left">78.9 ( 67.5 - 87)</td>
-<td align="left">83.089 (65.81 - 95.6)</td>
+<td align="left">83.116 (65.95 - 95.5)</td>
+<td align="right">0.06</td>
 </tr>
 <tr class="even">
 <td align="left">covariate_01</td>
 <td align="left">H</td>
 <td align="left">outcome_one</td>
 <td align="left">positive</td>
+<td align="right">5</td>
+<td align="right">20</td>
 <td align="left">25.0 ( 8.7 - 49.1)</td>
 <td align="left">14.8 ( 3.8 - 44)</td>
-<td align="left">0.438 ( 0.29 - 29.9)</td>
+<td align="left">0.429 ( 0.28 - 29.8)</td>
+<td align="right">0.59</td>
 </tr>
 <tr class="odd">
 <td align="left">covariate_01</td>
 <td align="left">M</td>
 <td align="left">outcome_one</td>
 <td align="left">positive</td>
+<td align="right">15</td>
+<td align="right">23</td>
 <td align="left">65.2 (42.7 - 83.6)</td>
 <td align="left">44.8 ( 16.0 - 78)</td>
-<td align="left">31.531 ( 0.40 - 81.1)</td>
+<td align="left">31.504 ( 0.41 - 81.1)</td>
+<td align="right">0.38</td>
 </tr>
 <tr class="even">
 <td align="left">covariate_01</td>
 <td align="left">E</td>
 <td align="left">outcome_two</td>
 <td align="left">positive</td>
+<td align="right">5</td>
+<td align="right">83</td>
 <td align="left">6.0 ( 2.0 - 13.5)</td>
 <td align="left">18.2 ( 5.0 - 49)</td>
 <td align="left">NA</td>
+<td align="right">0.58</td>
 </tr>
 <tr class="odd">
 <td align="left">covariate_01</td>
 <td align="left">H</td>
 <td align="left">outcome_two</td>
 <td align="left">positive</td>
+<td align="right">1</td>
+<td align="right">20</td>
 <td align="left">5.0 ( 0.1 - 24.9)</td>
 <td align="left">7.7 ( 0.9 - 44)</td>
 <td align="left">NA</td>
+<td align="right">0.96</td>
 </tr>
 <tr class="even">
 <td align="left">covariate_02</td>
 <td align="left">Yes</td>
 <td align="left">outcome_one</td>
 <td align="left">positive</td>
+<td align="right">83</td>
+<td align="right">89</td>
 <td align="left">93.3 (85.9 - 97.5)</td>
 <td align="left">96.7 ( 88.2 - 99)</td>
-<td align="left">99.901 (97.00 - 100.0)</td>
+<td align="left">99.902 (97.04 - 100.0)</td>
+<td align="right">0.02</td>
 </tr>
 <tr class="odd">
 <td align="left">covariate_02</td>
 <td align="left">No</td>
 <td align="left">outcome_two</td>
 <td align="left">positive</td>
+<td align="right">3</td>
+<td align="right">37</td>
 <td align="left">8.1 ( 1.7 - 21.9)</td>
 <td align="left">21.8 ( 6.7 - 52)</td>
 <td align="left">NA</td>
+<td align="right">0.51</td>
 </tr>
 <tr class="even">
 <td align="left">covariate_02</td>
 <td align="left">Yes</td>
 <td align="left">outcome_two</td>
 <td align="left">positive</td>
+<td align="right">3</td>
+<td align="right">89</td>
 <td align="left">3.4 ( 0.7 - 9.5)</td>
 <td align="left">9.1 ( 2.1 - 32)</td>
 <td align="left">NA</td>
+<td align="right">0.68</td>
 </tr>
 <tr class="odd">
 <td align="left">outcome_one</td>
 <td align="left">positive</td>
 <td align="left">covariate_02</td>
 <td align="left">Yes</td>
+<td align="right">83</td>
+<td align="right">83</td>
 <td align="left">100.0 (95.7 - 100.0)</td>
 <td align="left">100.0 (100.0 - 100)</td>
 <td align="left">NA</td>
+<td align="right">0.00</td>
 </tr>
 <tr class="even">
 <td align="left">outcome_two</td>
 <td align="left">positive</td>
 <td align="left">covariate_02</td>
 <td align="left">No</td>
+<td align="right">3</td>
+<td align="right">6</td>
 <td align="left">50.0 (11.8 - 88.2)</td>
 <td align="left">54.9 ( 29.4 - 78)</td>
 <td align="left">NA</td>
+<td align="right">0.15</td>
 </tr>
 <tr class="odd">
 <td align="left">outcome_two</td>
 <td align="left">positive</td>
 <td align="left">covariate_02</td>
 <td align="left">Yes</td>
+<td align="right">3</td>
+<td align="right">6</td>
 <td align="left">50.0 (11.8 - 88.2)</td>
 <td align="left">45.1 ( 21.9 - 71)</td>
 <td align="left">NA</td>
+<td align="right">0.19</td>
 </tr>
 </tbody>
 </table>

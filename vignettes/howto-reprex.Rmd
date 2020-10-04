@@ -424,15 +424,24 @@ outcome_01_adj_tbl <-
 
 ## II.4. Evaluate output
 
-- Take a quick look to the output
+- Take a quick look to the output:
+
+  + `raw_or_unadjusted_prev` crude or raw prevalence
+  + `sampling_weighted_prev` sampling weights adjusted prevalence
+  + `sampling_and_test_prev` __sampling weights__ and __test performance__ adjusted prevalence
 
 ```{r}
 
 outcome_01_adj_tbl %>% 
-  select(1:4,starts_with("unite1_")) %>% 
-  # view()
-  # avallecam::print_inf()
-  knitr::kable() %>% 
+  select(1:4,raw_num,raw_den,
+         starts_with("unite1_"),
+         prop_cv) %>% 
+  rename("raw_or_unadjusted_prev"=unite1_raw_prop,
+         "sampling_weighted_prev"=unite1_prop,
+         "sampling_and_test_prev"=unite1_adj_dot_unk_p50) %>% 
+  mutate_if(.predicate = is.numeric,.funs = ~round(.x,2)) %>%
+  #   DT::datatable()
+  knitr::kable() %>%
   kableExtra::kable_styling(bootstrap_options = "striped", full_width = F)
 
 ```

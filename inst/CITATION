@@ -1,0 +1,12 @@
+bibentry(
+  bibtype = "Article",
+  header = "To cite package ‘serosurvey’ in publications use:",
+  author = person(given = "Andree", family = "Valle Campos"),
+  title = "serosurvey: Serological Survey Analysis For Prevalence Estimation Under Misclassification",
+  journal = "Zenodo",
+  month = "oct",
+  year = "2020",
+  doi = "10.5281/zenodo.4065080",
+  note = "R package version 1.0",
+  url = "https://avallecam.github.io/serosurvey/",
+)

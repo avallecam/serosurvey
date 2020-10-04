@@ -5,6 +5,7 @@
 
 <!-- badges: start -->
 
+[![DOI](https://zenodo.org/badge/296497540.svg)](https://zenodo.org/badge/latestdoi/296497540)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN
@@ -252,20 +253,24 @@ Here are a list of publications with interesting approaches using R:
 ``` r
 citation("serosurvey")
 #> 
-#> To cite package 'serosurvey' in publications use:
+#> To cite package ‘serosurvey’ in publications use:
 #> 
-#>   Andree Valle Campos (2020). serosurvey: Serological Survey
-#>   Analysis For Prevalence Estimation Under Misclassification. R
-#>   package version 0.0.0.9000.
-#>   https://avallecam.github.io/serosurvey/
+#> Valle Campos A (2020). "serosurvey: Serological Survey Analysis
+#> For Prevalence Estimation Under Misclassification." _Zenodo_. doi:
+#> 10.5281/zenodo.4065080 (URL:
+#> https://doi.org/10.5281/zenodo.4065080), R package version 1.0,
+#> <URL: https://avallecam.github.io/serosurvey/>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
-#>   @Manual{,
-#>     title = {serosurvey: Serological Survey Analysis For Prevalence Estimation Under Misclassification},
+#>   @Article{,
 #>     author = {Andree {Valle Campos}},
+#>     title = {serosurvey: Serological Survey Analysis For Prevalence Estimation Under Misclassification},
+#>     journal = {Zenodo},
+#>     month = {oct},
 #>     year = {2020},
-#>     note = {R package version 0.0.0.9000},
+#>     doi = {10.5281/zenodo.4065080},
+#>     note = {R package version 1.0},
 #>     url = {https://avallecam.github.io/serosurvey/},
 #>   }
 ```

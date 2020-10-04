@@ -26,6 +26,7 @@ options(tidyverse.quiet = TRUE)
 # serosurvey
 
 <!-- badges: start -->
+[![DOI](https://zenodo.org/badge/296497540.svg)](https://zenodo.org/badge/latestdoi/296497540)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/serosurvey)](https://cran.r-project.org/package=serosurvey)
 <!-- badges: end -->

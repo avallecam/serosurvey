@@ -1,0 +1,9 @@
+title: serosurvey
+template:
+  params:
+    bootswatch: flatly
+
+navbar:
+  right:
+  - icon: fa-github
+  href: https://github.com/avallecam/serosurvey
