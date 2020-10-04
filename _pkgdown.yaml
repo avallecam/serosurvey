@@ -6,4 +6,4 @@ template:
 navbar:
   right:
   - icon: fa-github
-  href: https://github.com/avallecam/serosurvey
+    href: https://github.com/avallecam/serosurvey
