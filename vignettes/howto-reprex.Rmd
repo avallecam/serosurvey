@@ -443,6 +443,7 @@ outcome_01_adj_tbl %>%
 
 ```{r}
 outcome_01_adj_tbl %>%
+  filter(str_detect(numerator,"outcome")) %>% 
   ggplot_prevalence_ii(
     denominator_level = denominator_level,
     numerator = numerator,
@@ -450,8 +451,8 @@ outcome_01_adj_tbl %>%
     proportion_upp = prop_upp,
     proportion_low = prop_low) +
   theme(axis.text.x = element_text(angle = 0, vjust = 0, hjust=0)) +
-  coord_flip() +
-  facet_wrap(denominator~.,scales = "free_y") +
+  # coord_flip() +
+  facet_wrap(denominator~.,scales = "free") +
   # facet_grid(denominator~.,scales = "free_y") +
   colorspace::scale_color_discrete_qualitative() +
   labs(title = "Prevalence of numerators across denominators",

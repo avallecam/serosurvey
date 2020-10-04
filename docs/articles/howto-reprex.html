@@ -455,7 +455,7 @@
 <a class="sourceLine" id="cb8-67" title="67">}</a>
 <a class="sourceLine" id="cb8-68" title="68"></a>
 <a class="sourceLine" id="cb8-69" title="69"><span class="kw">toc</span>()</a>
-<a class="sourceLine" id="cb8-70" title="70"><span class="co">#&gt; 241 sec elapsed</span></a>
+<a class="sourceLine" id="cb8-70" title="70"><span class="co">#&gt; 262.36 sec elapsed</span></a>
 <a class="sourceLine" id="cb8-71" title="71"></a>
 <a class="sourceLine" id="cb8-72" title="72">outcome_<span class="dv">01</span>_adj &lt;-<span class="st"> </span>out  <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb8-73" title="73"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rowname=</span><span class="kw"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(rowname)) <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -532,7 +532,7 @@
 <td align="left">positive</td>
 <td align="left">75.9 (65.3 - 84.6)</td>
 <td align="left">78.9 ( 67.5 - 87)</td>
-<td align="left">83.140 (65.87 - 95.5)</td>
+<td align="left">83.089 (65.81 - 95.6)</td>
 </tr>
 <tr class="even">
 <td align="left">covariate_01</td>
@@ -541,7 +541,7 @@
 <td align="left">positive</td>
 <td align="left">25.0 ( 8.7 - 49.1)</td>
 <td align="left">14.8 ( 3.8 - 44)</td>
-<td align="left">0.423 ( 0.27 - 29.8)</td>
+<td align="left">0.438 ( 0.29 - 29.9)</td>
 </tr>
 <tr class="odd">
 <td align="left">covariate_01</td>
@@ -550,7 +550,7 @@
 <td align="left">positive</td>
 <td align="left">65.2 (42.7 - 83.6)</td>
 <td align="left">44.8 ( 16.0 - 78)</td>
-<td align="left">31.450 ( 0.41 - 81.1)</td>
+<td align="left">31.531 ( 0.40 - 81.1)</td>
 </tr>
 <tr class="even">
 <td align="left">covariate_01</td>
@@ -577,7 +577,7 @@
 <td align="left">positive</td>
 <td align="left">93.3 (85.9 - 97.5)</td>
 <td align="left">96.7 ( 88.2 - 99)</td>
-<td align="left">99.903 (97.00 - 100.0)</td>
+<td align="left">99.901 (97.00 - 100.0)</td>
 </tr>
 <tr class="odd">
 <td align="left">covariate_02</td>
@@ -634,19 +634,20 @@
 <li>Make a quick plot using a custom created function</li>
 </ul>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">outcome_<span class="dv">01</span>_adj_tbl <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/ggplot_prevalence.html">ggplot_prevalence_ii</a></span>(</a>
-<a class="sourceLine" id="cb11-3" title="3">    <span class="dt">denominator_level =</span> denominator_level,</a>
-<a class="sourceLine" id="cb11-4" title="4">    <span class="dt">numerator =</span> numerator,</a>
-<a class="sourceLine" id="cb11-5" title="5">    <span class="dt">proportion =</span> prop,</a>
-<a class="sourceLine" id="cb11-6" title="6">    <span class="dt">proportion_upp =</span> prop_upp,</a>
-<a class="sourceLine" id="cb11-7" title="7">    <span class="dt">proportion_low =</span> prop_low) <span class="op">+</span></a>
-<a class="sourceLine" id="cb11-8" title="8"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">0</span>, <span class="dt">vjust =</span> <span class="dv">0</span>, <span class="dt">hjust=</span><span class="dv">0</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb11-9" title="9"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb11-10" title="10"><span class="st">  </span><span class="kw">facet_wrap</span>(denominator<span class="op">~</span>.,<span class="dt">scales =</span> <span class="st">"free_y"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb11-11" title="11"><span class="st">  </span><span class="co"># facet_grid(denominator~.,scales = "free_y") +</span></a>
-<a class="sourceLine" id="cb11-12" title="12"><span class="st">  </span>colorspace<span class="op">::</span><span class="kw"><a href="http://colorspace.R-Forge.R-project.org//reference/scale_colour_discrete_qualitative.html">scale_color_discrete_qualitative</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb11-13" title="13"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"Prevalence of numerators across denominators"</span>,</a>
-<a class="sourceLine" id="cb11-14" title="14">       <span class="dt">y =</span> <span class="st">"Prevalence"</span>,<span class="dt">x =</span> <span class="st">""</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb11-2" title="2"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="kw">str_detect</span>(numerator,<span class="st">"outcome"</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="st">  </span><span class="kw"><a href="../reference/ggplot_prevalence.html">ggplot_prevalence_ii</a></span>(</a>
+<a class="sourceLine" id="cb11-4" title="4">    <span class="dt">denominator_level =</span> denominator_level,</a>
+<a class="sourceLine" id="cb11-5" title="5">    <span class="dt">numerator =</span> numerator,</a>
+<a class="sourceLine" id="cb11-6" title="6">    <span class="dt">proportion =</span> prop,</a>
+<a class="sourceLine" id="cb11-7" title="7">    <span class="dt">proportion_upp =</span> prop_upp,</a>
+<a class="sourceLine" id="cb11-8" title="8">    <span class="dt">proportion_low =</span> prop_low) <span class="op">+</span></a>
+<a class="sourceLine" id="cb11-9" title="9"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">0</span>, <span class="dt">vjust =</span> <span class="dv">0</span>, <span class="dt">hjust=</span><span class="dv">0</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb11-10" title="10"><span class="st">  </span><span class="co"># coord_flip() +</span></a>
+<a class="sourceLine" id="cb11-11" title="11"><span class="st">  </span><span class="kw">facet_wrap</span>(denominator<span class="op">~</span>.,<span class="dt">scales =</span> <span class="st">"free"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb11-12" title="12"><span class="st">  </span><span class="co"># facet_grid(denominator~.,scales = "free_y") +</span></a>
+<a class="sourceLine" id="cb11-13" title="13"><span class="st">  </span>colorspace<span class="op">::</span><span class="kw"><a href="http://colorspace.R-Forge.R-project.org//reference/scale_colour_discrete_qualitative.html">scale_color_discrete_qualitative</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb11-14" title="14"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"Prevalence of numerators across denominators"</span>,</a>
+<a class="sourceLine" id="cb11-15" title="15">       <span class="dt">y =</span> <span class="st">"Prevalence"</span>,<span class="dt">x =</span> <span class="st">""</span>)</a></code></pre></div>
 <p><img src="howto-reprex_files/figure-html/unnamed-chunk-12-1.png" width="960"></p>
 </div>
 <div id="reference" class="section level2 unnumbered">
