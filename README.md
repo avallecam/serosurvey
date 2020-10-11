@@ -225,6 +225,17 @@ serosvy_unknown_sample_posterior_ii(
 example("serosvy_unknown_sample_posterior")
 ```
 
+## Run a `learnr` tutorial
+
+``` r
+# install package
+if(!require("remotes")) install.packages("remotes")
+remotes::install_github("avallecam/serosurvey")
+# install learner and run tutorial
+if(!require("learnr")) install.packages("learnr")
+learnr::run_tutorial(name = "taller",package = "serosurvey")
+```
+
 ## Contributing
 
 Feel free to fill an issue or contribute with your functions or
