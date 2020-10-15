@@ -1,0 +1,94 @@
+---
+title: "Workflow: How to use the serosurvey R package?"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEncoding{UTF-8}
+  %\VignetteIndexEntry{Introduction: serosurvey R package}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+bibliography: ../references.bib
+link-citations: yes
+linkcolor: Blue
+urlcolor: Blue
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE
+)
+knitr::opts_chunk$set(fig.width=10, fig.height=4)
+options(tidyverse.quiet = TRUE)
+```
+
+```{r setup}
+library(serosurvey)
+```
+
+### 1. `survey`: Estimate single prevalences
+
+- From a [`srvyr`](http://gdfe.co/srvyr/) __survey design object__, __`serosvy_proportion`__ estimates:
+
+  + weighted prevalence (`prop`), 
+  + total population (`total`),
+  + raw proportion (`raw_prop`), 
+  + coefficient of variability (`cv`), 
+  + design effect (`deff`)
+
+### 2. `survey`: Estimate multiple prevalences
+
+- In 
+the [Article tab](https://avallecam.github.io/serosurvey/articles/howto-reprex.html) 
+we provide a workflow to __estimate multiple prevalences__: 
+
+  + using different set of covariates and outcomes as numerators or denominators,
+  + in one single pipe operation
+
+
+### 3. `serology`: Estimate prevalence Under misclassification
+
+- We gather __one frequentist approach__ [@ROGAN1978], 
+available in different Github repos, that deal with 
+misclassification due to an imperfect diagnostic 
+test [@Azman2020; @Takahashi2020].
+Check the [Reference tab](https://avallecam.github.io/serosurvey/reference/index.html).
+
+- We provide __tidy outputs for bayesian approaches__ developed 
+in @Larremore2020unk [here](https://github.com/LarremoreLab/bayesian-joint-prev-se-sp/blob/master/singleSERO_uncertainTEST.R) 
+and @Larremore2020kno [here](https://github.com/LarremoreLab/covid_serological_sampling/blob/master/codebase/seroprevalence.R):
+
+- You can use them with [`purrr`](https://purrr.tidyverse.org/) and [`furrr`](https://davisvaughan.github.io/furrr/) to efficiently iterate 
+and parallelize this step for __multiple prevalences__.
+Check the workflow 
+in [Article tab](https://avallecam.github.io/serosurvey/articles/howto-reprex.html).
+
+
+#### __Known test performance - Bayesian method__
+
+
+#### __Unknown test performance - Bayesian method__
+
+- The test performance is called _"unknown"_ or _"uncertain"_ when test 
+sensitivity and specificity are not known with 
+certainty [@Kritsotakis2020; @Diggle2011; @Gelman2020] and 
+lab validation data is available with a limited set of samples, 
+tipically during a novel pathogen outbreak.
+
+## Contributing
+
+Feel free to fill an issue or contribute with your functions or workflows in a pull request. 
+
+Here are a list of publications with interesting approaches using R:
+
+- @Silveira2020 and @Hallal2020 analysed a serological survey accounting for sampling design and test validity using parametric bootstraping, following @Lewis2012.
+
+- @Flor2020 implemented a lot of frequentist and bayesian methods for test with known sensitivity and specificity. Code is available [here](https://github.com/BfRstats/bayespem-validation-code).
+
+- @Gelman2020 also applied Bayesian inference with hierarchical regression 
+and post-stratification to account for test uncertainty
+with unknown specificity and sensitivity. 
+Here a [case-study](https://github.com/bob-carpenter/diagnostic-testing/blob/master/src/case-study/seroprevalence-meta-analysis.Rmd).

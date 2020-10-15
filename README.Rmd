@@ -23,6 +23,14 @@ knitr::opts_chunk$set(
 knitr::opts_chunk$set(fig.width=10, fig.height=4)
 options(tidyverse.quiet = TRUE)
 ```
+
+
+<br>
+**<span style="color: red;">Disclaimer</span>**
+
+This package is a work in progress. It has been released to get feedback from 
+users that we can incorporate in future releases.
+
 # serosurvey
 
 <!-- badges: start -->
@@ -181,6 +189,20 @@ expand_grid(
   print(n=Inf)
 ```
 
+#### `learnr` tutorial
+
+- Learn to build this with in a tutorial in Spanish:
+
+```r
+# update package
+if(!require("remotes")) install.packages("remotes")
+remotes::install_github("avallecam/serosurvey")
+# install learner and run tutorial
+if(!require("learnr")) install.packages("learnr")
+learnr::run_tutorial(name = "taller",package = "serosurvey")
+```
+
+
 ### 3. `serology`: Estimate prevalence Under misclassification
 
 - We gather __one frequentist approach__ [@ROGAN1978], 
@@ -306,18 +328,6 @@ result_unk %>%
 ```{r,eval=FALSE}
 example("serosvy_unknown_sample_posterior")
 ```
-
-## Run a `learnr` tutorial
-
-```r
-# install package
-if(!require("remotes")) install.packages("remotes")
-remotes::install_github("avallecam/serosurvey")
-# install learner and run tutorial
-if(!require("learnr")) install.packages("learnr")
-learnr::run_tutorial(name = "taller",package = "serosurvey")
-```
-
 
 ## Contributing
 

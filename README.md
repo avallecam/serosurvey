@@ -1,6 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+<br> **<span style="color: red;">Disclaimer</span>**
+
+This package is a work in progress. It has been released to get feedback
+from users that we can incorporate in future releases.
+
 # serosurvey
 
 <!-- badges: start -->
@@ -155,6 +160,21 @@ expand_grid(
 #> #   raw_den <int>, raw_prop <dbl>, raw_prop_low <dbl>, raw_prop_upp <dbl>
 ```
 
+#### `learnr` tutorial
+
+  - Learn to build this with in a tutorial in Spanish:
+
+<!-- end list -->
+
+``` r
+# update package
+if(!require("remotes")) install.packages("remotes")
+remotes::install_github("avallecam/serosurvey")
+# install learner and run tutorial
+if(!require("learnr")) install.packages("learnr")
+learnr::run_tutorial(name = "taller",package = "serosurvey")
+```
+
 ### 3\. `serology`: Estimate prevalence Under misclassification
 
   - We gather **one frequentist approach** (Rogan and Gladen
@@ -223,17 +243,6 @@ serosvy_unknown_sample_posterior_ii(
 
 ``` r
 example("serosvy_unknown_sample_posterior")
-```
-
-## Run a `learnr` tutorial
-
-``` r
-# install package
-if(!require("remotes")) install.packages("remotes")
-remotes::install_github("avallecam/serosurvey")
-# install learner and run tutorial
-if(!require("learnr")) install.packages("learnr")
-learnr::run_tutorial(name = "taller",package = "serosurvey")
 ```
 
 ## Contributing
