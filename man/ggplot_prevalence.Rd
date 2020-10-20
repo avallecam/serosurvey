@@ -2,29 +2,13 @@
 % Please edit documentation in R/serosurvey_viz.R
 \name{ggplot_prevalence}
 \alias{ggplot_prevalence}
-\alias{ggplot_prevalence_ii}
 \title{Visualization of proportions}
 \usage{
-ggplot_prevalence(data, category, outcome, proportion, proportion_upp,
-  proportion_low, breaks_n = 5)
-
-ggplot_prevalence_ii(data, denominator_level, numerator, proportion,
-  proportion_upp, proportion_low, breaks_n = 5)
+ggplot_prevalence(data, denominator_level, numerator, proportion,
+  proportion_upp, proportion_low)
 }
 \arguments{
 \item{data}{input tibble}
-
-\item{category}{denominator level}
-
-\item{outcome}{numerator variable}
-
-\item{proportion}{point estimate}
-
-\item{proportion_upp}{upper interval}
-
-\item{proportion_low}{lower interval}
-
-\item{breaks_n}{number of breaks in axis}
 
 \item{denominator_level}{\itemize{
 \item denominator values column
@@ -33,6 +17,13 @@ ggplot_prevalence_ii(data, denominator_level, numerator, proportion,
 \item{numerator}{\itemize{
 \item numerator variable name column
 }}
+
+\item{proportion}{point estimate}
+
+\item{proportion_upp}{upper interval}
+
+\item{proportion_low}{lower interval
+#param breaks_n number of breaks in axis}
 }
 \description{
 visualization of proportions
@@ -40,8 +31,6 @@ visualization of proportions
 \section{Functions}{
 \itemize{
 \item \code{ggplot_prevalence}: ggplot2 visualization of proportions
-
-\item \code{ggplot_prevalence_ii}: ggplot_prevalence with new arguments
 }}
 
 \examples{

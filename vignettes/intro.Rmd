@@ -1,5 +1,5 @@
 ---
-title: "Workflow: How to use the serosurvey R package?"
+title: "Introduction: serosurvey R package?"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteEncoding{UTF-8}
@@ -24,6 +24,9 @@ knitr::opts_chunk$set(
 knitr::opts_chunk$set(fig.width=10, fig.height=4)
 options(tidyverse.quiet = TRUE)
 ```
+
+## Introduction
+
 
 ```{r setup}
 library(serosurvey)
@@ -92,3 +95,5 @@ Here are a list of publications with interesting approaches using R:
 and post-stratification to account for test uncertainty
 with unknown specificity and sensitivity. 
 Here a [case-study](https://github.com/bob-carpenter/diagnostic-testing/blob/master/src/case-study/seroprevalence-meta-analysis.Rmd).
+
+## References
