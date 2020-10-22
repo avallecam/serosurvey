@@ -91,6 +91,9 @@
     <li>
       <a href="../articles/howto-reprex.html">Workflow: How to use the serosurvey R package?</a>
     </li>
+    <li>
+      <a href="../articles/intro.html">Introduction: serosurvey R package</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -126,11 +129,8 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>ggplot_prevalence</span>(<span class='no'>data</span>, <span class='no'>category</span>, <span class='no'>outcome</span>, <span class='no'>proportion</span>, <span class='no'>proportion_upp</span>,
-  <span class='no'>proportion_low</span>, <span class='kw'>breaks_n</span> <span class='kw'>=</span> <span class='fl'>5</span>)
-
-<span class='fu'>ggplot_prevalence_ii</span>(<span class='no'>data</span>, <span class='no'>denominator_level</span>, <span class='no'>numerator</span>, <span class='no'>proportion</span>,
-  <span class='no'>proportion_upp</span>, <span class='no'>proportion_low</span>, <span class='kw'>breaks_n</span> <span class='kw'>=</span> <span class='fl'>5</span>)</pre>
+    <pre class="usage"><span class='fu'>ggplot_prevalence</span>(<span class='no'>data</span>, <span class='no'>denominator_level</span>, <span class='no'>numerator</span>, <span class='no'>proportion</span>,
+  <span class='no'>proportion_upp</span>, <span class='no'>proportion_low</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -138,30 +138,6 @@
     <tr>
       <th>data</th>
       <td><p>input tibble</p></td>
-    </tr>
-    <tr>
-      <th>category</th>
-      <td><p>denominator level</p></td>
-    </tr>
-    <tr>
-      <th>outcome</th>
-      <td><p>numerator variable</p></td>
-    </tr>
-    <tr>
-      <th>proportion</th>
-      <td><p>point estimate</p></td>
-    </tr>
-    <tr>
-      <th>proportion_upp</th>
-      <td><p>upper interval</p></td>
-    </tr>
-    <tr>
-      <th>proportion_low</th>
-      <td><p>lower interval</p></td>
-    </tr>
-    <tr>
-      <th>breaks_n</th>
-      <td><p>number of breaks in axis</p></td>
     </tr>
     <tr>
       <th>denominator_level</th>
@@ -175,6 +151,19 @@
 <li><p>numerator variable name column</p></li>
 </ul></td>
     </tr>
+    <tr>
+      <th>proportion</th>
+      <td><p>point estimate</p></td>
+    </tr>
+    <tr>
+      <th>proportion_upp</th>
+      <td><p>upper interval</p></td>
+    </tr>
+    <tr>
+      <th>proportion_low</th>
+      <td><p>lower interval
+#param breaks_n number of breaks in axis</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
@@ -182,7 +171,6 @@
     
 <ul>
 <li><p><code>ggplot_prevalence</code>: ggplot2 visualization of proportions</p></li>
-<li><p><code>ggplot_prevalence_ii</code>: ggplot_prevalence with new arguments</p></li>
 </ul>
     
 
