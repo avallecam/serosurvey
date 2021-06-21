@@ -16,17 +16,15 @@ URL: https://avallecam.github.io/serosurvey/
 BugReports: https://github.com/avallecam/serosurvey/issues
 License: GPL-3
 Imports:
-    skimr
-Suggests: 
-    testthat,
-    tidyverse,
-    skimr,
     furrr,
-    tictoc,
+    knitr,
+    rmarkdown,
+    skimr,
     srvyr,
     survey,
-    rmarkdown,
-    knitr
+    testthat,
+    tictoc,
+    tidyverse
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
