@@ -5,12 +5,23 @@
 \alias{serosvy_unknown_sample_posterior_ii}
 \title{Tidy output for Bayesian serological sampling functions for one population and unknown test performance}
 \usage{
-serosvy_unknown_sample_posterior(positive_number_test, total_number_test,
-  true_positive, true_negative, false_positive, false_negative)
+serosvy_unknown_sample_posterior(
+  positive_number_test,
+  total_number_test,
+  true_positive,
+  true_negative,
+  false_positive,
+  false_negative
+)
 
-serosvy_unknown_sample_posterior_ii(positive_number_test,
-  total_number_test, true_positive, true_negative, false_positive,
-  false_negative)
+serosvy_unknown_sample_posterior_ii(
+  positive_number_test,
+  total_number_test,
+  true_positive,
+  true_negative,
+  false_positive,
+  false_negative
+)
 }
 \arguments{
 \item{positive_number_test}{number of positive tests population}

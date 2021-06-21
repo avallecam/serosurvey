@@ -1,0 +1,13 @@
+name: taller
+title: taller
+username:
+account: avallecam
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 4301055
+bundleId: 4741097
+url: https://avallecam.shinyapps.io/taller/
+when: 1624315286.95916
+lastSyncTime: 1624315286.95916
+asMultiple: FALSE
+asStatic: FALSE

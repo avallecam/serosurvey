@@ -4,8 +4,14 @@
 \alias{ggplot_prevalence}
 \title{Visualization of proportions}
 \usage{
-ggplot_prevalence(data, denominator_level, numerator, proportion,
-  proportion_upp, proportion_low)
+ggplot_prevalence(
+  data,
+  denominator_level,
+  numerator,
+  proportion,
+  proportion_upp,
+  proportion_low
+)
 }
 \arguments{
 \item{data}{input tibble}

@@ -5,9 +5,16 @@
 \alias{serosvy_extract_posterior}
 \title{Miscellaneous function}
 \usage{
-unite_dotwhiskers(data, variable_dot, variable_low, variable_upp,
-  digits_dot = 3, digits_low = 2, digits_upp = 3,
-  decimal_to_percent = TRUE)
+unite_dotwhiskers(
+  data,
+  variable_dot,
+  variable_low,
+  variable_upp,
+  digits_dot = 3,
+  digits_low = 2,
+  digits_upp = 3,
+  decimal_to_percent = TRUE
+)
 
 serosvy_extract_posterior(data, variable)
 }

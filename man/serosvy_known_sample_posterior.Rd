@@ -4,8 +4,12 @@
 \alias{serosvy_known_sample_posterior}
 \title{Tidy output for the Bayesian serological sampling functions for one or more sub-population and known test performance}
 \usage{
-serosvy_known_sample_posterior(positive_number_test, total_number_test,
-  sensitivity, specificity)
+serosvy_known_sample_posterior(
+  positive_number_test,
+  total_number_test,
+  sensitivity,
+  specificity
+)
 }
 \arguments{
 \item{positive_number_test}{number of positive tests population}
