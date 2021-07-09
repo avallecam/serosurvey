@@ -17,6 +17,9 @@
 #'
 #' Takahashi, S., Greenhouse, B., & Rodríguez-Barraquer, I. (2020). Are SARS-CoV-2 seroprevalence estimates biased?. doi: [https://doi.org/10.1093/infdis/jiaa523](https://doi.org/10.1093/infdis/jiaa523)
 #'
+#' @import tidyverse
+#' @import skimr
+#'
 #' @export correct_sero_misclass
 #' @export correct_sero_misclass_p
 #' @export rogan_gladen_estimator
@@ -64,7 +67,6 @@ correct_sero_misclass <- function(num_pos,num_neg,sens=.806,spec=.83){
 #' @describeIn correct_sero_misclass takes known sensitivity and specificity of test and returns proportion of sample that 'true' positive
 #' @inheritParams correct_sero_misclass
 #' @param p_A - proportion of positives by imperfect test
-#' @param N - number tested
 #' @return numeric vector
 
 correct_sero_misclass_p <- function(p_A,sens=.891,spec=.792){

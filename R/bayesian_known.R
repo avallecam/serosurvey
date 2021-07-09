@@ -17,6 +17,8 @@
 #'
 #' @return Prevalence posterior distribution
 #'
+#' @import stats
+#'
 #' @export sample_posterior_r_mcmc_hyperR
 #'
 #' @examples

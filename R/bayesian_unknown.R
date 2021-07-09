@@ -18,6 +18,8 @@
 #'
 #' @return Prevalence posterior distribution
 #'
+#' @import tidyverse
+#'
 #' @export sample_posterior_r_mcmc_testun
 #'
 #' @examples

@@ -164,15 +164,15 @@ expand_grid(
   print(n=Inf)
 ```
 
-#### `learnr` tutorial
+<!-- #### `learnr` tutorial -->
 
-- Learn to build this with in a tutorial in Spanish:
+<!-- - Learn to build this with in a tutorial in Spanish: -->
 
-```r
-# install learner and run tutorial
-if(!require("learnr")) install.packages("learnr")
-learnr::run_tutorial(name = "taller",package = "serosurvey")
-```
+<!-- ```r -->
+<!-- # install learner and run tutorial -->
+<!-- if(!require("learnr")) install.packages("learnr") -->
+<!-- learnr::run_tutorial(name = "taller",package = "serosurvey") -->
+<!-- ``` -->
 
 
 ### 3. `serology`: Estimate prevalence Under misclassification

@@ -11,6 +11,10 @@
 #' @param digits_upp digits of upper interval to round
 #' @param decimal_to_percent logical to multiply values by 100. TRUE by default.
 #'
+#' @import tidyverse
+#' @import stringr
+#' @import purrr
+#'
 #' @export unite_dotwhiskers
 #' @export serosvy_extract_posterior
 #'

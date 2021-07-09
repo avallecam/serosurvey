@@ -6,3 +6,6 @@
 ^\.github$
 ^vignettes/howto-reprex\.Rmd$
 ^vignettes/intro\.Rmd$
+^docs$
+^_pkgdown\.yaml$
+^references\.bib$

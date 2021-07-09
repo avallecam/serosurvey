@@ -14,6 +14,7 @@
 #'
 #' @import skimr
 #' @import tidyverse
+#' @import ggplot2
 #'
 #' @export ggplot_prevalence
 #'

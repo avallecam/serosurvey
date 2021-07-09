@@ -43,11 +43,11 @@ The current workflow is divided in two steps:
 
 ## More
 
-  - In the [Introductory
+-   In the [Introductory
     article](https://avallecam.github.io/serosurvey/articles/intro.html)
     we provide detailed definitions and references of the methods
     available.
-  - In the [Workflow
+-   In the [Workflow
     article](https://avallecam.github.io/serosurvey/articles/howto-reprex.html)
     we provide a reproducible example with this package.
 
@@ -58,7 +58,7 @@ workflows in a pull request.
 
 ## Contact
 
-Andree Valle Campos | [`@avallecam`](https://twitter.com/avallecam) |
+Andree Valle Campos \| [`@avallecam`](https://twitter.com/avallecam) \|
 <avallecam@gmail.com>
 
 Project Link: <https://github.com/avallecam/serosurvey>
@@ -77,11 +77,10 @@ citation("serosurvey")
 #> 
 #> To cite package ‘serosurvey’ in publications use:
 #> 
-#> Valle Campos A (2020). "serosurvey: Serological Survey Analysis
-#> For Prevalence Estimation Under Misclassification." _Zenodo_. doi:
-#> 10.5281/zenodo.4065080 (URL:
-#> https://doi.org/10.5281/zenodo.4065080), R package version 1.0,
-#> <URL: https://avallecam.github.io/serosurvey/>.
+#> Valle Campos A (2020). "serosurvey: Serological Survey Analysis For
+#> Prevalence Estimation Under Misclassification." _Zenodo_. doi:
+#> 10.5281/zenodo.4065080 (URL: https://doi.org/10.5281/zenodo.4065080), R
+#> package version 1.0, <URL: https://avallecam.github.io/serosurvey/>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 

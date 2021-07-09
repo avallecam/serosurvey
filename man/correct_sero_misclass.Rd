@@ -30,10 +30,6 @@ rogan_gladen_estimator(prev.obs, Se, Sp)
 \item{Se}{sensitivity}
 
 \item{Sp}{specificity}
-
-\item{N}{\itemize{
-\item number tested
-}}
 }
 \value{
 numeric vector

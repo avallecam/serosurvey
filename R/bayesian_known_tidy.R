@@ -17,6 +17,7 @@
 #'
 #' @import skimr
 #' @import tidyverse
+#' @import purrr
 #'
 #' @export serosvy_known_sample_posterior
 #'

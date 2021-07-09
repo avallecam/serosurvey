@@ -16,6 +16,7 @@
 #'
 #' @import skimr
 #' @import tidyverse
+#' @import purrr
 #'
 #' @export srvyr_prop_step_01
 #' @export srvyr_prop_step_02
