@@ -14,6 +14,12 @@
 #' @import tidyverse
 #' @import stringr
 #' @import purrr
+#' @importFrom rlang :=
+#' @importFrom tidyr unnest
+#' @importFrom dplyr select
+#' @importFrom dplyr rename
+#' @importFrom dplyr mutate_at
+#' @importFrom dplyr funs
 #'
 #' @export unite_dotwhiskers
 #' @export serosvy_extract_posterior
@@ -54,8 +60,8 @@ unite_dotwhiskers <- function(data,
 
   # combo to maintain variable name in a new variable
   c_var <- enquo(variable_dot)
-  c_var_name_01 <- c_var %>% rlang::as_name() %>% str_c("unite1_",.)
-  c_var_name_02 <- c_var %>% rlang::as_name() %>% str_c("unite2_",.)
+  c_var_name_01 <- c_var %>% rlang::as_name() %>% str_c("unite1_",.data)
+  c_var_name_02 <- c_var %>% rlang::as_name() %>% str_c("unite2_",.data)
 
   data_pre <- data %>%
     mutate(estim_tab={{variable_dot}},
@@ -65,50 +71,49 @@ unite_dotwhiskers <- function(data,
   if (decimal_to_percent==TRUE) {
     data_pre <- data_pre %>%
       # from decimal to percentile
-      mutate_at(.vars = vars(estim_tab,cilow_tab,ciupp_tab),
-                .funs = funs(.*100))
+      mutate_at(.vars = vars(.data$estim_tab,.data$cilow_tab,.data$ciupp_tab),
+                .funs = funs(.data*100))
   }
 
   data_out <- data_pre %>%
     # digits must be value specific
-    mutate_at(.vars = vars(estim_tab),.funs = format,digits=digits_dot) %>%
-    mutate_at(.vars = vars(cilow_tab),.funs = format,digits=digits_low) %>%
-    mutate_at(.vars = vars(ciupp_tab),.funs = format,digits=digits_upp) %>%
+    mutate_at(.vars = vars(.data$estim_tab),.funs = format,digits=digits_dot) %>%
+    mutate_at(.vars = vars(.data$cilow_tab),.funs = format,digits=digits_low) %>%
+    mutate_at(.vars = vars(.data$ciupp_tab),.funs = format,digits=digits_upp) %>%
     # missing must keep as missing
-    mutate_at(.vars = vars(estim_tab,cilow_tab,ciupp_tab),
+    mutate_at(.vars = vars(.data$estim_tab,.data$cilow_tab,.data$ciupp_tab),
               .funs = ~if_else(str_detect(.x,"NA"),NA_character_,.x)) %>%
     # two proposal
     mutate(
-      !!c_var_name_01 := str_c(estim_tab," (",cilow_tab," - ",ciupp_tab,")"),
-      !!c_var_name_02 := str_c(estim_tab,"\n(",cilow_tab," - ",ciupp_tab,")")
+      !!c_var_name_01 := str_c(.data$estim_tab," (",.data$cilow_tab," - ",.data$ciupp_tab,")"),
+      !!c_var_name_02 := str_c(.data$estim_tab,"\n(",.data$cilow_tab," - ",.data$ciupp_tab,")")
     ) %>%
-    select(-estim_tab,-cilow_tab,-ciupp_tab)
+    select(-.data$estim_tab,-.data$cilow_tab,-.data$ciupp_tab)
 
   data_out
 }
 
 #' @describeIn unite_dotwhiskers priorización con dos covariables
-#' @inheritParams unite_dotwhiskers
 #' @param variable variable to extract from posterior distributions
 
 serosvy_extract_posterior <- function(data,variable) {
   c_var <- enquo(variable)
-  c_var_name_01 <- c_var %>% rlang::as_name() %>% str_c(.,"_p50")
-  c_var_name_02 <- c_var %>% rlang::as_name() %>% str_c(.,"_p05")
-  c_var_name_03 <- c_var %>% rlang::as_name() %>% str_c(.,"_p95")
+  c_var_name_01 <- c_var %>% rlang::as_name() %>% str_c(.data,"_p50")
+  c_var_name_02 <- c_var %>% rlang::as_name() %>% str_c(.data,"_p05")
+  c_var_name_03 <- c_var %>% rlang::as_name() %>% str_c(.data,"_p95")
   data %>%
     unnest({{variable}}) %>%
     unnest(summary) %>%
     rename(
-      !!c_var_name_01 := numeric.p50,
-      !!c_var_name_02 := numeric.p05,
-      !!c_var_name_03 := numeric.p95
+      !!c_var_name_01 := .data$numeric.p50,
+      !!c_var_name_02 := .data$numeric.p05,
+      !!c_var_name_03 := .data$numeric.p95
     ) %>%
     select(-ends_with("posterior"),
            -ends_with("performance"),
            -ends_with("skim_variable"),
            # -numeric.p05,
            # -numeric.p95,
-           -numeric.mean
+           -.data$numeric.mean
     )
 }

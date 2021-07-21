@@ -2,11 +2,11 @@
 #'
 #' @description Funtions that implement the Rogen Gladen Estimator (1978)
 #'
-#' @describeIn correct_sero_misclass corrects num positive by sens and spec. source: [here](https://github.com/HopkinsIDD/Bangladesh-Cholera-Serosurvey/blob/fa53ec36649628dd0ee683b36d3e5dd719aef7e2/source/utils.R)
+#' @describeIn correct_sero_misclass Corrects num positive by Sensitivity and Specificity. source: [here](https://github.com/HopkinsIDD/Bangladesh-Cholera-Serosurvey/blob/fa53ec36649628dd0ee683b36d3e5dd719aef7e2/source/utils.R)
 #'
 #' @param num_pos number of positives
 #' @param num_neg number of negatives
-#' @param sens senstivitity
+#' @param sens sensitivity
 #' @param spec specifcity
 #'
 #' @references
@@ -16,6 +16,8 @@
 #' Azman, A. S., Lauer, S., Bhuiyan, M. T. R., Luquero, F. J., Leung, D. T., Hegde, S., ... & Lessler, J. (2020). Vibrio cholerae O1 transmission in Bangladesh: insights from a nationally-representative serosurvey. medRxiv. doi: [https://doi.org/10.1101/2020.03.13.20035352](https://doi.org/10.1101/2020.03.13.20035352)
 #'
 #' Takahashi, S., Greenhouse, B., & Rodríguez-Barraquer, I. (2020). Are SARS-CoV-2 seroprevalence estimates biased?. doi: [https://doi.org/10.1093/infdis/jiaa523](https://doi.org/10.1093/infdis/jiaa523)
+#'
+#' @return numeric vector
 #'
 #' @import tidyverse
 #' @import skimr
@@ -64,17 +66,14 @@ correct_sero_misclass <- function(num_pos,num_neg,sens=.806,spec=.83){
   pmax((num_pos + (num_pos+num_neg)*(spec -1)) / (sens + spec - 1),0)
 }
 
-#' @describeIn correct_sero_misclass takes known sensitivity and specificity of test and returns proportion of sample that 'true' positive
-#' @inheritParams correct_sero_misclass
-#' @param p_A - proportion of positives by imperfect test
-#' @return numeric vector
+#' @describeIn correct_sero_misclass Takes known sensitivity and specificity of test and returns proportion of sample that are 'true' positive
+#' @param p_A proportion of positives by imperfect test
 
 correct_sero_misclass_p <- function(p_A,sens=.891,spec=.792){
   pmin(pmax((p_A + (spec-1))/(sens+spec -1),0),1)
 }
 
-#' @describeIn correct_sero_misclass Function to adjust the observed prevalence for a single Se & Sp. limitation: this allows values out of 0-1 range. source: [here](https://github.com/sakitakahashi/COVID-sensitivity)
-#' @inheritParams correct_sero_misclass
+#' @describeIn correct_sero_misclass Adjust the observed prevalence for a single Sensitivity and Specificity. Limitation: this allows values out of 0-1 range. source: [here](https://github.com/sakitakahashi/COVID-sensitivity)
 #' @param prev.obs observed prevalence
 #' @param Se sensitivity
 #' @param Sp specificity

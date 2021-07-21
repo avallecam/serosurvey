@@ -17,13 +17,11 @@ rogan_gladen_estimator(prev.obs, Se, Sp)
 
 \item{num_neg}{number of negatives}
 
-\item{sens}{senstivitity}
+\item{sens}{sensitivity}
 
 \item{spec}{specifcity}
 
-\item{p_A}{\itemize{
-\item proportion of positives by imperfect test
-}}
+\item{p_A}{proportion of positives by imperfect test}
 
 \item{prev.obs}{observed prevalence}
 
@@ -39,11 +37,11 @@ Funtions that implement the Rogen Gladen Estimator (1978)
 }
 \section{Functions}{
 \itemize{
-\item \code{correct_sero_misclass}: corrects num positive by sens and spec. source: \href{https://github.com/HopkinsIDD/Bangladesh-Cholera-Serosurvey/blob/fa53ec36649628dd0ee683b36d3e5dd719aef7e2/source/utils.R}{here}
+\item \code{correct_sero_misclass}: Corrects num positive by Sensitivity and Specificity. source: \href{https://github.com/HopkinsIDD/Bangladesh-Cholera-Serosurvey/blob/fa53ec36649628dd0ee683b36d3e5dd719aef7e2/source/utils.R}{here}
 
-\item \code{correct_sero_misclass_p}: takes known sensitivity and specificity of test and returns proportion of sample that 'true' positive
+\item \code{correct_sero_misclass_p}: Takes known sensitivity and specificity of test and returns proportion of sample that are 'true' positive
 
-\item \code{rogan_gladen_estimator}: Function to adjust the observed prevalence for a single Se & Sp. limitation: this allows values out of 0-1 range. source: \href{https://github.com/sakitakahashi/COVID-sensitivity}{here}
+\item \code{rogan_gladen_estimator}: Adjust the observed prevalence for a single Sensitivity and Specificity. Limitation: this allows values out of 0-1 range. source: \href{https://github.com/sakitakahashi/COVID-sensitivity}{here}
 }}
 
 \examples{

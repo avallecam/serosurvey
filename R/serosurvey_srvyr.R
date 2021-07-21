@@ -17,6 +17,21 @@
 #' @import skimr
 #' @import tidyverse
 #' @import purrr
+#' @importFrom dplyr mutate
+#' @importFrom dplyr group_by
+#' @importFrom dplyr ungroup
+#' @importFrom dplyr mutate_if
+#' @importFrom dplyr arrange
+#' @importFrom dplyr summarise
+#' @importFrom dplyr summarize
+#' @importFrom dplyr pull
+#' @importFrom dplyr rename_at
+#' @importFrom dplyr n
+#' @importFrom tibble tibble
+#' @importFrom tibble as_tibble
+#' @importFrom tibble enframe
+#' @importFrom srvyr survey_mean
+#' @importFrom srvyr survey_total
 #'
 #' @export srvyr_prop_step_01
 #' @export srvyr_prop_step_02
@@ -124,13 +139,12 @@ srvyr_prop_step_01 <- function(design,numerator,denominator) {
       # design=map(design,dplyr::sym),
       numerator=map(numerator,dplyr::sym)
     ) %>%
-    filter(!is.na(numerator_level))
+    filter(!is.na(.data$numerator_level))
 
   return(num_levels)
 }
 
 #' @describeIn srvyr_prop_step_01 step 02
-#' @inheritParams srvyr_prop_step_01
 
 srvyr_prop_step_02 <- function(design,
                                numerator,
@@ -142,12 +156,12 @@ srvyr_prop_step_02 <- function(design,
     filter(!is.na({{denominator}})) %>%
     group_by({{denominator}}) %>%
     summarize(
-      prop = survey_mean({{numerator}} == numerator_level,
+      prop = survey_mean({{numerator}} == .data$numerator_level,
                          proportion = TRUE,
                          prop_method = "logit",
                          vartype = c("ci","cv","se")
       ),
-      total = survey_total({{numerator}} == numerator_level,
+      total = survey_total({{numerator}} == .data$numerator_level,
                            # proportion = TRUE,
                            # prop_method = "logit",
                            deff = TRUE,
@@ -163,7 +177,6 @@ srvyr_prop_step_02 <- function(design,
 
 
 #' @describeIn srvyr_prop_step_01 step 03
-#' @inheritParams srvyr_prop_step_01
 
 srvyr_prop_step_03 <- function(design,
                                numerator,
@@ -176,15 +189,14 @@ srvyr_prop_step_03 <- function(design,
     ungroup() %>%
     group_by({{denominator}}) %>%
     mutate(
-      p = prop.table(n),
-      t = sum(n)#,
+      p = prop.table(.data$n),
+      t = sum(.data$n)#,
       # sum_total = sum(total)
     ) %>%
     ungroup()
 }
 
 #' @describeIn srvyr_prop_step_01 gather all steps in one
-#' @inheritParams srvyr_prop_step_01
 
 serosvy_proportion <- function(design,numerator,denominator) {
   design %>%
@@ -193,45 +205,45 @@ serosvy_proportion <- function(design,numerator,denominator) {
       {{denominator}}) %>%
 
     # estimate proportion using sampling weight
-    mutate(resultado=pmap(.l = select(.,design=design,
+    mutate(resultado=pmap(.l = select(.data,design=design,
                                       numerator = numerator,
                                       denominator = denominator,
-                                      numerator_level=numerator_level),
+                                      numerator_level=.data$numerator_level),
                           .f = srvyr_prop_step_02)) %>%
-    unnest(resultado) %>%
+    unnest(.data$resultado) %>%
 
     # recover the denominator for each estimate
-    group_by(denominator_level) %>%
+    group_by(.data$denominator_level) %>%
     mutate(
-      total_den = 1*total/prop,
-      total_den_low = 1*total_low/prop_low,
-      total_den_upp = 1*total_upp/prop_upp
+      total_den = 1*.data$total/.data$prop,
+      total_den_low = 1*.data$total_low/.data$prop_low,
+      total_den_upp = 1*.data$total_upp/.data$prop_upp
     ) %>%
     ungroup() %>%
 
     # make raw unweighted estimates
-    mutate(crudo=pmap(.l = select(.,design=design,
+    mutate(crudo=pmap(.l = select(.data,design=design,
                                   numerator=numerator,
                                   denominator=denominator),
                       .f = srvyr_prop_step_03)) %>%
-    unnest(crudo) %>%
-    filter(numerator_level=={{numerator}} & denominator_level=={{denominator}}) %>%
+    unnest(.data$crudo) %>%
+    filter(.data$numerator_level=={{numerator}} & .data$denominator_level=={{denominator}}) %>%
     select(-{{numerator}},-{{denominator}}) %>%
 
     # wrangling
     select(-design) %>%
     mutate_if(.predicate = is.list,.funs = as.character) %>%
-    select(denominator,denominator_level,numerator,numerator_level,everything()) %>%
-    arrange(denominator_level,numerator_level) %>%
+    select(denominator,.data$denominator_level,numerator,.data$numerator_level,everything()) %>%
+    arrange(.data$denominator_level,.data$numerator_level) %>%
 
     # exact binomial test for raw uncertainty
-    rename(raw_den=t,raw_num=n) %>%
-    mutate(raw=pmap(.l = select(.,x=raw_num,n=raw_den),
+    rename(raw_den=t,raw_num=.data$n) %>%
+    mutate(raw=pmap(.l = select(.data,x=.data$raw_num,n=.data$raw_den),
                     .f = binom.test),
            raw=map(.x = raw,.f = broom::tidy)) %>%
     unnest(raw) %>%
-    select(-statistic,-p.value,-parameter,-method,-alternative,-p) %>%
-    rename(raw_prop=estimate,
-           raw_prop_low=conf.low,
-           raw_prop_upp=conf.high)
+    select(-.data$statistic,-.data$p.value,-.data$parameter,-.data$method,-.data$alternative,-.data$p) %>%
+    rename(raw_prop=.data$estimate,
+           raw_prop_low=.data$conf.low,
+           raw_prop_upp=.data$conf.high)
 }

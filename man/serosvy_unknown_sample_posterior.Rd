@@ -42,13 +42,6 @@ tibble of prevalence posterior distribution
 \description{
 \strong{one} population - \strong{unknown} test performance - posterior distribution of prevalence. source \href{https://github.com/LarremoreLab/bayesian-joint-prev-se-sp/blob/master/singleSERO_uncertainTEST.R}{here}
 }
-\section{Functions}{
-\itemize{
-\item \code{serosvy_unknown_sample_posterior}: one population - unknown test performance - posterior distribution of prevalence. source \href{https://github.com/LarremoreLab/bayesian-joint-prev-se-sp/blob/master/singleSERO_uncertainTEST.R}{here}
-
-\item \code{serosvy_unknown_sample_posterior_ii}: takes known sensitivity and specificity of test and returns proportion of sample that 'true' positive
-}}
-
 \examples{
 
 \dontrun{

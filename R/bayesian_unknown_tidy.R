@@ -2,8 +2,6 @@
 #'
 #' @description __one__ population - __unknown__ test performance - posterior distribution of prevalence. source [here](https://github.com/LarremoreLab/bayesian-joint-prev-se-sp/blob/master/singleSERO_uncertainTEST.R)
 #'
-#' @describeIn serosvy_unknown_sample_posterior one population - unknown test performance - posterior distribution of prevalence. source [here](https://github.com/LarremoreLab/bayesian-joint-prev-se-sp/blob/master/singleSERO_uncertainTEST.R)
-#'
 #' @param positive_number_test number of positive tests population
 #' @param total_number_test number of total tests in population
 #' @param true_positive true positive tests in the lab
@@ -19,6 +17,11 @@
 #'
 #' @import skimr
 #' @import tidyverse
+#' @importFrom tibble tibble
+#' @importFrom tibble as_tibble
+#' @importFrom tibble enframe
+#' @importFrom dplyr summarise
+#' @importFrom dplyr select
 #'
 #' @export serosvy_unknown_sample_posterior
 #' @export serosvy_unknown_sample_posterior_ii
@@ -120,15 +123,15 @@ serosvy_unknown_sample_posterior <- function(positive_number_test,
 
     # as_tibble()
     # first matrix element is r (posterior distribution)
-    .[,1] %>%
+    .data[,1] %>%
 
     # as_tibble() %>%
     enframe(value = "r",name = NULL) %>%
     # 90% credibility interval
-    summarise(numeric.p05 = quantile(r, probs = .05),
-              numeric.mean = mean(r),
-              numeric.p50 = quantile(r, probs = .50),
-              numeric.p95 = quantile(r, probs = .95))
+    summarise(numeric.p05 = quantile(.data$r, probs = .05),
+              numeric.mean = mean(.data$r),
+              numeric.p50 = quantile(.data$r, probs = .50),
+              numeric.p95 = quantile(.data$r, probs = .95))
 
   # my_skim <- skim_with(
   #   numeric = sfl(p05 = ~ quantile(., probs = .05), # 90% credibility interval
@@ -162,8 +165,7 @@ serosvy_unknown_sample_posterior <- function(positive_number_test,
   )
 }
 
-#' @describeIn serosvy_unknown_sample_posterior takes known sensitivity and specificity of test and returns proportion of sample that 'true' positive
-#' @inheritParams serosvy_unknown_sample_posterior
+#' @rdname serosvy_unknown_sample_posterior
 
 serosvy_unknown_sample_posterior_ii <- function(positive_number_test,
                                              total_number_test,
@@ -207,20 +209,20 @@ serosvy_unknown_sample_posterior_ii <- function(positive_number_test,
     #           numeric.p95 = quantile(r, probs = .95))
 
   my_skim <- skim_with(
-    numeric = sfl(p05 = ~ quantile(., probs = .05), # 90% credibility interval
+    numeric = sfl(p05 = ~ quantile(.data, probs = .05), # 90% credibility interval
                   mean = mean,
-                  p50 = ~ quantile(., probs = .50),
-                  p95 = ~ quantile(., probs = .95)),
+                  p50 = ~ quantile(.data, probs = .50),
+                  p95 = ~ quantile(.data, probs = .95)),
     append = FALSE)
 
   all_in_one <- result %>%
     my_skim() %>%
     as_tibble() %>%
-    select(skim_variable,numeric.p05:numeric.p95)
+    select(.data$skim_variable,.data$numeric.p05:.data$numeric.p95)
 
   result_sum <- result %>%
     # # first matrix element is r (posterior distribution)
-    .[,1] %>%
+    .data[,1] %>%
     enframe(value = "r",name = NULL) %>%
     # summarise(numeric.p05 = quantile(r, probs = .05),
     #           numeric.mean = mean(r),
@@ -228,14 +230,14 @@ serosvy_unknown_sample_posterior_ii <- function(positive_number_test,
     #           numeric.p95 = quantile(r, probs = .95)) %>%
   my_skim() %>%
   as_tibble() %>%
-  filter(skim_variable=="r") %>%
-  select(skim_variable,numeric.p05:numeric.p95)
+  filter(.data$skim_variable=="r") %>%
+  select(.data$skim_variable,.data$numeric.p05:.data$numeric.p95)
 
   performance_sum <- result %>%
     my_skim() %>%
     as_tibble() %>%
-    filter(!(skim_variable=="r")) %>%
-    select(skim_variable,numeric.p05:numeric.p95)
+    filter(!(.data$skim_variable=="r")) %>%
+    select(.data$skim_variable,.data$numeric.p05:.data$numeric.p95)
 
   output <- tibble(
     posterior=list(result %>% as_tibble()),

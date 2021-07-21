@@ -18,6 +18,9 @@
 #' @import skimr
 #' @import tidyverse
 #' @import purrr
+#' @importFrom tibble as_tibble
+#' @importFrom tibble tibble
+#' @importFrom dplyr select
 #'
 #' @export serosvy_known_sample_posterior
 #'
@@ -151,8 +154,8 @@ serosvy_known_sample_posterior <- function(positive_number_test,
   result_sum <- result %>%
     my_skim() %>%
     as_tibble() %>%
-    filter(skim_variable=="r1") %>%
-    select(skim_variable,numeric.p05:numeric.p95)
+    filter(.data$skim_variable=="r1") %>%
+    select(.data$skim_variable,.data$numeric.p05:.data$numeric.p95)
 
   output <- tibble(
     posterior=list(result),
