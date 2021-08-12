@@ -9,3 +9,4 @@
 ^docs$
 ^_pkgdown\.yaml$
 ^references\.bib$
+^codecov\.yml$

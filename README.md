@@ -15,6 +15,9 @@ from users that we can incorporate in future releases.
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/serosurvey)](https://cran.r-project.org/package=serosurvey)
+[![Codecov test
+coverage](https://codecov.io/gh/avallecam/serosurvey/branch/master/graph/badge.svg)](https://codecov.io/gh/avallecam/serosurvey?branch=master)
+[![R-CMD-check](https://github.com/avallecam/serosurvey/workflows/R-CMD-check/badge.svg)](https://github.com/avallecam/serosurvey/actions)
 <!-- badges: end -->
 
 The goal of `serosurvey` is to gather **Serological Survey Analysis**
@@ -55,6 +58,13 @@ The current workflow is divided in two steps:
 
 Feel free to fill an issue or contribute with your functions or
 workflows in a pull request.
+
+## Code of Conduct
+
+Please note that the epihelper project is released with a [Contributor
+Code of
+Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
 
 ## Contact
 
