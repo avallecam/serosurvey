@@ -139,7 +139,7 @@ srvyr_prop_step_01 <- function(design,numerator,denominator) {
       # design=map(design,dplyr::sym),
       numerator=map(numerator,dplyr::sym)
     ) %>%
-    filter(!is.na(.data$numerator_level))
+    dplyr::filter(!is.na(.data$numerator_level))
 
   return(num_levels)
 }
@@ -152,8 +152,8 @@ srvyr_prop_step_02 <- function(design,
                                numerator_level) {
 
   design %>%
-    filter(!is.na({{numerator}})) %>%
-    filter(!is.na({{denominator}})) %>%
+    dplyr::filter(!is.na({{numerator}})) %>%
+    dplyr::filter(!is.na({{denominator}})) %>%
     group_by({{denominator}}) %>%
     summarize(
       prop = survey_mean({{numerator}} == .data$numerator_level,
@@ -227,7 +227,7 @@ serosvy_proportion <- function(design,numerator,denominator) {
                                   denominator=denominator),
                       .f = srvyr_prop_step_03)) %>%
     unnest(.data$crudo) %>%
-    filter(.data$numerator_level=={{numerator}} & .data$denominator_level=={{denominator}}) %>%
+    dplyr::filter(.data$numerator_level=={{numerator}} & .data$denominator_level=={{denominator}}) %>%
     select(-{{numerator}},-{{denominator}}) %>%
 
     # wrangling
